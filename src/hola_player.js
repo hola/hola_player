@@ -3,6 +3,7 @@ var videojs = window.videojs = require('video.js');
 require('./css/videojs.css'); // auto injected
 var Hls = require('hls.js');
 var hlsjs_source_handler = require('videojs5-hlsjs-source-handler');
+var flashls_source_handler = require('./flashls_source_handler.js');
 require('@hola.org/videojs-osmf');
 var $ = require('jquery-browserify');
 
@@ -32,6 +33,7 @@ function guess_link_type(){}
 
 (function(){
     hlsjs_source_handler(window, videojs, Hls);
+    flashls_source_handler();
     // XXX michaelg the defaults interfere with player opening
     $('.vjs-styles-defaults').remove();
     var player = new Player();
