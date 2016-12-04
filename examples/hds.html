@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="../dist/hola_player.js"></script>
+</head>
+<body>
+  <div><h1>Video tag with Hola player - playing HDS without HolaCDN</h1></div>
+  <video preload="none" class="video-js vjs-default-skin" width="640" height="360" controls>
+    <source src="http://player.h-cdn.org/static/hds/manifest.f4m" type="application/adobe-f4m">
+  </video>
+  <script>
+    (function(){
+        window.hola_player(function(player){
+          player.init({
+            videojs: {
+              osmf: {
+                swf: '../dist/videojs-osmf.swf',
+              }
+            },
+          });
+        });
+    })();
+  </script>
+</body>
+</html>

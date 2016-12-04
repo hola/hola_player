@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="../dist/hola_player.min.js"></script>
+</head>
+<body>
+  <div><h1>Video tag with Hola player - playing MP4</h1></div>
+  <video preload="none" class="video-js vjs-default-skin" width="640" height="360" controls>
+    <source
+      src="http://player.h-cdn.org/static/mp4/tears_of_steel_1080p_MP4.mp4"
+      type="video/mp4" label="1080p">
+    <source
+      src="http://player.h-cdn.org/static/mp4/tears_of_steel_360p_MP4.mp4"
+      type="video/mp4" label="360p">
+  </video>
+  <script>
+    (function(){
+      var cdn_static = 'http://player.h-cdn.org/static';
+      window.hola_player(function(player){
+        player.init({
+          poster: cdn_static+'/mp4/tears_of_steel_1080p_MP4.jpg',
+          thumbnails: {
+            0: {
+              src: cdn_static+'/mp4/tears_of_steel_thumbnails_0_7.jpg',
+              sprites: {
+                width: 192,
+                height: 80,
+                position: [0, 87, 130, 172, 217, 240, 303, 346]
+              }
+            },
+            389: {
+              src: cdn_static+'/mp4/tears_of_steel_thumbnails_8_15.jpg',
+              sprites: {
+                width: 192,
+                height: 80,
+                position: [389, 431, 473, 517, 559, 603, 647, 690]
+              }
+            }
+          },
+          settings: {
+            quality: true,
+          },
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

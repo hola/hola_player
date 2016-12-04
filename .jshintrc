@@ -1,0 +1,19 @@
+{
+  "evil" : true,
+  "validthis": false,
+  "browser": true,
+  "debug": true,
+  "boss": true,
+  "expr": true,
+  "eqnull": true,
+  "quotmark": "single",
+  "sub": true,
+  "trailing": true,
+  "undef": true,
+  "laxbreak": true,
+  "strict": "global",
+  "predef": [
+    "require",
+    "console"
+  ]
+}
