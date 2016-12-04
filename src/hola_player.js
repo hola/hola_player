@@ -127,7 +127,7 @@ Player.prototype.init_vjs = function(element, opt, cb){
         settings_options.volume = opt.volume;
         vjs_opt.plugins.settings = settings_options;
     }
-    vjs_opt = videojs.mergeOptions(vjs_opt, opt.videojs);
+    vjs_opt = videojs.mergeOptions(vjs_opt, opt.videojs_options);
     load_deps({
         'videojs-settings': !!vjs_opt.plugins.settings,
         'videojs-hola-skin': !!vjs_opt.plugins.hola_skin,
