@@ -1,12 +1,13 @@
 'use strict';
 var videojs = window.videojs = require('video.js');
 require('./css/videojs.css'); // auto injected
+var Hls = require('hls.js');
+var hlsjs_source_handler = require('videojs5-hlsjs-source-handler');
+require('@hola.org/videojs-osmf');
 var $ = require('jquery-browserify');
 
 function load_deps(deps){
     deps = deps||{};
-    if (deps['videojs-osmf'])
-        require('@hola.org/videojs-osmf');
     if (deps['videojs-settings'])
         require('@hola.org/videojs-settings');
     if (deps['videojs-hola-skin'])
@@ -30,6 +31,7 @@ var swf_urls = {
 function guess_link_type(){}
 
 (function(){
+    hlsjs_source_handler(window, videojs, Hls);
     // XXX michaelg the defaults interfere with player opening
     $('.vjs-styles-defaults').remove();
     var player = new Player();
@@ -124,9 +126,7 @@ Player.prototype.init_vjs = function(element, opt, cb){
         vjs_opt.plugins.settings = settings_options;
     }
     vjs_opt = videojs.mergeOptions(vjs_opt, opt.videojs);
-    console.log(vjs_opt);
     load_deps({
-        'videojs-osmf': true,
         'videojs-settings': !!vjs_opt.plugins.settings,
         'videojs-hola-skin': !!vjs_opt.plugins.hola_skin,
         'videojs-thumbnails': !!opt.thumbnails,
