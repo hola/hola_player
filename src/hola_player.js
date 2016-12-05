@@ -1,6 +1,7 @@
 'use strict';
 var videojs = window.videojs = require('video.js');
 require('./css/videojs.css'); // auto injected
+var mime = require('./mime.js');
 var hlsjs_source_handler = require('./hlsjs_source_handler.js');
 var flashls_source_handler = require('./flashls_source_handler.js');
 require('@hola.org/videojs-osmf');
@@ -26,9 +27,6 @@ var swf_urls = {
     videojs: './videojs.swf',
     'videojs-osmf': './videojs-osmf.swf',
 };
-
-// XXX bahaa: TODO
-function guess_link_type(){}
 
 (function(){
     hlsjs_source_handler();
@@ -114,7 +112,7 @@ Player.prototype.init_vjs = function(element, opt, cb){
     {
         vjs_opt.sources = [{
             src: opt.video_url,
-            type: opt.video_type||guess_link_type(opt.video_url)
+            type: opt.video_type||mime.guess_link_type(opt.video_url)
         }];
     }
     var settings_options = opt.settings;

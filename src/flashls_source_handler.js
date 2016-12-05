@@ -1,14 +1,13 @@
 'use strict';
 var videojs = require('video.js');
-var hlsTypeRE = /^application\/x-mpegURL$/i;
-var hlsExtRE = /\.m3u8/i;
+var mime = require('./mime.js');
 
 module.exports = function(){
     videojs.getComponent('Flash').registerSourceHandler({
         canHandleSource: function(source){
-            if (hlsTypeRE.test(source.type))
+            if (mime.is_hls_type(source.type))
                 return 'probably';
-            else if (hlsExtRE.test(source.src))
+            else if (mime.is_hls_link(source.src))
                 return 'maybe';
             return '';
         },
