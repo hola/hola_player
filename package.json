@@ -27,10 +27,11 @@
   "main": "./dist/hola_player.js",
   "browserify-css": "./browserify-css.js",
   "files": [
-    "dist/",
-    "src/",
-    "examples/",
     "Gruntfile.js",
+    "browserify-css.js",
+    "dist/",
+    "examples/",
+    "src/",
     ".jshintrc"
   ],
   "dependencies": {
