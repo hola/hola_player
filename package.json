@@ -42,7 +42,7 @@
     "hls.js": "hola/hls.js#v0.6.1-40",
     "jquery-browserify": "^1.8.1",
     "video.js": "hola/video.js#hola_5.10.2",
-    "videojs5-hlsjs-source-handler": "hola/videojs5-hlsjs-source-handler#v0.0.8-5"
+    "videojs5-hlsjs-source-handler": "hola/videojs5-hlsjs-source-handler#v0.0.8-7"
   },
   "devDependencies": {
     "browserify-css": "^0.9.2",

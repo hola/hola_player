@@ -1,8 +1,7 @@
 'use strict';
 var videojs = window.videojs = require('video.js');
 require('./css/videojs.css'); // auto injected
-var Hls = require('hls.js');
-var hlsjs_source_handler = require('videojs5-hlsjs-source-handler');
+var hlsjs_source_handler = require('./hlsjs_source_handler.js');
 var flashls_source_handler = require('./flashls_source_handler.js');
 require('@hola.org/videojs-osmf');
 var $ = require('jquery-browserify');
@@ -32,7 +31,7 @@ var swf_urls = {
 function guess_link_type(){}
 
 (function(){
-    hlsjs_source_handler(window, videojs, Hls);
+    hlsjs_source_handler();
     flashls_source_handler();
     // XXX michaelg the defaults interfere with player opening
     $('.vjs-styles-defaults').remove();

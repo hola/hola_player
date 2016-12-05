@@ -2,6 +2,7 @@
 var videojs = require('video.js');
 var hlsTypeRE = /^application\/x-mpegURL$/i;
 var hlsExtRE = /\.m3u8/i;
+
 module.exports = function(){
     videojs.getComponent('Flash').registerSourceHandler({
         canHandleSource: function(source){
