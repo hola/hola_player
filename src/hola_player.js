@@ -65,6 +65,7 @@ Player.prototype.init = function(opt, cb){
         // with Hola player wrapper there is no autoSetup mode
         // XXX: maybe we should merge data-setup conf with vjs_opt
         $(element).removeAttr('data-setup');
+        reset_native_hls(element, opt.sources);
     }
     this.init_vjs();
 };
@@ -181,3 +182,14 @@ Player.prototype.init_vjs = function(){
         });
     });
 };
+
+function reset_native_hls(el, sources){
+    var is_hls = function(e){ return mime.is_hls_link(e.src); };
+    // not using el.currentSrc because it might not be selected yet.
+    if (!el.canPlayType('application/x-mpegurl') || !sources.some(is_hls))
+        return;
+    // if source is hls and browser supports hls natively reset video element
+    // so videojs will select our hls source handler instead of native.
+    el.src = '';
+    el.load();
+}
