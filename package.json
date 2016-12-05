@@ -12,7 +12,13 @@
   ],
   "homepage": "http://holacdn.com/player",
   "scripts": {
-    "build": "grunt"
+    "build": "grunt",
+    "login": "c=`npm c ls`; test \"${c#*@hola}\" != \"$c\" || npm login --scope @hola.org",
+    "release": "run-s build login release:*",
+    "release:tag": "git tag v$npm_package_version",
+    "release:publish": "npm publish",
+    "release:pushtags": "git push --tags origin",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
@@ -20,6 +26,13 @@
   },
   "main": "./dist/hola_player.js",
   "browserify-css": "./browserify-css.js",
+  "files": [
+    "dist/",
+    "src/",
+    "examples/",
+    "Gruntfile.js",
+    ".jshintrc"
+  ],
   "dependencies": {
     "@hola.org/videojs-hola-skin": ">=0.0.5-31 <0.0.5",
     "@hola.org/videojs-osmf": ">=0.0.0-33 <0.0.0",
@@ -38,6 +51,7 @@
     "grunt-browserify": "^5.0.0",
     "grunt-contrib-copy": "^1.0.0",
     "grunt-contrib-jshint": "^1.1.0",
-    "grunt-contrib-uglify": "^2.0.0"
+    "grunt-contrib-uglify": "^2.0.0",
+    "npm-run-all": "^3.1.2"
   }
 }
