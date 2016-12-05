@@ -46,8 +46,9 @@ Player.prototype.init = function(opt, cb){
         cb = opt;
         opt = {};
     }
-    opt = opt||{};
-    var element = opt.player ? $(opt.player)[0] :
+    this.ready_cb = cb;
+    this.opt = opt = opt||{};
+    var element = this.element = opt.player ? $(opt.player)[0] :
         document.querySelector('video, object, embed');
     if ($(element).is('video'))
     {
@@ -65,10 +66,11 @@ Player.prototype.init = function(opt, cb){
         // XXX: maybe we should merge data-setup conf with vjs_opt
         $(element).removeAttr('data-setup');
     }
-    this.init_vjs(element, opt, cb);
+    this.init_vjs();
 };
 
-Player.prototype.init_vjs = function(element, opt, cb){
+Player.prototype.init_vjs = function(){
+    var hola_player = this, opt = hola_player.opt;
     var tech_order = opt.tech=='flash' ?
         ['flash', 'html5'] : ['html5', 'flash'];
     tech_order.push('osmf');
@@ -133,7 +135,7 @@ Player.prototype.init_vjs = function(element, opt, cb){
         'videojs-thumbnails': !!opt.thumbnails,
     });
     var play_fired = false;
-    videojs(element, vjs_opt, function(){
+    videojs(hola_player.element, vjs_opt, function(){
         var player = this;
         player.controls(true);
         player.controlBar.show();
@@ -167,8 +169,11 @@ Player.prototype.init_vjs = function(element, opt, cb){
         }).on('save_logs', function(e){
             // XXX bahaa: TODO
         });
-        if (cb)
-            try { cb(player); } catch(e){ console.err(e.stack||e); }
+        if (hola_player.ready_cb)
+        {
+            try { hola_player.ready_cb(player); }
+            catch(e){ console.err(e.stack||e); }
+        }
         // repeat 'play' event for autoplay==true cases
         setTimeout(function(){
             if (!player.paused() && !play_fired)
