@@ -37,7 +37,9 @@ function guess_link_type(){}
     // XXX michaelg the defaults interfere with player opening
     $('.vjs-styles-defaults').remove();
     var player = new Player();
+    // XXX bahaa: change to module.exports
     window.hola_player = function(cb){ return cb && cb(player); };
+    window.hola_player.VERSION = '__VERSION__';
 })();
 
 function Player(){}

@@ -1,6 +1,7 @@
 module.exports = function(grunt) {
+    var pkg = grunt.file.readJSON('package.json');
     grunt.initConfig({
-        pkg: grunt.file.readJSON('package.json'),
+        pkg: pkg,
         jshint: {
             options: {
                 jshintrc: '.jshintrc',
@@ -12,7 +13,13 @@ module.exports = function(grunt) {
                 browserifyOptions: {
                     debug: true,
                 },
-                transform: ['browserify-css'],
+                transform: [
+                    ['browserify-versionify', {
+                        placeholder: '__VERSION__',
+                        version: pkg.version,
+                    }],
+                    'browserify-css',
+                ],
             },
             watch: {
                 options: {
