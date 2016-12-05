@@ -50,12 +50,65 @@ Player.prototype.init = function(opt, cb){
     this.opt = opt = opt||{};
     var element = this.element = opt.player ? $(opt.player)[0] :
         document.querySelector('video, object, embed');
-    if ($(element).is('video'))
+    var $element = $(element);
+    // special case when using a div container or flash object - create
+    // video tag instead
+    // XXX gilad/alexeym: unify with in loader.js,
+    // it should not be in player itself.
+    if ($element.is('div') || $element.is('object'))
+    {
+        var $video = $('<video>', {
+            id: '__hola_player_unique_id__',
+            'class': 'video-js',
+            preload: opt.preload||'auto',
+            poster: opt.poster,
+        });
+        opt.player = '#'+$video.attr('id');
+        var sources = opt.sources;
+        if (!(opt.video_url || sources && sources.length))
+        {
+            // XXX gilad: should we still invoke callback?
+            return cb && cb(null);
+        }
+        if (sources && sources.length)
+        {
+            sources = sources.map(function(source){
+                var url = source.src||source.file;
+                return {
+                    src: url,
+                    type: source.type||mime.guess_link_type(url),
+                };
+            });
+        }
+        else
+        {
+            sources = [{
+                src: opt.video_url,
+                type: opt.video_type||mime.guess_link_type(opt.video_url),
+            }];
+        }
+        $video.append(sources.map(function(source){
+            return $('<source>', source);
+        }));
+        var position = $element.css('position');
+        $video.css({
+            position: position=='static' ? 'relative' : position,
+            left: $element.css('left'),
+            top: $element.css('top'),
+        }).attr({
+            width: opt.width||$element.width(),
+            height: opt.height||$element.height(),
+        }).insertAfter(element);
+        $element.hide();
+        this.element = element = $video[0];
+        $element = $(element);
+    }
+    else if ($element.is('video'))
     {
         element.controls = false;
         if (!opt.sources)
         {
-            opt.sources = $(element).find('source').map(function(){
+            opt.sources = $element.find('source').map(function(){
                 var source = $(this);
                 return {src: source.attr('src'), type: source.attr('type'),
                     label: source.attr('label'),
@@ -64,7 +117,7 @@ Player.prototype.init = function(opt, cb){
         }
         // with Hola player wrapper there is no autoSetup mode
         // XXX: maybe we should merge data-setup conf with vjs_opt
-        $(element).removeAttr('data-setup');
+        $element.removeAttr('data-setup');
         reset_native_hls(element, opt.sources);
     }
     this.init_vjs();
