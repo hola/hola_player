@@ -72,7 +72,7 @@ module.exports = function(grunt) {
         },
     });
     require('load-grunt-tasks')(grunt);
-    grunt.registerTask('build',
-        ['clean', 'jshint', 'browserify:dist', 'exorcise', 'copy', 'uglify']);
+    grunt.registerTask('build', ['clean', 'jshint', 'browserify:dist',
+        'exorcise', 'copy', 'uglify', 'zip']);
     grunt.registerTask('default', ['build']);
 };
