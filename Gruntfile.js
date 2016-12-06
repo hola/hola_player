@@ -2,17 +2,16 @@ module.exports = function(grunt) {
     var pkg = grunt.file.readJSON('package.json');
     grunt.initConfig({
         pkg: pkg,
+        clean: {
+            dist: ['dist/*'],
+        },
         jshint: {
-            options: {
-                jshintrc: '.jshintrc',
-            },
+            options: {jshintrc: '.jshintrc'},
             all: ['src/*.js'],
         },
         browserify: {
             options: {
-                browserifyOptions: {
-                    debug: true,
-                },
+                browserifyOptions: {debug: true},
                 transform: [
                     ['browserify-versionify', {
                         placeholder: '__VERSION__',
@@ -26,22 +25,16 @@ module.exports = function(grunt) {
                     watch: true,
                     keepAlive: true,
                 },
-                files: {
-                    'dist/hola_player.js': ['src/hola_player.js'],
-                },
+                files: {'dist/hola_player.js': ['src/hola_player.js']},
             },
             dist: {
-                files: {
-                    'dist/hola_player.js': ['src/hola_player.js'],
-                },
+                files: {'dist/hola_player.js': ['src/hola_player.js']},
             },
         },
         exorcise: {
             dist: {
                 options: {},
-                files: {
-                    'dist/hola_player.js.map': ['dist/hola_player.js'],
-                },
+                files: {'dist/hola_player.js.map': ['dist/hola_player.js']},
             },
         },
         copy: {
@@ -60,18 +53,17 @@ module.exports = function(grunt) {
                 sourceMapIn: 'dist/hola_player.js.map',
             },
             dist : {
-                files: {
-                    'dist/hola_player.min.js' : 'dist/hola_player.js',
-                },
+                files: {'dist/hola_player.min.js' : 'dist/hola_player.js'},
             },
         }
     });
+    grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-browserify');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-exorcise');
     grunt.registerTask('build',
-        ['jshint', 'browserify:dist', 'exorcise', 'copy', 'uglify']);
+        ['clean', 'jshint', 'browserify:dist', 'exorcise', 'copy', 'uglify']);
     grunt.registerTask('default', ['build']);
 };
