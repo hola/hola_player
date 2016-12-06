@@ -70,13 +70,7 @@ module.exports = function(grunt) {
             },
         },
     });
-    grunt.loadNpmTasks('grunt-contrib-clean');
-    grunt.loadNpmTasks('grunt-browserify');
-    grunt.loadNpmTasks('grunt-contrib-copy');
-    grunt.loadNpmTasks('grunt-contrib-jshint');
-    grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.loadNpmTasks('grunt-exorcise');
-    grunt.loadNpmTasks('grunt-zip');
+    require('load-grunt-tasks')(grunt);
     grunt.registerTask('build',
         ['clean', 'jshint', 'browserify:dist', 'exorcise', 'copy', 'uglify']);
     grunt.registerTask('default', ['build']);
