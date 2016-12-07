@@ -28,16 +28,18 @@ module.exports = function(grunt) {
                     watch: true,
                     keepAlive: true,
                 },
-                files: {'dist/hola_player.js': ['src/hola_player.js']},
+                files: {'dist/hola_player.dev.js': ['src/hola_player.js']},
             },
             dist: {
-                files: {'dist/hola_player.js': ['src/hola_player.js']},
+                files: {'dist/hola_player.dev.js': ['src/hola_player.js']},
             },
         },
         exorcise: {
             dist: {
                 options: {},
-                files: {'dist/hola_player.js.map': ['dist/hola_player.js']},
+                files: {
+                    'dist/hola_player.dev.js.map': ['dist/hola_player.dev.js'],
+                },
             },
         },
         copy: {
@@ -53,10 +55,10 @@ module.exports = function(grunt) {
         uglify : {
             options: {
                 sourceMap: true,
-                sourceMapIn: 'dist/hola_player.js.map',
+                sourceMapIn: 'dist/hola_player.dev.js.map',
             },
             dist : {
-                files: {'dist/hola_player.min.js' : 'dist/hola_player.js'},
+                files: {'dist/hola_player.js' : 'dist/hola_player.dev.js'},
             },
         },
         zip: {
