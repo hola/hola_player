@@ -27,4 +27,4 @@ E.current_script = function(){
     // assumes wasn't loaded async
     var scripts = document.getElementsByTagName('script');
     return scripts[scripts.length-1];
-}
+};
