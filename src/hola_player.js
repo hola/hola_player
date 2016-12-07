@@ -2,10 +2,12 @@
 var videojs = window.videojs = require('video.js');
 require('./css/videojs.css'); // auto injected
 var mime = require('./mime.js');
+var util = require('./util.js');
 var hlsjs_source_handler = require('./hlsjs_source_handler.js');
 var flashls_source_handler = require('./flashls_source_handler.js');
 require('@hola.org/videojs-osmf');
 var $ = require('jquery-browserify');
+var url = require('url');
 
 function load_deps(deps){
     deps = deps||{};
@@ -31,6 +33,7 @@ var swf_urls = {
 (function(){
     hlsjs_source_handler();
     flashls_source_handler();
+    load_cdn_loader();
     // XXX michaelg the defaults interfere with player opening
     $('.vjs-styles-defaults').remove();
     var player = new Player();
@@ -245,4 +248,22 @@ function reset_native_hls(el, sources){
     // so videojs will select our hls source handler instead of native.
     el.src = '';
     el.load();
+}
+
+function load_cdn_loader(){
+    var script = util.current_script();
+    if (!script)
+        return;
+    var customer = url.parse(script.src, true, true).query.customer;
+    if (!customer)
+        return;
+    if (document.querySelector('script[src*="//player.h-cdn.com/loader"]'))
+    {
+        console.warn('Hola loader.js is included with Hola Player. '
+            +'There is no need to load it separately');
+        return;
+    }
+    console.log('Adding CDN loader...');
+    util.load_script('//player.h-cdn.com/loader.js?customer='+customer,
+        undefined, {async: true, crossOrigin: 'anonymous'});
 }
