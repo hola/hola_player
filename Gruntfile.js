@@ -1,5 +1,15 @@
 'use strict';
 var path = require('path');
+var require_transform = require('./transforms/require-transform.js');
+
+function absolute(a){
+    if (Array.isArray(a))
+        return a.map(function(r){ return path.join(__dirname, r); });
+    var ret = {};
+    Object.keys(a).forEach(function(r){
+        ret[path.join(__dirname, r)] = a[r]; });
+    return ret;
+}
 
 module.exports = function(grunt) {
     require('time-grunt')(grunt);
@@ -15,13 +25,31 @@ module.exports = function(grunt) {
         },
         browserify: {
             options: {
-                browserifyOptions: {debug: true},
+                browserifyOptions: {
+                    debug: true,
+                    noParse: absolute([
+                        // avoid it requiring its own videojs
+                        './node_modules/videojs-ima/src/videojs.ima.js',
+                        // for faster build
+                        './node_modules/video.js/dist/video.js',
+                        './node_modules/jquery-browserify/lib/jquery.js',
+                    ]),
+                },
                 transform: [
                     ['browserify-versionify', {
                         placeholder: '__VERSION__',
                         version: pkg.version,
                     }],
                     'browserify-css',
+                    [require_transform, {
+                        global: true,
+                        shims: absolute({
+                            './node_modules/videojs-ima/src/videojs.ima.js': {
+                                'video.js': 'window.videojs',
+                                'videojs-contrib-ads': 'null',
+                            },
+                        }),
+                    }],
                 ],
             },
             watch: {

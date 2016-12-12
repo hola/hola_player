@@ -13,6 +13,7 @@
   "laxbreak": true,
   "strict": "global",
   "predef": [
+    "__dirname",
     "require",
     "module",
     "console"

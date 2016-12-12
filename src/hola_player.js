@@ -23,6 +23,16 @@ function load_deps(deps){
         require('@hola.org/videojs-thumbnails');
         require('./css/videojs-thumbnails.css');
     }
+    if (deps['videojs-contrib-ads'])
+    {
+        require('videojs-contrib-ads');
+        require('./css/videojs-contrib-ads.css');
+    }
+    if (deps['videojs-ima'])
+    {
+        require('videojs-ima');
+        require('./css/videojs-ima.css');
+    }
 }
 
 var swf_urls = {
@@ -190,6 +200,8 @@ Player.prototype.init_vjs = function(){
         'videojs-settings': !!vjs_opt.plugins.settings,
         'videojs-hola-skin': !!vjs_opt.plugins.hola_skin,
         'videojs-thumbnails': !!opt.thumbnails,
+        'videojs-contrib-ads': !!opt.ads,
+        'videojs-ima': !!opt.ads,
     });
     var play_fired = false;
     videojs(hola_player.element, vjs_opt, function(){
