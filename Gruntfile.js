@@ -1,3 +1,4 @@
+'use strict';
 var path = require('path');
 
 module.exports = function(grunt) {
@@ -10,7 +11,7 @@ module.exports = function(grunt) {
         },
         jshint: {
             options: {jshintrc: '.jshintrc'},
-            all: ['src/*.js'],
+            all: ['src/*.js', './*.js'],
         },
         browserify: {
             options: {
