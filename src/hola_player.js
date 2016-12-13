@@ -71,12 +71,23 @@ Player.prototype.init_element = function(){
     var element = opt.player ? $(opt.player)[0] :
         document.querySelector('video, object, embed');
     var $element = $(element);
+    if (opt.sources && !opt.sources.length)
+        opt.sources = undefined;
+    if (opt.video_url)
+    {
+        opt.sources = [{
+            src: opt.video_url,
+            type: opt.video_type||mime.guess_link_type(opt.video_url),
+        }];
+    }
     // special case when using a div container or flash object - create
     // video tag instead
     // XXX gilad/alexeym: unify with in loader.js,
     // it should not be in player itself.
     if ($element.is('div') || $element.is('object'))
     {
+        if (!opt.sources)
+            return null;
         var $video = $('<video>', {
             id: util.unique_id('hola_player'),
             class: 'video-js',
@@ -84,27 +95,7 @@ Player.prototype.init_element = function(){
             poster: opt.poster,
         });
         opt.player = '#'+$video.attr('id');
-        var sources = opt.sources;
-        if (!(opt.video_url || sources && sources.length))
-            return null;
-        if (sources && sources.length)
-        {
-            sources = sources.map(function(source){
-                var url = source.src||source.file;
-                return {
-                    src: url,
-                    type: source.type||mime.guess_link_type(url),
-                };
-            });
-        }
-        else
-        {
-            sources = [{
-                src: opt.video_url,
-                type: opt.video_type||mime.guess_link_type(opt.video_url),
-            }];
-        }
-        $video.append(sources.map(function(source){
+        $video.append(opt.sources.map(function(source){
             return $('<source>', source);
         }));
         var position = $element.css('position');
@@ -124,7 +115,10 @@ Player.prototype.init_element = function(){
         element.controls = false;
         if (!opt.sources)
         {
-            opt.sources = $element.find('source').map(function(){
+            var $sources = $element.find('source');
+            if (!$sources.length)
+                return null;
+            opt.sources = $sources.map(function(){
                 var source = $(this);
                 return {src: source.attr('src'), type: source.attr('type'),
                     label: source.attr('label'),
@@ -145,8 +139,9 @@ Player.prototype.init_vjs = function(){
     var tech_order = opt.tech=='flash' ?
         ['flash', 'html5'] : ['html5', 'flash'];
     tech_order.push('osmf');
-    // XXX arik: unite swf to one
     var vjs_opt = {
+        sources: opt.sources,
+        // XXX arik: unite swf to one
         osmf: {swf: swf_urls['videojs-osmf']},
         flash: {
             swf: swf_urls.videojs,
@@ -171,7 +166,7 @@ Player.prototype.init_vjs = function(){
         techOrder: tech_order,
         tooltips: true,
         plugins: {
-            settings: false,
+            settings: hola_player.get_settings_opt(),
             hola_skin: opt.skin ? false : {
                 css: false,
                 no_play_transform: opt.no_play_transform,
@@ -179,26 +174,6 @@ Player.prototype.init_vjs = function(){
             },
         },
     };
-    if (opt.sources)
-        vjs_opt.sources = opt.sources;
-    else if (opt.video_url)
-    {
-        vjs_opt.sources = [{
-            src: opt.video_url,
-            type: opt.video_type||mime.guess_link_type(opt.video_url)
-        }];
-    }
-    var settings_options = opt.settings;
-    if (settings_options===undefined || settings_options===true)
-        settings_options = {info: true, report: true, quality: false};
-    if (settings_options!==false)
-    {
-        if (settings_options.quality)
-            settings_options.quality = {sources: vjs_opt.sources||[]};
-        settings_options.graph = opt.graph;
-        settings_options.volume = opt.volume;
-        vjs_opt.plugins.settings = settings_options;
-    }
     vjs_opt = videojs.mergeOptions(vjs_opt, opt.videojs_options);
     load_deps({
         'videojs-settings': !!vjs_opt.plugins.settings,
@@ -250,6 +225,19 @@ Player.prototype.init_vjs = function(){
                 player.trigger('play');
         });
     });
+};
+
+Player.prototype.get_settings_opt = function(){
+    var opt = this.opt, s = opt.settings;
+    if (s===false)
+        return;
+    if (s===undefined || s===true)
+        s = {info: true, report: true, quality: false};
+    if (s.quality)
+        s.quality = {sources: opt.sources||[]};
+    s.graph = opt.graph;
+    s.volume = opt.volume;
+    return s;
 };
 
 function reset_native_hls(el, sources){
