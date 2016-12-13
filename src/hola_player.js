@@ -147,7 +147,6 @@ Player.prototype.init_vjs = function(){
         'videojs-contrib-ads': !!opt.ads,
         'videojs-ima': !!opt.ads,
     });
-    var play_fired = false;
     videojs(this.element, vjs_opt, function(){
         var player = this;
         player.controls(true);
@@ -155,7 +154,6 @@ Player.prototype.init_vjs = function(){
         if (opt.thumbnails)
             player.thumbnails(opt.thumbnails);
         player.on('play', function(){
-            play_fired = true;
             player.bigPlayButton.hide();
         }).on('pause', function(e){
             if (player.scrubbing())
