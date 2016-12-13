@@ -138,7 +138,7 @@ Player.prototype.init_element = function(){
 };
 
 Player.prototype.init_vjs = function(){
-    var opt = this.opt, cb = this.ready_cb;
+    var opt = this.opt, cb = this.ready_cb, hola_player = this;
     var vjs_opt = this.get_vjs_opt();
     load_deps({
         'videojs-settings': !!vjs_opt.plugins.settings,
@@ -153,6 +153,7 @@ Player.prototype.init_vjs = function(){
         player.controlBar.show();
         if (opt.thumbnails)
             player.thumbnails(opt.thumbnails);
+        hola_player.init_ads(player);
         player.on('play', function(){
             player.bigPlayButton.hide();
         }).on('pause', function(e){
@@ -241,6 +242,26 @@ Player.prototype.get_vjs_opt = function(){
             },
         },
     }, opt.videojs_options);
+};
+
+Player.prototype.init_ads = function(player){
+    var opt = this.opt;
+    if (!player.ads || !player.ima || !opt.ads ||
+        !opt.ads.adTagUrl && !opt.ads.adsResponse)
+    {
+        return;
+    }
+    player.ima(videojs.mergeOptions({
+        id: this.element.id,
+        contribAdsSettings: {
+            prerollTimeout: 1000,
+            postrollTimeout: 1000,
+        },
+    }, opt.ads));
+    player.ima.requestAds();
+    // avoid it eating clicks while ad isn't playing
+    if (player.ima.adContainerDiv)
+        player.ima.adContainerDiv.style.display = 'none';
 };
 
 function reset_native_hls(el, sources){
