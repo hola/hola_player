@@ -135,46 +135,8 @@ Player.prototype.init_element = function(){
 };
 
 Player.prototype.init_vjs = function(){
-    var hola_player = this, opt = hola_player.opt, cb = hola_player.ready_cb;
-    var tech_order = opt.tech=='flash' ?
-        ['flash', 'html5'] : ['html5', 'flash'];
-    tech_order.push('osmf');
-    var vjs_opt = {
-        sources: opt.sources,
-        // XXX arik: unite swf to one
-        osmf: {swf: swf_urls['videojs-osmf']},
-        flash: {
-            swf: swf_urls.videojs,
-            accelerated: opt.accelerated,
-        },
-        html5: {
-            hlsjsConfig: {
-                fragLoadingLoopThreshold: 1000,
-                manifestLoadingTimeOut: 20*1000,
-                manifestLoadingMaxRetry: 4,
-                levelLoadingTimeOut: 20*1000,
-                levelLoadingMaxRetry: 4,
-                xhrSetup: opt.withCredentials && function(xhr){
-                    xhr.withCredentials = true;
-                },
-            },
-        },
-        inactivityTimeout: opt.inactivity_timeout===undefined ?
-            2000 : opt.inactivity_timeout,
-        autoplay: opt.auto_play,
-        poster: opt.poster,
-        techOrder: tech_order,
-        tooltips: true,
-        plugins: {
-            settings: hola_player.get_settings_opt(),
-            hola_skin: opt.skin ? false : {
-                css: false,
-                no_play_transform: opt.no_play_transform,
-                show_controls_before_start: opt.show_controls_before_start,
-            },
-        },
-    };
-    vjs_opt = videojs.mergeOptions(vjs_opt, opt.videojs_options);
+    var opt = this.opt, cb = this.ready_cb;
+    var vjs_opt = this.get_vjs_opt();
     load_deps({
         'videojs-settings': !!vjs_opt.plugins.settings,
         'videojs-hola-skin': !!vjs_opt.plugins.hola_skin,
@@ -183,7 +145,7 @@ Player.prototype.init_vjs = function(){
         'videojs-ima': !!opt.ads,
     });
     var play_fired = false;
-    videojs(hola_player.element, vjs_opt, function(){
+    videojs(this.element, vjs_opt, function(){
         var player = this;
         player.controls(true);
         player.controlBar.show();
@@ -238,6 +200,47 @@ Player.prototype.get_settings_opt = function(){
     s.graph = opt.graph;
     s.volume = opt.volume;
     return s;
+};
+
+Player.prototype.get_vjs_opt = function(){
+    var opt = this.opt;
+    return videojs.mergeOptions({
+        sources: opt.sources,
+        osmf: {swf: swf_urls['videojs-osmf']}, // XXX arik: unite swf to one
+        flash: {
+            swf: swf_urls.videojs,
+            accelerated: opt.accelerated,
+        },
+        html5: {
+            hlsjsConfig: {
+                debug: false,
+                fragLoadingLoopThreshold: 1000,
+                manifestLoadingTimeOut: 20*1000,
+                manifestLoadingMaxRetry: 4,
+                levelLoadingTimeOut: 20*1000,
+                levelLoadingMaxRetry: 4,
+                xhrSetup: opt.withCredentials && function(xhr){
+                    xhr.withCredentials = true;
+                },
+            },
+        },
+        inactivityTimeout: opt.inactivity_timeout===undefined ?
+            2000 : opt.inactivity_timeout,
+        autoplay: opt.auto_play,
+        poster: opt.poster,
+        techOrder:
+            (opt.tech=='flash' ? ['flash', 'html5'] : ['html5', 'flash'])
+            .concat('osmf'),
+        tooltips: true,
+        plugins: {
+            settings: this.get_settings_opt(),
+            hola_skin: opt.skin ? false : {
+                css: false,
+                no_play_transform: opt.no_play_transform,
+                show_controls_before_start: opt.show_controls_before_start,
+            },
+        },
+    }, opt.videojs_options);
 };
 
 function reset_native_hls(el, sources){
