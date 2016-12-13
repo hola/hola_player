@@ -6,7 +6,6 @@ var util = require('./util.js');
 var hlsjs_source_handler = require('./hlsjs_source_handler.js');
 var flashls_source_handler = require('./flashls_source_handler.js');
 require('@hola.org/videojs-osmf');
-var $ = require('jquery-browserify');
 var url = require('url');
 
 function load_deps(deps){
@@ -66,9 +65,10 @@ Player.prototype.init = function(opt, cb){
 
 Player.prototype.init_element = function(){
     var opt = this.opt, cb = this.ready_cb;
-    var element = opt.player ? $(opt.player)[0] :
+    var element = opt.player ? document.querySelector(opt.player) :
         document.querySelector('video, object, embed');
-    var $element = $(element);
+    if (!element)
+        return null;
     if (opt.sources && !opt.sources.length)
         opt.sources = undefined;
     if (opt.video_url)
@@ -82,49 +82,52 @@ Player.prototype.init_element = function(){
     // video tag instead
     // XXX gilad/alexeym: unify with in loader.js,
     // it should not be in player itself.
-    if ($element.is('div') || $element.is('object'))
+    if (element.tagName=='DIV' || element.tagName=='OBJECT' ||
+        element.tagName=='EMBED')
     {
         if (!opt.sources)
             return null;
-        var $video = $('<video>', {
+        var style = window.getComputedStyle(element);
+        var videoel = videojs.createEl('video', {}, {
             id: util.unique_id('hola_player'),
             class: 'video-js',
             preload: opt.preload||'auto',
             poster: opt.poster,
+            width: opt.width||parseFloat(style.width),
+            height: opt.height||parseFloat(style.height),
         });
-        $video.append(opt.sources.map(function(source){
-            return $('<source>', source);
+        videojs.appendContent(videoel, opt.sources.map(function(source){
+            return videojs.createEl('source', {}, source);
         }));
-        var position = $element.css('position');
-        $video.css({
-            position: position=='static' ? 'relative' : position,
-            left: $element.css('left'),
-            top: $element.css('top'),
-        }).attr({
-            width: opt.width||$element.width(),
-            height: opt.height||$element.height(),
-        }).insertAfter(element);
-        $element.hide();
-        return $video[0];
+        videoel.style.position = style.position=='static' ?
+            'relative' : style.position;
+        videoel.style.left = style.left;
+        videoel.style.top = style.top;
+        // $(videoel).insertAfter(element);
+        element.parentNode.insertBefore(videoel, element.nextSibling);
+        element.style.display = 'none';
+        return videoel;
     }
-    if ($element.is('video'))
+    if (element.tagName=='VIDEO')
     {
         element.controls = false;
         if (!opt.sources)
         {
-            var $sources = $element.find('source');
-            if (!$sources.length)
+            var sources = element.querySelectorAll('source');
+            if (!sources.length)
                 return null;
-            opt.sources = $sources.map(function(){
-                var source = $(this);
-                return {src: source.attr('src'), type: source.attr('type'),
-                    label: source.attr('label'),
-                    default: !!source.attr('default')};
-            }).get();
+            opt.sources = Array.prototype.map.call(sources, function(source){
+                return {
+                    src: source.getAttribute('src'),
+                    type: source.getAttribute('type'),
+                    label: source.getAttribute('label'),
+                    default: !!source.getAttribute('default')
+                };
+            });
         }
         // with Hola player wrapper there is no autoSetup mode
         // XXX: maybe we should merge data-setup conf with vjs_opt
-        $element.removeAttr('data-setup');
+        element.removeAttribute('data-setup');
         // XXX bahaa: find a better solution
         reset_native_hls(element, opt.sources);
         return element;
