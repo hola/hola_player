@@ -61,7 +61,14 @@ Player.prototype.init = function(opt, cb){
     }
     this.ready_cb = cb;
     this.opt = opt = opt||{};
-    var element = this.element = opt.player ? $(opt.player)[0] :
+    if (!(this.element = this.init_element()))
+        return cb && cb(null);
+    this.init_vjs();
+};
+
+Player.prototype.init_element = function(){
+    var opt = this.opt, cb = this.ready_cb;
+    var element = opt.player ? $(opt.player)[0] :
         document.querySelector('video, object, embed');
     var $element = $(element);
     // special case when using a div container or flash object - create
@@ -71,18 +78,15 @@ Player.prototype.init = function(opt, cb){
     if ($element.is('div') || $element.is('object'))
     {
         var $video = $('<video>', {
-            id: '__hola_player_unique_id__',
-            'class': 'video-js',
+            id: util.unique_id('hola_player'),
+            class: 'video-js',
             preload: opt.preload||'auto',
             poster: opt.poster,
         });
         opt.player = '#'+$video.attr('id');
         var sources = opt.sources;
         if (!(opt.video_url || sources && sources.length))
-        {
-            // XXX gilad: should we still invoke callback?
-            return cb && cb(null);
-        }
+            return null;
         if (sources && sources.length)
         {
             sources = sources.map(function(source){
@@ -113,10 +117,9 @@ Player.prototype.init = function(opt, cb){
             height: opt.height||$element.height(),
         }).insertAfter(element);
         $element.hide();
-        this.element = element = $video[0];
-        $element = $(element);
+        return $video[0];
     }
-    else if ($element.is('video'))
+    if ($element.is('video'))
     {
         element.controls = false;
         if (!opt.sources)
@@ -131,13 +134,14 @@ Player.prototype.init = function(opt, cb){
         // with Hola player wrapper there is no autoSetup mode
         // XXX: maybe we should merge data-setup conf with vjs_opt
         $element.removeAttr('data-setup');
+        // XXX bahaa: find a better solution
         reset_native_hls(element, opt.sources);
+        return element;
     }
-    this.init_vjs();
 };
 
 Player.prototype.init_vjs = function(){
-    var hola_player = this, opt = hola_player.opt;
+    var hola_player = this, opt = hola_player.opt, cb = hola_player.ready_cb;
     var tech_order = opt.tech=='flash' ?
         ['flash', 'html5'] : ['html5', 'flash'];
     tech_order.push('osmf');
@@ -238,11 +242,8 @@ Player.prototype.init_vjs = function(){
         }).on('save_logs', function(e){
             // XXX bahaa: TODO
         });
-        if (hola_player.ready_cb)
-        {
-            try { hola_player.ready_cb(player); }
-            catch(e){ console.err(e.stack||e); }
-        }
+        if (cb)
+            try { cb(player); } catch(e){ console.err(e.stack||e); }
         // repeat 'play' event for autoplay==true cases
         setTimeout(function(){
             if (!player.paused() && !play_fired)

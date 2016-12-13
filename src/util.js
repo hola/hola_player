@@ -28,3 +28,9 @@ E.current_script = function(){
     var scripts = document.getElementsByTagName('script');
     return scripts[scripts.length-1];
 };
+
+var id_counter = 0;
+var rand = Math.floor(Math.random()*10000)+'';
+E.unique_id = function(prefix){
+    return (prefix ? prefix+'_' : '')+rand+'_'+(++id_counter);
+};
