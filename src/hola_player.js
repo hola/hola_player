@@ -110,6 +110,7 @@ Player.prototype.init_element = function(){
     }
     else if (element.tagName=='VIDEO')
     {
+        element.autoplay = false;
         element.controls = false;
         if (!opt.sources)
         {
@@ -183,11 +184,11 @@ Player.prototype.init_vjs = function(){
         });
         if (cb)
             try { cb(player); } catch(e){ console.err(e.stack||e); }
-        // repeat 'play' event for autoplay==true cases
-        setTimeout(function(){
-            if (!player.paused() && !play_fired)
-                player.trigger('play');
-        });
+        if (opt.auto_play)
+        {
+            player.play();
+            player.autoplay(true);
+        }
     });
 };
 
@@ -228,7 +229,6 @@ Player.prototype.get_vjs_opt = function(){
         },
         inactivityTimeout: opt.inactivity_timeout===undefined ?
             2000 : opt.inactivity_timeout,
-        autoplay: opt.auto_play,
         poster: opt.poster,
         techOrder:
             (opt.tech=='flash' ? ['flash', 'html5'] : ['html5', 'flash'])

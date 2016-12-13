@@ -10,7 +10,11 @@
   </video>
   <script>
     (function(){
-      window.hola_player(function(player){ player.init(); });
+      window.hola_player(function(player){
+        player.init({
+          auto_play: true,
+        });
+      });
     })();
   </script>
 </body>
