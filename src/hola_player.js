@@ -106,9 +106,9 @@ Player.prototype.init_element = function(){
         // $(videoel).insertAfter(element);
         element.parentNode.insertBefore(videoel, element.nextSibling);
         element.style.display = 'none';
-        return videoel;
+        element = videoel;
     }
-    if (element.tagName=='VIDEO')
+    else if (element.tagName=='VIDEO')
     {
         element.controls = false;
         if (!opt.sources)
@@ -130,8 +130,10 @@ Player.prototype.init_element = function(){
         element.removeAttribute('data-setup');
         // XXX bahaa: find a better solution
         reset_native_hls(element, opt.sources);
-        return element;
     }
+    if (!element.id)
+        element.id = util.unique_id('hola_player');
+    return element;
 };
 
 Player.prototype.init_vjs = function(){
