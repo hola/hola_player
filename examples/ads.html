@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src=//imasdk.googleapis.com/js/sdkloader/ima3.js></script>
+    <script src="../dist/hola_player.dev.js"></script>
+</head>
+<body>
+  <div><h1>Video tag with Hola player - playing MP4 with ads</h1></div>
+  <video preload="none" class="video-js vjs-default-skin" width="640" height="360" controls>
+    <source
+      src="http://player.h-cdn.org/static/mp4/tears_of_steel_1080p_MP4.mp4"
+      type="video/mp4" label="1080p">
+    <source
+      src="http://player.h-cdn.org/static/mp4/tears_of_steel_360p_MP4.mp4"
+      type="video/mp4" label="360p">
+  </video>
+  <script>
+    (function(){
+      window.hola_player(function(player){
+        player.init({
+          poster: 'http://player.h-cdn.org/static/mp4/tears_of_steel_1080p_MP4.jpg',
+          ads: {
+            adTagUrl: 'https://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/124319096/external/ad_rule_samples&ciu_szs=300x250&ad_rule=1&impl=s&gdfp_req=1&env=vp&output=vmap&unviewed_position_start=1&cust_params=deployment%3Ddevsite%26sample_ar%3Dpremidpost&cmsid=496&vid=short_onecue&correlator=',
+          },
+          settings: {
+            quality: true,
+          },
+        }, function(vjs){
+          vjs.ima({
+            contribAdsSettings: {
+              prerollTimeout: 1000,
+              postrollTimeout: 1000,
+            },
+            id: 'myVideo',
+            adTagUrl: 'https://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/124319096/external/ad_rule_samples&ciu_szs=300x250&ad_rule=1&impl=s&gdfp_req=1&env=vp&output=vmap&unviewed_position_start=1&cust_params=deployment%3Ddevsite%26sample_ar%3Dpremidpost&cmsid=496&vid=short_onecue&correlator=',
+          });
+          vjs.ima.requestAds();
+          // XXX bahaa: hack for ima frame eating poster clicks
+          vjs.one('click', function(){
+            vjs.play();
+          });
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
