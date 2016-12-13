@@ -44,8 +44,6 @@ var swf_urls = {
     hlsjs_source_handler();
     flashls_source_handler();
     load_cdn_loader();
-    // XXX michaelg the defaults interfere with player opening
-    $('.vjs-styles-defaults').remove();
     var player = new Player();
     // XXX bahaa: change to module.exports
     window.hola_player = function(cb){ return cb && cb(player); };
