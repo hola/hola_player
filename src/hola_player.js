@@ -92,7 +92,6 @@ Player.prototype.init_element = function(){
             preload: opt.preload||'auto',
             poster: opt.poster,
         });
-        opt.player = '#'+$video.attr('id');
         $video.append(opt.sources.map(function(source){
             return $('<source>', source);
         }));
