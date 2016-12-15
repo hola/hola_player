@@ -34,9 +34,16 @@ function load_deps(deps){
     }
 }
 
+// XXX bahaa: make these easily replacable for self-hosting
 var swf_urls = {
-    videojs: './videojs.swf',
-    'videojs-osmf': './videojs-osmf.swf',
+    videojs:
+        'http://player.h-cdn.com/player/swf/'+
+        require('@hola.org/videojs-swf/package.json').version+
+        '/videojs.swf',
+    'videojs-osmf':
+        'http://player.h-cdn.com/player/swf/osmf/'+
+        require('@hola.org/videojs-osmf/package.json').version+
+        '/videojs-osmf.swf',
 };
 
 (function(){
