@@ -258,11 +258,14 @@ Player.prototype.get_vjs_opt = function(){
 
 Player.prototype.init_ads = function(player){
     var opt = this.opt;
-    if (!player.ads || !player.ima || !opt.ads ||
-        !opt.ads.adTagUrl && !opt.ads.adsResponse)
-    {
+    if (!opt.ads)
         return;
-    }
+    if (!opt.ads.adTagUrl && !opt.ads.adsResponse) // bad params
+        return console.error('missing Ad Tag');
+    if (!window.google) // missing external <script> or blocked by AdBlocker
+        return console.error('missing IMA HTML5 SDK');
+    if (!player.ads || !player.ima) // shouldn't happen as they're bundled
+        return console.error('missing ad modules');
     player.ima(videojs.mergeOptions({
         id: this.element.id,
         contribAdsSettings: {
