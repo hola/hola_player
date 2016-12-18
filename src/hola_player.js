@@ -8,6 +8,19 @@ var flashls_source_handler = require('./flashls_source_handler.js');
 require('@hola.org/videojs-osmf');
 var url = require('url');
 
+module.exports = hola_player;
+hola_player.VERSION = '__VERSION__';
+
+var player = new Player();
+// XXX bahaa: do we really need to keep this weird API?
+function hola_player(cb){ return cb && cb(player); }
+
+(function(){
+    hlsjs_source_handler();
+    flashls_source_handler();
+    load_cdn_loader();
+})();
+
 function load_deps(deps){
     deps = deps||{};
     if (deps['videojs-settings'])
@@ -45,16 +58,6 @@ var swf_urls = {
         require('@hola.org/videojs-osmf/package.json').version+
         '/videojs-osmf.swf',
 };
-
-(function(){
-    hlsjs_source_handler();
-    flashls_source_handler();
-    load_cdn_loader();
-    var player = new Player();
-    // XXX bahaa: change to module.exports
-    window.hola_player = function(cb){ return cb && cb(player); };
-    window.hola_player.VERSION = '__VERSION__';
-})();
 
 function Player(){}
 Player.prototype.init = function(opt, cb){

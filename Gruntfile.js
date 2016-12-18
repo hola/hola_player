@@ -26,6 +26,7 @@ module.exports = function(grunt) {
         browserify: {
             options: {
                 browserifyOptions: {
+                    standalone: 'hola_player',
                     debug: true,
                     noParse: absolute([
                         // avoid it requiring its own videojs
@@ -51,6 +52,7 @@ module.exports = function(grunt) {
                         }),
                     }],
                 ],
+                plugin: ['browserify-derequire'],
             },
             watch: {
                 options: {
