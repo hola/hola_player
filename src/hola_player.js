@@ -72,8 +72,10 @@ Player.prototype.init = function(opt, cb){
 
 Player.prototype.init_element = function(){
     var opt = this.opt, cb = this.ready_cb;
-    var element = opt.player ? document.querySelector(opt.player) :
-        document.querySelector('video, object, embed');
+    var element = !opt.player ?
+        document.querySelector('video, object, embed') :
+        videojs.isEl(opt.player) ? opt.player :
+        document.querySelector(opt.player);
     if (!element)
         return null;
     if (opt.sources && !opt.sources.length)
