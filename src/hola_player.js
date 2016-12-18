@@ -194,7 +194,7 @@ Player.prototype.init_vjs = function(){
             // XXX bahaa: TODO
         });
         if (cb)
-            try { cb(player); } catch(e){ console.err(e.stack||e); }
+            try { cb(player); } catch(e){ console.error(e.stack||e); }
         if (opt.auto_play)
         {
             player.play();
