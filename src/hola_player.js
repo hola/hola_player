@@ -189,7 +189,22 @@ Player.prototype.init_vjs = function(){
         }).on('problem_report', function(e){
             // XXX bahaa: TODO
         }).on('cdn_graph_overlay', function(e){
-            // XXX bahaa: TODO
+            var hola_cdn = window.hola_cdn;
+            if (window.cdn_graph || !hola_cdn || hola_cdn.get_mode()!='cdn')
+                return;
+            try {
+                var bws = hola_cdn._get_bws();
+                var ldr = window.hola_cdn.get_wrapper().loader;
+                var gopt = {
+                    graph: 'newgraph_progress_mode_highlight_tips',
+                    player_obj: bws.player,
+                    video: bws.player.vjs
+                };
+                var url = '//player.h-cdn.com'+
+                    hola_cdn.require.zdot('cdngraph_js');
+                ldr.util.load_script(url, function(){
+                    window.cdn_graph.init(gopt, bws, ldr); });
+            } catch(err){ console.error(err.stack||err); }
         }).on('save_logs', function(e){
             // XXX bahaa: TODO
         });
