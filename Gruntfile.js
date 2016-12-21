@@ -30,7 +30,7 @@ module.exports = function(grunt) {
                     debug: true,
                     noParse: absolute([
                         // avoid it requiring its own videojs
-                        './node_modules/videojs-ima/src/videojs.ima.js',
+                        './node_modules/@hola.org/videojs-ima/src/videojs.ima.js',
                         // for faster build
                         './node_modules/video.js/dist/video.js',
                         './node_modules/jquery-browserify/lib/jquery.js',
@@ -45,7 +45,7 @@ module.exports = function(grunt) {
                     [require_transform, {
                         global: true,
                         shims: absolute({
-                            './node_modules/videojs-ima/src/videojs.ima.js': {
+                            './node_modules/@hola.org/videojs-ima/src/videojs.ima.js': {
                                 'video.js': 'window.videojs',
                                 'videojs-contrib-ads': 'null',
                             },

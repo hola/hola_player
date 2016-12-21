@@ -42,7 +42,7 @@ function load_deps(deps){
     }
     if (deps['videojs-ima'])
     {
-        require('videojs-ima');
+        require('@hola.org/videojs-ima');
         require('./css/videojs-ima.css');
     }
 }
