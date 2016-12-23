@@ -1,7 +1,7 @@
 {
   "name": "@hola.org/hola_player",
   "description": "An HTML5 and Flash video player with a common API and skin for both.",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "license": "Apache-2.0",
   "keywords": [
     "flash",
@@ -35,7 +35,7 @@
     ".jshintrc"
   ],
   "dependencies": {
-    "@hola.org/videojs-hola-skin": ">=0.0.5-31 <0.0.5",
+    "@hola.org/videojs-hola-skin": ">=0.0.5-36 <0.0.5",
     "@hola.org/videojs-osmf": ">=0.0.0-33 <0.0.0",
     "@hola.org/videojs-settings": ">=0.0.3-26 <0.0.3",
     "@hola.org/videojs-swf": ">=5.1.0-4 <5.1.0",
