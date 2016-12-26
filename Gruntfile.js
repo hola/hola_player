@@ -63,6 +63,12 @@ module.exports = function(grunt) {
             },
             dist: {
                 files: {'dist/hola_player.dev.js': ['src/hola_player.js']},
+                options: {
+                    ignore: ['videojs-contrib-dash'],
+                },
+            },
+            dash: {
+                files: {'dist/hola_player.dash.dev.js': ['src/hola_player.js']},
             },
         },
         exorcise: {
@@ -70,6 +76,7 @@ module.exports = function(grunt) {
                 options: {},
                 files: {
                     'dist/hola_player.dev.js.map': ['dist/hola_player.dev.js'],
+                    'dist/hola_player.dash.dev.js.map': ['dist/hola_player.dash.dev.js'],
                 },
             },
         },
@@ -89,7 +96,10 @@ module.exports = function(grunt) {
                 sourceMapIn: 'dist/hola_player.dev.js.map',
             },
             dist : {
-                files: {'dist/hola_player.js' : 'dist/hola_player.dev.js'},
+                files: [
+                    {dest: 'dist/hola_player.js', src: 'dist/hola_player.dev.js'},
+                    {dest: 'dist/hola_player.dash.js', src: 'dist/hola_player.dash.dev.js'},
+                ],
             },
         },
         zip: {
@@ -106,6 +116,6 @@ module.exports = function(grunt) {
     });
     require('load-grunt-tasks')(grunt);
     grunt.registerTask('build', ['clean', 'jshint', 'browserify:dist',
-        'exorcise', 'copy', 'uglify']);
+        'browserify:dash', 'exorcise', 'copy', 'uglify']);
     grunt.registerTask('default', ['build']);
 };

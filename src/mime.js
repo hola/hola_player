@@ -36,3 +36,6 @@ E.guess_link_type = function(url){
 E.is_hls_type = function(type){
     return /^application\/x-mpegurl$/i.test(type);
 };
+E.is_dash_type = function(type){
+    return /^application\/dash\+xml/i.test(type);
+};

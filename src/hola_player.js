@@ -45,6 +45,8 @@ function load_deps(deps){
         require('@hola.org/videojs-ima');
         require('./css/videojs-ima.css');
     }
+    if (deps['videojs-contrib-dash'])
+        require('videojs-contrib-dash');
 }
 
 // XXX bahaa: make these easily replacable for self-hosting
@@ -158,6 +160,9 @@ Player.prototype.init_vjs = function(){
         'videojs-thumbnails': !!opt.thumbnails,
         'videojs-contrib-ads': !!opt.ads,
         'videojs-ima': !!opt.ads,
+        'videojs-contrib-dash': opt.sources.some(function(s){
+            return mime.is_dash_link(s.src) || mime.is_dash_type(s.type);
+        }),
     });
     videojs(this.element, vjs_opt, function(){
         var player = this;
