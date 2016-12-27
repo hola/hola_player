@@ -49,6 +49,9 @@ module.exports = function(grunt) {
                                 'video.js': 'window.videojs',
                                 'videojs-contrib-ads': 'null',
                             },
+                            './node_modules/videojs-contrib-dash/es5/videojs-dash.js': {
+                                'dashjs': 'window.dashjs',
+                            },
                         }),
                     }],
                 ],
@@ -64,7 +67,7 @@ module.exports = function(grunt) {
             dist: {
                 files: {'dist/hola_player.dev.js': ['src/hola_player.js']},
                 options: {
-                    ignore: ['videojs-contrib-dash'],
+                    ignore: ['videojs-contrib-dash', 'dashjs'],
                 },
             },
             dash: {
@@ -95,11 +98,13 @@ module.exports = function(grunt) {
                 sourceMap: true,
                 sourceMapIn: 'dist/hola_player.dev.js.map',
             },
-            dist : {
-                files: [
-                    {dest: 'dist/hola_player.js', src: 'dist/hola_player.dev.js'},
-                    {dest: 'dist/hola_player.dash.js', src: 'dist/hola_player.dash.dev.js'},
-                ],
+            dist: {
+                options: {sourceMapIn: 'dist/hola_player.dev.js.map'},
+                files: {'dist/hola_player.js': 'dist/hola_player.dev.js'},
+            },
+            dash: {
+                options: {sourceMapIn: 'dist/hola_player.dash.dev.js.map'},
+                files: {'dist/hola_player.dash.js': 'dist/hola_player.dash.dev.js'},
             },
         },
         zip: {

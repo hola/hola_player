@@ -46,7 +46,12 @@ function load_deps(deps){
         require('./css/videojs-ima.css');
     }
     if (deps['videojs-contrib-dash'])
+    {
+        window.dashjs = {
+            MediaPlayer: require('dashjs/dist/dash.mediaplayer.debug.js'),
+        };
         require('videojs-contrib-dash');
+    }
 }
 
 // XXX bahaa: make these easily replacable for self-hosting

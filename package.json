@@ -45,6 +45,7 @@
     "@hola.org/hls.js": ">=0.6.1-50 <0.6.1",
     "video.js": "hola/video.js#hola_5.10.2",
     "videojs-contrib-ads": "^4.1.5",
+    "dashjs": "hola/dash.js#development",
     "videojs-contrib-dash": "^2.6.0"
   },
   "devDependencies": {
