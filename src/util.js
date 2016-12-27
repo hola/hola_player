@@ -34,3 +34,20 @@ var rand = Math.floor(Math.random()*10000)+'';
 E.unique_id = function(prefix){
     return (prefix ? prefix+'_' : '')+rand+'_'+(++id_counter);
 };
+
+E.scaled_number = function(num){
+    if (num===undefined)
+        return '';
+    if (!num)
+        return '0';
+    var k = 1024;
+    var sizes = ['', 'K', 'M', 'G', 'T', 'P'];
+    var i = Math.floor(Math.log(num)/Math.log(k));
+    num /= Math.pow(k, i);
+    if (num<0.001)
+        return '0';
+    if (num>=k-1)
+        num = Math.trunc(num);
+    var str = num.toFixed(num<1 ? 3 : num<10 ? 2 : num<100 ? 1 : 0);
+    return str.replace(/\.0*$/, '')+sizes[i];
+};
