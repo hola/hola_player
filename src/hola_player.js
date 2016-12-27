@@ -305,7 +305,8 @@ Player.prototype.init_ads = function(player){
 };
 
 function reset_native_hls(el, sources){
-    var is_hls = function(e){ return mime.is_hls_link(e.src); };
+    var is_hls = function(s){
+        return mime.is_hls_link(s.src) || mime.is_hls_type(s.type); };
     // not using el.currentSrc because it might not be selected yet.
     if (!el.canPlayType('application/x-mpegurl') || !sources.some(is_hls))
         return;
