@@ -4,23 +4,14 @@
     <script src="../dist/hola_player.dev.js"></script>
 </head>
 <body>
-  <div><h1>Video tag with Hola player - playing HLS without HolaCDN</h1></div>
+  <div><h1>Video tag with Hola player - playing HLS</h1></div>
   <video preload="none" class="video-js vjs-default-skin" width="640" height="360">
     <source src="http://player.h-cdn.org/static/hls/cdn2/master.m3u8" type="application/x-mpegurl">
   </video>
   <script>
     (function(){
         window.hola_player(function(player){
-            player.init({
-              settings: {
-                quality: true,
-              },
-              videojs_options: {
-                flash: {
-                  swf: '../dist/videojs.swf',
-                },
-              },
-            });
+            player.init();
         });
     })();
   </script>
