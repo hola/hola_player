@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="../dist/hola_player.dash.dev.js"></script>
+</head>
+<body>
+  <div><h1>Video tag with Hola player - playing DASH</h1></div>
+  <video preload="none" class="video-js vjs-default-skin" width="640" height="360">
+    <source
+      src="http://makostore-hd.ctedgecdn.net/Makostore-Vod/_definst_/amlst:http/SHORT/CH22_NEWS/2016/01/forat_mishpat_vtr2_n20160109_v1/forat_mishpat_vtr2_n20160109_v1_,850,.mp4/manifest.mpd" type="application/dash+xml">
+  </video>
+  <script>
+    (function(){
+        window.hola_player(function(player){
+            player.init();
+        });
+    })();
+  </script>
+</body>
+</html>
