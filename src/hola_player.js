@@ -193,31 +193,15 @@ Player.prototype.init_vjs = function(){
                 return;
             player.posterImage.show();
             player.bigPlayButton.show();
+            // XXX bahaa: do we really need to pause and rewind?
             if (!player.paused())
                 player.pause();
             player.currentTime(0);
-        }).on('problem_report', function(e){
-            // XXX bahaa: TODO
-        }).on('cdn_graph_overlay', function(e){
-            var hola_cdn = window.hola_cdn;
-            if (window.cdn_graph || !hola_cdn || hola_cdn.get_mode()!='cdn')
-                return;
-            try {
-                var bws = hola_cdn._get_bws();
-                var ldr = window.hola_cdn.get_wrapper().loader;
-                var gopt = {
-                    graph: 'newgraph_progress_mode_highlight_tips',
-                    player_obj: bws.player,
-                    video: bws.player.vjs
-                };
-                var url = '//player.h-cdn.com'+
-                    hola_cdn.require.zdot('cdngraph_js');
-                ldr.util.load_script(url, function(){
-                    window.cdn_graph.init(gopt, bws, ldr); });
-            } catch(err){ console.error(err.stack||err); }
         }).on('save_logs', function(e){
             // XXX bahaa: TODO
-        });
+        }).on('problem_report', function(e){
+            // XXX bahaa: TODO
+        }).on('cdn_graph_overlay', on_cdn_graph_overlay);
         if (cb)
             try { cb(player); } catch(e){ console.error(e.stack||e); }
         if (opt.auto_play)
@@ -227,6 +211,24 @@ Player.prototype.init_vjs = function(){
         }
     });
 };
+
+function on_cdn_graph_overlay(){
+    var hola_cdn = window.hola_cdn;
+    if (window.cdn_graph || !hola_cdn || hola_cdn.get_mode()!='cdn')
+        return;
+    try {
+        var bws = hola_cdn._get_bws();
+        var ldr = window.hola_cdn.get_wrapper().loader;
+        var gopt = {
+            graph: 'newgraph_progress_mode_highlight_tips',
+            player_obj: bws.player,
+            video: bws.player.vjs
+        };
+        var url = '//player.h-cdn.com'+hola_cdn.require.zdot('cdngraph_js');
+        ldr.util.load_script(url, function(){
+            window.cdn_graph.init(gopt, bws, ldr); });
+    } catch(err){ console.error(err.stack||err); }
+}
 
 Player.prototype.get_settings_opt = function(){
     var opt = this.opt, s = opt.settings;
