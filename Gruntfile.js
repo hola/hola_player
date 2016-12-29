@@ -40,6 +40,12 @@ module.exports = function(grunt) {
                     ['browserify-versionify', {
                         placeholder: '__VERSION__',
                         version: pkg.version,
+                    }], ['browserify-versionify', {
+                        placeholder: '__VIDEOJS_SWF_VERSION__',
+                        version: pkg.dependencies['@hola.org/videojs-swf'],
+                    }], ['browserify-versionify', {
+                        placeholder: '__VIDEOJS_OSMF_VERSION__',
+                        version: pkg.dependencies['@hola.org/videojs-osmf'],
                     }],
                     'browserify-css',
                     [require_transform, {
