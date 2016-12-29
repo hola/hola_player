@@ -200,11 +200,11 @@ Player.prototype.init_vjs = function(){
             // XXX bahaa: TODO
         }).on('cdn_graph_overlay', function(e){
             var hola_cdn = window.hola_cdn;
-            if (window.cdn_graph || !hola_cdn || hola_cdn.get_mode()!='cdn')
+            var bws = hola_cdn && hola_cdn._get_bws();
+            if (window.cdn_graph || !bws || hola_cdn.get_mode()!='cdn')
                 return;
             try {
-                var bws = hola_cdn._get_bws();
-                var ldr = window.hola_cdn.get_wrapper().loader;
+                var ldr = hola_cdn.get_wrapper().loader;
                 var gopt = {
                     graph: 'newgraph_progress_mode_highlight_tips',
                     player_obj: bws.player,
