@@ -57,13 +57,11 @@ function load_deps(deps){
 // XXX bahaa: make these easily replacable for self-hosting
 var swf_urls = {
     videojs:
-        'http://player.h-cdn.com/player/swf/'+
-        require('@hola.org/videojs-swf/package.json').version+
-        '/videojs.swf',
+        'http://player.h-cdn.com/player/swf/__VIDEOJS_SWF_VERSION__/'+
+        'videojs.swf',
     'videojs-osmf':
-        'http://player.h-cdn.com/player/swf/osmf/'+
-        require('@hola.org/videojs-osmf/package.json').version+
-        '/videojs-osmf.swf',
+        'http://player.h-cdn.com/player/swf/osmf/__VIDEOJS_OSMF_VERSION__/'+
+        'videojs-osmf.swf',
 };
 
 function Player(){}
@@ -193,31 +191,15 @@ Player.prototype.init_vjs = function(){
                 return;
             player.posterImage.show();
             player.bigPlayButton.show();
+            // XXX bahaa: do we really need to pause and rewind?
             if (!player.paused())
                 player.pause();
             player.currentTime(0);
-        }).on('problem_report', function(e){
-            // XXX bahaa: TODO
-        }).on('cdn_graph_overlay', function(e){
-            var hola_cdn = window.hola_cdn;
-            var bws = hola_cdn && hola_cdn._get_bws();
-            if (window.cdn_graph || !bws || hola_cdn.get_mode()!='cdn')
-                return;
-            try {
-                var ldr = hola_cdn.get_wrapper().loader;
-                var gopt = {
-                    graph: 'newgraph_progress_mode_highlight_tips',
-                    player_obj: bws.player,
-                    video: bws.player.vjs
-                };
-                var url = '//player.h-cdn.com'+
-                    hola_cdn.require.zdot('cdngraph_js');
-                ldr.util.load_script(url, function(){
-                    window.cdn_graph.init(gopt, bws, ldr); });
-            } catch(err){ console.error(err.stack||err); }
         }).on('save_logs', function(e){
             // XXX bahaa: TODO
-        });
+        }).on('problem_report', function(e){
+            // XXX bahaa: TODO
+        }).on('cdn_graph_overlay', on_cdn_graph_overlay);
         if (cb)
             try { cb(player); } catch(e){ console.error(e.stack||e); }
         if (opt.auto_play)
@@ -227,6 +209,24 @@ Player.prototype.init_vjs = function(){
         }
     });
 };
+
+function on_cdn_graph_overlay(){
+    var hola_cdn = window.hola_cdn;
+    var bws = hola_cdn && hola_cdn._get_bws();
+    if (window.cdn_graph || !bws || hola_cdn.get_mode()!='cdn')
+        return;
+    try {
+        var ldr = hola_cdn.get_wrapper().loader;
+        var gopt = {
+            graph: 'newgraph_progress_mode_highlight_tips',
+            player_obj: bws.player,
+            video: bws.player.vjs
+        };
+        var url = '//player.h-cdn.com'+hola_cdn.require.zdot('cdngraph_js');
+        ldr.util.load_script(url, function(){
+            window.cdn_graph.init(gopt, bws, ldr); });
+    } catch(err){ console.error(err.stack||err); }
+}
 
 Player.prototype.get_settings_opt = function(){
     var opt = this.opt, s = opt.settings;
