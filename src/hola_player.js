@@ -233,8 +233,8 @@ Player.prototype.get_settings_opt = function(){
     if (s===false)
         return;
     if (s===undefined || s===true)
-        s = {info: true, report: true, quality: false};
-    if (s.quality)
+        s = {info: true, report: true};
+    if (s.quality || s.quality===undefined)
         s.quality = {sources: opt.sources||[]};
     s.graph = opt.graph;
     s.volume = opt.volume;
