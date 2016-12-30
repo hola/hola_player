@@ -292,7 +292,7 @@ Player.prototype.init_ads = function(player){
     if (!player.ads || !player.ima) // shouldn't happen as they're bundled
         return console.error('missing ad modules');
     player.ima(videojs.mergeOptions({
-        id: this.element.id,
+        id: player.id(),
         contribAdsSettings: {
             prerollTimeout: 1000,
             postrollTimeout: 1000,
