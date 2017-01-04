@@ -52,6 +52,7 @@ function load_deps(deps){
         };
         require('videojs-contrib-dash');
     }
+    require('@hola.org/videojs-contrib-media-sources');
 }
 
 // XXX bahaa: make these easily replacable for self-hosting
