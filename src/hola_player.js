@@ -299,7 +299,13 @@ Player.prototype.init_ads = function(player){
             postrollTimeout: 1000,
         },
     }, opt.ads));
-    player.ima.requestAds();
+    if (videojs.browser.IS_ANDROID || videojs.browser.IS_IOS){
+        player.one('touchend', function(){
+            player.ima.initializeAdDisplayContainer();
+            player.ima.requestAds();
+        });
+    } else
+        player.ima.requestAds();
     // avoid it eating clicks while ad isn't playing
     if (player.ima.adContainerDiv)
         player.ima.adContainerDiv.style.display = 'none';
