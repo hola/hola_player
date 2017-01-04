@@ -5,7 +5,6 @@ var mime = require('./mime.js');
 var util = require('./util.js');
 var hlsjs_source_handler = require('./hlsjs_source_handler.js');
 var flashls_source_handler = require('./flashls_source_handler.js');
-require('@hola.org/videojs-osmf');
 var url = require('url');
 
 module.exports = hola_player;
@@ -23,6 +22,8 @@ function hola_player(cb){ return cb && cb(player); }
 
 function load_deps(deps){
     deps = deps||{};
+    require('@hola.org/videojs-osmf');
+    require('@hola.org/videojs-contrib-media-sources');
     if (deps['videojs-settings'])
         require('@hola.org/videojs-settings');
     if (deps['videojs-hola-skin'])
@@ -52,7 +53,6 @@ function load_deps(deps){
         };
         require('videojs-contrib-dash');
     }
-    require('@hola.org/videojs-contrib-media-sources');
 }
 
 // XXX bahaa: make these easily replacable for self-hosting
@@ -299,12 +299,14 @@ Player.prototype.init_ads = function(player){
             postrollTimeout: 1000,
         },
     }, opt.ads));
-    if (videojs.browser.IS_ANDROID || videojs.browser.IS_IOS){
+    if (videojs.browser.IS_ANDROID || videojs.browser.IS_IOS)
+    {
         player.one('touchend', function(){
             player.ima.initializeAdDisplayContainer();
             player.ima.requestAds();
         });
-    } else
+    }
+    else
         player.ima.requestAds();
     // avoid it eating clicks while ad isn't playing
     if (player.ima.adContainerDiv)
