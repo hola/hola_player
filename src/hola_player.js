@@ -297,6 +297,7 @@ Player.prototype.init_ads = function(player){
         contribAdsSettings: {
             prerollTimeout: 1000,
             postrollTimeout: 1000,
+            disablePlayContentBehindAd: true,
         },
     }, opt.ads));
     if (videojs.browser.IS_ANDROID || videojs.browser.IS_IOS)
