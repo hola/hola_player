@@ -38,7 +38,7 @@ function load_deps(deps){
     }
     if (deps['videojs-contrib-ads'])
     {
-        require('videojs-contrib-ads');
+        require('@hola.org/videojs-contrib-ads');
         require('./css/videojs-contrib-ads.css');
     }
     if (deps['videojs-ima'])
