@@ -204,7 +204,8 @@ Player.prototype.init_vjs = function(){
         }).on('cdn_graph_overlay', on_cdn_graph_overlay);
         if (cb)
             try { cb(player); } catch(e){ console.error(e.stack||e); }
-        if (opt.auto_play)
+        if (opt.auto_play &&
+            !videojs.browser.IS_ANDROID && !videojs.browser.IS_IOS)
         {
             player.play();
             player.autoplay(true);
@@ -284,6 +285,11 @@ Player.prototype.get_vjs_opt = function(){
 };
 
 Player.prototype.init_ads = function(player){
+    var hide_container = function(){
+        // avoid it eating clicks while ad isn't playing
+        if (player.ima.adContainerDiv)
+            player.ima.adContainerDiv.style.display = 'none';
+    };
     var opt = this.opt;
     if (!opt.ads)
         return;
@@ -293,26 +299,28 @@ Player.prototype.init_ads = function(player){
         return console.error('missing IMA HTML5 SDK');
     if (!player.ads || !player.ima) // shouldn't happen as they're bundled
         return console.error('missing ad modules');
-    player.ima(videojs.mergeOptions({
+    opt.ads = videojs.mergeOptions({
         id: player.id(),
         contribAdsSettings: {
             prerollTimeout: 1000,
             postrollTimeout: 1000,
             disablePlayContentBehindAd: true,
         },
-    }, opt.ads));
-    if (videojs.browser.IS_ANDROID || videojs.browser.IS_IOS)
-    {
-        player.one('touchend', function(){
-            player.ima.initializeAdDisplayContainer();
-            player.ima.requestAds();
+    }, opt.ads);
+    player.ima(opt.ads, function(){
+        player.ima.addEventListener(
+            window.google.ima.AdEvent.Type.ALL_ADS_COMPLETED,
+            function(){
+            hide_container();
+            player.removeClass('vjs-ad-playing');
         });
-    }
+        player.ima.startFromReadyCallback();
+    });
+    if (videojs.browser.IS_ANDROID || videojs.browser.IS_IOS)
+        player.one('touchend', function(){ player.ima.requestAds(); });
     else
         player.ima.requestAds();
-    // avoid it eating clicks while ad isn't playing
-    if (player.ima.adContainerDiv)
-        player.ima.adContainerDiv.style.display = 'none';
+    hide_container();
 };
 
 function reset_native_hls(el, sources){
