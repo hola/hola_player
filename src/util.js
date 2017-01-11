@@ -20,7 +20,7 @@ E.current_script = function(){
     if (script = document.currentScript)
         return script;
     if (script = document.querySelector(
-        'script[src*="//player.h-cdn.com/player/hola_player"'))
+        'script[src*="//player.h-cdn.com/player/"'))
     {
         return script;
     }
