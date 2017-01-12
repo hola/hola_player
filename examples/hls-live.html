@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src=//imasdk.googleapis.com/js/sdkloader/ima3.js></script>
+    <script src="../dist/hola_player.dev.js"></script>
+</head>
+<body>
+  <div><h1>Video tag with Hola player - playing HLS</h1></div>
+  <div>
+    <video preload="none" class="video-js vjs-default-skin" width="640" height="360">
+      <source
+        src="http://wowza.streamroot.io/liveorigin/stream1/playlist.m3u8"
+        type="application/x-mpegurl">
+    </video>
+  </div>
+  <div id="log">
+    Log:
+  </div>
+  <script>
+    (function(){
+        var log_div = document.getElementById('log');
+        function log(){
+          log_div.innerHTML =
+              log_div.innerHTML + '<br/>' +
+              Array.prototype.join.call(arguments, ' ');
+        };
+        window.hola_player(function(player){
+          player.init({
+            auto_play: true,
+            ads: {
+              adTagUrl: 'https://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/124319096/external/ad_rule_samples&ciu_szs=300x250&ad_rule=1&impl=s&gdfp_req=1&env=vp&output=vmap&unviewed_position_start=1&cust_params=deployment%3Ddevsite%26sample_ar%3Dpremidpost&cmsid=496&vid=short_onecue&correlator=',
+            }
+          }, function(v){
+            v.on([
+                'readyforpreroll',
+                'contentplayback',
+                'adsready',
+                'adplaying',
+                'adscanceled',
+                'adserror',
+                'nopreroll',
+                'nopostroll',
+                'adend',
+                'adskip',
+                'adstart',
+                'ads-ad-started',
+                'ads-request',
+                'ads-load',
+                'ads-pod-started',
+                'ads-pod-ended',
+                'ads-allpods-completed',
+                'ads-ad-started',
+                'ads-ad-ended',
+                'ads-first-quartile',
+                'ads-midpoint',
+                'ads-third-quartile',
+                'ads-pause',
+                'ads-play',
+                'ads-mute',
+                'ads-click',
+            ], function(e){
+              log(e.type);
+            });
+          });
+        });
+    })();
+  </script>
+</body>
+</html>
