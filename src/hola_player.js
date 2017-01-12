@@ -299,23 +299,14 @@ Player.prototype.init_ads = function(player){
         return console.error('missing IMA HTML5 SDK');
     if (!player.ads || !player.ima) // shouldn't happen as they're bundled
         return console.error('missing ad modules');
-    opt.ads = videojs.mergeOptions({
+    player.ima(videojs.mergeOptions({
         id: player.id(),
         contribAdsSettings: {
             prerollTimeout: 1000,
             postrollTimeout: 1000,
             disablePlayContentBehindAd: true,
         },
-    }, opt.ads);
-    player.ima(opt.ads, function(){
-        player.ima.addEventListener(
-            window.google.ima.AdEvent.Type.ALL_ADS_COMPLETED,
-            function(){
-            hide_container();
-            player.removeClass('vjs-ad-playing');
-        });
-        player.ima.startFromReadyCallback();
-    });
+    }, opt.ads));
     if (videojs.browser.IS_ANDROID || videojs.browser.IS_IOS)
         player.one('touchend', function(){ player.ima.requestAds(); });
     else
