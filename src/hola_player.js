@@ -74,7 +74,7 @@ Player.prototype.init = function(opt, cb){
     }
     this.ready_cb = cb;
     this.opt = opt = opt||{};
-    opt.auto_play = opt.autoplay;
+    opt.auto_play = opt.auto_play || opt.autoplay;
     if (!(this.element = this.init_element()))
         return cb && cb(null);
     this.init_vjs();
