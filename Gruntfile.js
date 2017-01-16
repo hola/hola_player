@@ -33,7 +33,6 @@ module.exports = function(grunt) {
                         './node_modules/@hola.org/videojs-ima/src/videojs.ima.js',
                         // for faster build
                         './node_modules/video.js/dist/video.js',
-                        './node_modules/jquery-browserify/lib/jquery.js',
                     ]),
                 },
                 transform: [
