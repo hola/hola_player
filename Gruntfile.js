@@ -99,10 +99,7 @@ module.exports = function(grunt) {
             },
         },
         uglify : {
-            options: {
-                sourceMap: true,
-                sourceMapIn: 'dist/hola_player.dev.js.map',
-            },
+            options: {sourceMap: true},
             dist: {
                 options: {sourceMapIn: 'dist/hola_player.dev.js.map'},
                 files: {'dist/hola_player.js': 'dist/hola_player.dev.js'},
