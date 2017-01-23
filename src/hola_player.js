@@ -193,10 +193,6 @@ Player.prototype.init_vjs = function(){
                 return;
             player.posterImage.show();
             player.bigPlayButton.show();
-            // XXX bahaa: do we really need to pause and rewind?
-            if (!player.paused())
-                player.pause();
-            player.currentTime(0);
         }).on('save_logs', function(e){
             // XXX bahaa: TODO
         }).on('problem_report', function(e){
