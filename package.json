@@ -1,7 +1,7 @@
 {
   "name": "@hola.org/hola_player",
   "description": "An HTML5 and Flash video player with a common API and skin for both.",
-  "version": "0.0.23",
+  "version": "0.0.24",
   "license": "ISC",
   "keywords": [
     "flash",
