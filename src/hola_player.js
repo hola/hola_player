@@ -212,7 +212,7 @@ Player.prototype.init_vjs = function(){
 function on_cdn_graph_overlay(){
     var hola_cdn = window.hola_cdn;
     var bws = hola_cdn && hola_cdn._get_bws();
-    if (window.cdn_graph || !bws || hola_cdn.get_mode()!='cdn')
+    if (window.cdn_graph || !bws || hola_cdn._get_mode()!='cdn')
         return;
     try {
         var ldr = hola_cdn.get_wrapper().loader;
