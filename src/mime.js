@@ -16,8 +16,8 @@ E.is_hds_link = function(v){ return is_rx_link(v, hds_suffix); };
 E.is_dash_link = function(v){ return is_rx_link(v, dash_suffix); };
 E.is_flv_link = function(v){ return is_rx_link(v, flv_suffix); };
 E.is_webm_link = function(v){ return is_rx_link(v, webm_suffix); };
-E.guess_link_type = function(url){
-    var p = url && url.parse(url).pathname;
+E.guess_link_type = function(v){
+    var p = url && url.parse(v).pathname;
     if (mp4_suffix.test(p))
         return 'video/mp4';
     if (hls_suffix.test(p))
@@ -30,7 +30,7 @@ E.guess_link_type = function(url){
         return 'video/flv';
     if (webm_suffix.test(p))
         return 'video/webm';
-    console.log('could not guess link type: "'+url+'" assuming mp4');
+    console.log('could not guess link type: "'+v+'" assuming mp4');
     return 'video/mp4';
 };
 E.is_hls_type = function(type){
