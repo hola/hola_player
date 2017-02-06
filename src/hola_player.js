@@ -106,14 +106,16 @@ Player.prototype.init_element = function(){
         if (!opt.sources)
             return null;
         var style = window.getComputedStyle(element);
-        var videoel = videojs.createEl('video', {}, {
+        var attrs = {
             id: util.unique_id('hola_player'),
             class: 'video-js',
             preload: opt.preload||'auto',
-            poster: opt.poster,
             width: opt.width||parseFloat(style.width),
             height: opt.height||parseFloat(style.height),
-        });
+        };
+        if (opt.poster)
+            attrs.poster = opt.poster;
+        var videoel = videojs.createEl('video', {}, attrs);
         videojs.appendContent(videoel, opt.sources.map(function(source){
             return videojs.createEl('source', {}, source);
         }));
