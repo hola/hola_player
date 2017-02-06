@@ -7,7 +7,7 @@ var hlsjs_source_handler = require('./hlsjs_source_handler.js');
 var flashls_source_handler = require('./flashls_source_handler.js');
 var url = require('url');
 
-module.exports = hola_player;
+window.hola_player = module.exports = hola_player;
 hola_player.VERSION = '__VERSION__';
 
 var player = new Player();
