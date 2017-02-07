@@ -18,24 +18,26 @@ Hola Player is a web video player based on the popular video.js open source proj
 
 To start using Hola Player, follow these steps:
 
-1. Add these includes to your document's `<head>`:
-```html
-<script src="//player.h-cdn.com/player/0.0.30/hola_player.js"></script>
-```
+1. Add this script to your document's `<head>`:
 
+  ```html
+  <script src="//player.h-cdn.com/player/0.0.30/hola_player.js"></script>
+  ```
 2. Add a `<video>` tag on your page:
-```html
-<video class="video-js vjs-default-skin" poster="http://player.h-cdn.org/static/mp4/tears_of_steel_1080p_MP4.jpg" width="640" height="360" controls>
-  <source src="http://player.h-cdn.org/static/mp4/tears_of_steel_360p_MP4.mp4" type="video/mp4">
-</video>
-```
+
+  ```html
+  <video class="video-js vjs-default-skin" poster="http://player.h-cdn.org/static/mp4/tears_of_steel_1080p_MP4.jpg" width="640" height="360" controls>
+      <source src="http://player.h-cdn.org/static/mp4/tears_of_steel_360p_MP4.mp4" type="video/mp4">
+  </video>
+  ```
 
 3. Initialize player:
-```html
-<script>
-  window.hola_player(function(player){ player.init({}); });
-</script>
-```
+
+  ```html
+  <script>
+      window.hola_player(function(player){ player.init({}); });
+  </script>
+  ```
 
 4. Done!
 
