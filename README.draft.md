@@ -1,5 +1,5 @@
-# hola video.js - Enhanced HTML5 Video Player
-hola video.js is a web video player based on the popular video.js open source project world. It supports HTML5 and Flash video. It supports video playback on desktops and mobile devices. hola video.js integrates advanced features from [holacdn.com](http://www.holacdn.com)
+# Hola Player - Enhanced HTML5 Video Player
+Hola Player is a web video player based on the popular video.js open source project world. It supports HTML5 and Flash video. It supports video playback on desktops and mobile devices. Hola Player integrates advanced features from [holacdn.com](http://www.holacdn.com)
 
 ## Features
 
@@ -16,17 +16,34 @@ hola video.js is a web video player based on the popular video.js open source pr
 
 ## Quick start
 
-To start using hola video.js, follow these steps:
+To start using Hola Player, follow these steps:
 
-1. TBD
+1. Add these includes to your document's `<head>`:
+```html
+<script src="//player.h-cdn.com/player/0.0.30/hola_player.js"></script>
+```
 
-2. Done!
+2. Add a `<video>` tag on your page:
+```html
+<video class="video-js vjs-default-skin" poster="http://player.h-cdn.org/static/mp4/tears_of_steel_1080p_MP4.jpg" width="640" height="360" controls>
+  <source src="http://player.h-cdn.org/static/mp4/tears_of_steel_360p_MP4.mp4" type="video/mp4">
+</video>
+```
+
+3. Initialize player:
+```html
+<script>
+  window.hola_player(function(player){ player.init({}); });
+</script>
+```
+
+4. Done!
 
 If you're ready to dive in, the documentation is the first place to go for more information.
 
 ## Integrated video analytics
 
-hola video.js comes integrated with the free hola video analytics module. To open your free account and have access to the analytics dashboard, check out holacdn.
+Hola Player comes integrated with the free hola video analytics module. To open your free account and have access to the analytics dashboard, check out holacdn.
 Hola analytics module provides the following information using the free dashboard:
 - Start buffering times
 - Total views
@@ -39,18 +56,22 @@ The use of this feature requires a free hola account. To learn more about the ho
 
 ## Integrated bandwidth saver for progressive http
 
-hola video.js comes integrated with the free hola bandwidth saver module. The bandwidth saver module uses progressive download methods to reduce buffer overhead while keeping the video loading time to a minimum and the player responsive.
+Hola Player comes integrated with the free hola bandwidth saver module. The bandwidth saver module uses progressive download methods to reduce buffer overhead while keeping the video loading time to a minimum and the player responsive.
 Bandwidth saver works with MP4/FLV streams.
 
 ## Examples
 
-TBD
+* Without HolaCDN: [MP4](http://hola.github.io/examples/cdn/#hola_player) | [HLS](http://hola.github.io/examples/cdn/#hola_player_hls) | [HDS](http://hola.github.io/examples/cdn/#hola_player_hds)
 
-## Building your own copy of Hola Video.js
+* With HolaCDN: [MP4](http://hola.github.io/examples/cdn/#hola_player_cdn) | [HLS](http://hola.github.io/examples/cdn/#hola_player_hls_cdn) | [HDS](http://hola.github.io/examples/cdn/#hola_player_hds_cdn)
 
-If you want to build your own copy of Hola Video.js and receive the latest updates follow these instructions:
+* [HolaCDN + IMA ads](http://hola.github.io/examples/cdn/#hola_player_ima)
 
-First, [fork](http://help.github.com/fork-a-repo/) the hola/hola_player git repository. At the top of every github page, there is a Fork button. Click it, and the forking process will copy Hola Video.js into your own GitHub account.
+## Building your own copy of Hola Player
+
+If you want to build your own copy of Hola Player and receive the latest updates follow these instructions:
+
+First, [fork](http://help.github.com/fork-a-repo/) the hola/hola_player git repository. At the top of every github page, there is a Fork button. Click it, and the forking process will copy Hola Player into your own GitHub account.
 
 Clone your fork of the repo into your code directory
 
@@ -70,7 +91,7 @@ Assign the original repo to a remote called "upstream"
 git remote add upstream https://github.com/hola/hola_player.git
 ```
 
->In the future, if you want to pull in updates to hola video.js that happened after you cloned the main repo, you can run:
+>In the future, if you want to pull in updates to Hola Player that happened after you cloned the main repo, you can run:
 >
 > ```bash
 > git checkout master
@@ -87,15 +108,15 @@ npm install
 > `npm config set color false`
 > Note that this change takes effect when a new command prompt window is opened; the current window will not be affected.
 
-Build a local copy of hola video.js
+Build a local copy of Hola Player
 
 ```bash
-grunt dist
+grunt
 ```
-Look at the [CONTRIBUTING.md file](CONTRIBUTING.md#building-your-own-copy-of-videojs) for the details.
 
 ## License
 
-hola video.js is licensed under the Apache License, Version 2.0. [View the license file](LICENSE)
+Hola Player is licensed under the ISC License. [View the license file](LICENSE)
 
-Copyright 2015 Hola Networks ltd
+Copyright 2017 Hola Networks ltd
+
