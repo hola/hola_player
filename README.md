@@ -4,7 +4,7 @@ Hola Player is a web video player based on the popular video.js open source proj
 ## Features
 
 - Commercial grade video player
-- Integrated hola analytics module
+- Integrated Hola analytics module
 - Integrated bandwidth saver module
 - All the features of the original video.js
   - Custom branding (no watermark)
@@ -23,6 +23,13 @@ To start using Hola Player, follow these steps:
   ```html
   <script src="//player.h-cdn.com/player/0.0.30/hola_player.js"></script>
   ```
+  
+  Note: If you would like to use the integrated Hola Video Analytics module, register for an account on [holacdn.com](http://holacdn.com/cp) and include your CustomerID when loading the player as follows:
+  
+    ```html
+  <script src="//player.h-cdn.com/player/0.0.30/hola_player.js?customer=xxx"></script>
+  ```
+  
 2. Add a `<video>` tag on your page:
 
   ```html
