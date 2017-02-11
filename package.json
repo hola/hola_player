@@ -47,7 +47,7 @@
     "@hola.org/videojs-contrib-ads": ">=4.2.0-2 <4.2.0",
     "video.js": "hola/video.js#hola_5.10.2",
     "dashjs": "hola/dash.js#development",
-    "videojs-contrib-dash": "^2.6.1"
+    "videojs-contrib-dash": "2.6.1"
   },
   "devDependencies": {
     "browserify-css": "^0.9.2",
