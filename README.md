@@ -26,7 +26,7 @@ To start using Hola Player, follow these steps:
   
   Note: If you would like to use the integrated Hola Video Analytics module, register for an account on [holacdn.com](http://holacdn.com/cp) and include your CustomerID when loading the player as follows:
   
-    ```html
+  ```html
   <script src="//player.h-cdn.com/player/0.0.33/hola_player.js?customer=xxx"></script>
   ```
   
