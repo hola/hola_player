@@ -172,7 +172,8 @@ Player.prototype.init_vjs = function(){
     });
     videojs(this.element, vjs_opt, function(){
         var player = this;
-        player.controls(true);
+        if (player.tech_)
+            player.controls(true);
         player.controlBar.show();
         if (opt.thumbnails)
             player.thumbnails(opt.thumbnails);
@@ -207,6 +208,18 @@ Player.prototype.init_vjs = function(){
             player.play();
             player.autoplay(true);
         }
+    }).on('error', function (){
+        var player = this;
+        var error = player.error;
+        if (!error || error.code!=error.MEDIA_ERR_SRC_NOT_SUPPORTED)
+            return;
+        var only_flash = opt.sources.every(function(s){
+            return mime.is_hds_link(s.src) || mime.is_flv_link(s.src);
+        });
+        var flash = videojs.getTech('Flash');
+        var modal = player.getChild('errorDisplay');
+        if (modal && only_flash && (!flash || !flash.isSupported()))
+            modal.fillWith('Flash plugin is required to play this media');
     });
 };
 
