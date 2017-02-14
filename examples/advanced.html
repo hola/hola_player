@@ -16,33 +16,31 @@
   <script>
     (function(){
       var cdn_static = 'http://player.h-cdn.org/static';
-      window.hola_player(function(player){
-        player.init({
-          poster: cdn_static+'/mp4/tears_of_steel_1080p_MP4.jpg',
-          thumbnails: {
-            0: {
-              src: cdn_static+'/mp4/tears_of_steel_thumbnails_0_7.jpg',
-              sprites: {
-                width: 192,
-                height: 80,
-                position: [0, 87, 130, 172, 217, 240, 303, 346]
-              }
-            },
-            389: {
-              src: cdn_static+'/mp4/tears_of_steel_thumbnails_8_15.jpg',
-              sprites: {
-                width: 192,
-                height: 80,
-                position: [389, 431, 473, 517, 559, 603, 647, 690]
-              }
+      window.hola_player({
+        poster: cdn_static+'/mp4/tears_of_steel_1080p_MP4.jpg',
+        thumbnails: {
+          0: {
+            src: cdn_static+'/mp4/tears_of_steel_thumbnails_0_7.jpg',
+            sprites: {
+              width: 192,
+              height: 80,
+              position: [0, 87, 130, 172, 217, 240, 303, 346]
             }
           },
-          graph: true,
-          settings: {
-            quality: true,
-            info: true,
-          },
-        });
+          389: {
+            src: cdn_static+'/mp4/tears_of_steel_thumbnails_8_15.jpg',
+            sprites: {
+              width: 192,
+              height: 80,
+              position: [389, 431, 473, 517, 559, 603, 647, 690]
+            }
+          }
+        },
+        graph: true,
+        settings: {
+          quality: true,
+          info: true,
+        },
       });
     })();
   </script>

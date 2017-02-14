@@ -7,18 +7,64 @@ var hlsjs_source_handler = require('./hlsjs_source_handler.js');
 var flashls_source_handler = require('./flashls_source_handler.js');
 var url = require('url');
 
-window.hola_player = module.exports = hola_player;
-hola_player.VERSION = '__VERSION__';
-
-var player = new Player();
-// XXX bahaa: do we really need to keep this weird API?
-function hola_player(cb){ return cb && cb(player); }
-
 (function(){
     hlsjs_source_handler();
     flashls_source_handler();
     load_cdn_loader();
 })();
+
+var E = window.hola_player = module.exports = hola_player;
+E.VERSION = '__VERSION__';
+E.players = {};
+
+function hola_player(opt, ready_cb){
+    if (typeof opt=='function')
+    {
+        ready_cb = opt;
+        opt = {};
+    }
+    opt = videojs.mergeOptions(opt); // clone
+    var pl = opt.player && typeof opt.player!='string' && opt.player.length
+        ? opt.player[0] : opt.player;
+    var element = !pl ? document.querySelector('video, object, embed') :
+        videojs.isEl(pl) ? pl : document.querySelector(pl);
+    if (!element)
+        return null;
+    if (element.hola_player)
+        return element.hola_player;
+    if (opt = set_defaults(element, opt))
+        return new Player(element, opt, ready_cb);
+}
+
+function set_defaults(element, opt){
+    opt.auto_play = opt.auto_play || opt.autoplay; // allow both
+    if (opt.video_url)
+    {
+        opt.sources = [{
+            src: opt.video_url,
+            type: opt.video_type||mime.guess_link_type(opt.video_url),
+        }];
+    }
+    else if (opt.sources && !opt.sources.length)
+        opt.sources = undefined;
+    if (['VIDEO', 'DIV', 'OBJECT', 'EMBED'].indexOf(element.tagName)<0)
+        return;
+    if (element.tagName=='VIDEO' && !opt.sources)
+    {
+        var sources = element.querySelectorAll('source');
+        if (!sources.length)
+            return;
+        opt.sources = Array.prototype.map.call(sources, function(source){
+            return {
+                src: source.getAttribute('src'),
+                type: source.getAttribute('type'),
+                label: source.getAttribute('label'),
+                default: !!source.getAttribute('default')
+            };
+        });
+    }
+    return opt.sources && opt;
+}
 
 function load_deps(deps){
     deps = deps||{};
@@ -65,46 +111,30 @@ var swf_urls = {
         'videojs-osmf.swf',
 };
 
-function Player(){}
-Player.prototype.init = function(opt, cb){
-    if (typeof opt=='function')
-    {
-        cb = opt;
-        opt = {};
-    }
-    this.ready_cb = cb;
-    this.opt = opt = opt||{};
-    opt.auto_play = opt.auto_play || opt.autoplay;
-    if (!(this.element = this.init_element()))
-        return cb && cb(null);
-    this.init_vjs();
-};
+function Player(element, opt, ready_cb){
+    this.ready_cb = ready_cb;
+    this.opt = opt;
+    this.element = this.init_element(element);
+    this.vjs = this.init_vjs();
+    E.players[this.id = this.vjs.id()] = this;
+}
 
-Player.prototype.init_element = function(){
-    var opt = this.opt, cb = this.ready_cb;
-    var pl = opt.player && opt.player.length ? opt.player[0] : opt.player;
-    var element = !pl ? document.querySelector('video, object, embed') :
-        videojs.isEl(pl) ? pl : document.querySelector(pl);
-    if (!element)
-        return null;
-    if (opt.sources && !opt.sources.length)
-        opt.sources = undefined;
-    if (opt.video_url)
+Player.prototype.init_element = function(element){
+    var opt = this.opt;
+    if (element.tagName=='VIDEO')
     {
-        opt.sources = [{
-            src: opt.video_url,
-            type: opt.video_type||mime.guess_link_type(opt.video_url),
-        }];
+        element.autoplay = false;
+        element.controls = false;
+        // with Hola player wrapper there is no autoSetup mode
+        // XXX: maybe we should merge data-setup conf with vjs_opt
+        element.removeAttribute('data-setup');
+        // XXX bahaa: find a better solution
+        reset_native_hls(element, opt.sources);
     }
-    // special case when using a div container or flash object - create
-    // video tag instead
-    // XXX gilad/alexeym: unify with in loader.js,
-    // it should not be in player itself.
-    if (element.tagName=='DIV' || element.tagName=='OBJECT' ||
-        element.tagName=='EMBED')
+    else
     {
-        if (!opt.sources)
-            return null;
+        // special case when using a div container or flash object - create
+        // video tag instead
         var style = window.getComputedStyle(element);
         var attrs = {
             id: util.unique_id('hola_player'),
@@ -126,34 +156,12 @@ Player.prototype.init_element = function(){
         // $(videoel).insertAfter(element);
         element.parentNode.insertBefore(videoel, element.nextSibling);
         element.style.display = 'none';
+        element.hola_player = this;
         element = videoel;
-    }
-    else if (element.tagName=='VIDEO')
-    {
-        element.autoplay = false;
-        element.controls = false;
-        if (!opt.sources)
-        {
-            var sources = element.querySelectorAll('source');
-            if (!sources.length)
-                return null;
-            opt.sources = Array.prototype.map.call(sources, function(source){
-                return {
-                    src: source.getAttribute('src'),
-                    type: source.getAttribute('type'),
-                    label: source.getAttribute('label'),
-                    default: !!source.getAttribute('default')
-                };
-            });
-        }
-        // with Hola player wrapper there is no autoSetup mode
-        // XXX: maybe we should merge data-setup conf with vjs_opt
-        element.removeAttribute('data-setup');
-        // XXX bahaa: find a better solution
-        reset_native_hls(element, opt.sources);
     }
     if (!element.id)
         element.id = util.unique_id('hola_player');
+    element.hola_player = this;
     return element;
 };
 
@@ -170,7 +178,7 @@ Player.prototype.init_vjs = function(){
             return mime.is_dash_link(s.src) || mime.is_dash_type(s.type);
         }),
     });
-    videojs(this.element, vjs_opt, function(){
+    return videojs(this.element, vjs_opt, function(){
         var player = this;
         if (player.tech_)
             player.controls(true);
@@ -248,7 +256,7 @@ Player.prototype.get_settings_opt = function(){
     if (s===undefined || s===true)
         s = {info: true, report: true};
     if (s.quality || s.quality===undefined)
-        s.quality = {sources: opt.sources||[]};
+        s.quality = {sources: opt.sources};
     s.graph = opt.graph;
     s.volume = opt.volume;
     return s;

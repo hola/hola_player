@@ -16,16 +16,14 @@
   </video>
   <script>
     (function(){
-      window.hola_player(function(player){
-        player.init({
-          poster: 'http://player.h-cdn.org/static/mp4/tears_of_steel_1080p_MP4.jpg',
-          ads: {
-            adTagUrl: 'https://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/124319096/external/ad_rule_samples&ciu_szs=300x250&ad_rule=1&impl=s&gdfp_req=1&env=vp&output=vmap&unviewed_position_start=1&cust_params=deployment%3Ddevsite%26sample_ar%3Dpremidpost&cmsid=496&vid=short_onecue&correlator=',
-          },
-          settings: {
-            quality: true,
-          },
-        });
+      window.hola_player({
+        poster: 'http://player.h-cdn.org/static/mp4/tears_of_steel_1080p_MP4.jpg',
+        ads: {
+          adTagUrl: 'https://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/124319096/external/ad_rule_samples&ciu_szs=300x250&ad_rule=1&impl=s&gdfp_req=1&env=vp&output=vmap&unviewed_position_start=1&cust_params=deployment%3Ddevsite%26sample_ar%3Dpremidpost&cmsid=496&vid=short_onecue&correlator=',
+        },
+        settings: {
+          quality: true,
+        },
       });
     })();
   </script>

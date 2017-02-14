@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="../dist/hola_player.dev.js?customer=demo"></script>
+</head>
+<body>
+  <div><h1>Two Video tags with Hola player - playing HLS and MP4</h1></div>
+  <video id="vid1" class="video-js vjs-default-skin" width="640" height="360" controls>
+    <source src="http://player.h-cdn.org/static/hls/cdn2/master.m3u8" type="application/x-mpegurl">
+  </video>
+  <video id="vid2" class="video-js vjs-default-skin" width="640" height="360" controls>
+    <source src="http://player.h-cdn.org/static/mp4/tears_of_steel_360p_MP4.mp4" type="video/mp4">
+  </video>
+  <script>
+    (function(hola_player){
+      hola_player({player: '#vid1', autoplay: true});
+      hola_player({player: '#vid2', autoplay: true});
+    })(window.hola_player);
+  </script>
+</body>
+</html>

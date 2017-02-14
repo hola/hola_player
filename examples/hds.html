@@ -10,15 +10,13 @@
   </video>
   <script>
     (function(){
-        window.hola_player(function(player){
-          player.init({
-            videojs_options: {
-              osmf: {
-                swf: '../dist/videojs-osmf.swf',
-              }
-            },
-          });
-        });
+      window.hola_player({
+        videojs_options: {
+          osmf: {
+            swf: '../dist/videojs-osmf.swf',
+          }
+        },
+      });
     })();
   </script>
 </body>
