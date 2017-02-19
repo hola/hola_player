@@ -285,6 +285,9 @@ Player.prototype.get_vjs_opt = function(){
         inactivityTimeout: opt.inactivity_timeout===undefined ?
             2000 : opt.inactivity_timeout,
         poster: opt.poster,
+        loop: opt.loop,
+        muted: opt.muted,
+        preload: opt.preload,
         techOrder:
             (opt.tech=='flash' ? ['flash', 'html5'] : ['html5', 'flash'])
             .concat('osmf'),
