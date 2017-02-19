@@ -180,13 +180,10 @@ Player.prototype.init_vjs = function(){
         var player = this;
         if (player.tech_)
             player.controls(true);
-        player.controlBar.show();
         if (opt.thumbnails)
             player.thumbnails(opt.thumbnails);
         hola_player.init_ads(player);
-        player.on('play', function(){
-            player.bigPlayButton.hide();
-        }).on('pause', function(e){
+        player.on('pause', function(e){
             if (player.scrubbing()) // XXX bahaa: do we need this?
                 e.stopImmediatePropagation();
         }).on('save_logs', function(e){
