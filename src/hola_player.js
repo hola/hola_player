@@ -253,11 +253,9 @@ Player.prototype.get_settings_opt = function(){
         return;
     if (s===undefined || s===true)
         s = {info: true, report: true};
-    if (s.quality || s.quality===undefined)
+    if (s.quality!==false)
         s.quality = {sources: opt.sources};
-    s.graph = opt.graph;
-    s.volume = opt.volume;
-    return s;
+    return videojs.mergeOptions({graph: opt.graph, volume: opt.volume}, s);
 };
 
 Player.prototype.get_vjs_opt = function(){
