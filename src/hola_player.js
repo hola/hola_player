@@ -189,15 +189,6 @@ Player.prototype.init_vjs = function(){
         }).on('pause', function(e){
             if (player.scrubbing()) // XXX bahaa: do we need this?
                 e.stopImmediatePropagation();
-        }).on('ended', function(){
-            // in this state videojs-contrib-ads catches the event, stops
-            // it, triggers 'contentended' instead, re-triggers it when
-            // post-roll is done or nonexistent.
-            // so we ignore it in this stage and handle the next one, else
-            // we will interfere with post-roll playback
-            if (player.ads && player.ads.state=='content-playback')
-                return;
-            player.posterImage.show();
         }).on('save_logs', function(e){
             // XXX bahaa: TODO
         }).on('problem_report', function(e){
