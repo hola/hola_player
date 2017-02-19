@@ -187,10 +187,8 @@ Player.prototype.init_vjs = function(){
         player.on('play', function(){
             player.bigPlayButton.hide();
         }).on('pause', function(e){
-            if (player.scrubbing())
+            if (player.scrubbing()) // XXX bahaa: do we need this?
                 e.stopImmediatePropagation();
-            if (opt.big_pause_btn)
-                player.bigPlayButton.show();
         }).on('ended', function(){
             // in this state videojs-contrib-ads catches the event, stops
             // it, triggers 'contentended' instead, re-triggers it when
@@ -200,7 +198,6 @@ Player.prototype.init_vjs = function(){
             if (player.ads && player.ads.state=='content-playback')
                 return;
             player.posterImage.show();
-            player.bigPlayButton.show();
         }).on('save_logs', function(e){
             // XXX bahaa: TODO
         }).on('problem_report', function(e){
