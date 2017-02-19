@@ -37,7 +37,7 @@ function hola_player(opt, ready_cb){
 }
 
 function set_defaults(element, opt){
-    opt.auto_play = opt.auto_play || opt.autoplay; // allow both
+    opt.autoplay = opt.auto_play || opt.autoplay; // allow both
     if (opt.video_url)
     {
         opt.sources = [{
@@ -49,12 +49,17 @@ function set_defaults(element, opt){
         opt.sources = undefined;
     if (['VIDEO', 'DIV', 'OBJECT', 'EMBED'].indexOf(element.tagName)<0)
         return;
-    if (element.tagName=='VIDEO' && !opt.sources)
+    if (element.tagName=='VIDEO')
     {
-        var sources = element.querySelectorAll('source');
-        if (!sources.length)
-            return;
-        opt.sources = Array.prototype.map.call(sources, videojs.getAttributes);
+        if (!opt.sources)
+        {
+            var sources = element.querySelectorAll('source');
+            if (!sources.length)
+                return;
+            opt.sources =
+                Array.prototype.map.call(sources, videojs.getAttributes);
+        }
+        opt = videojs.mergeOptions(videojs.getAttributes(element), opt);
     }
     return opt.sources && opt;
 }
@@ -203,7 +208,7 @@ Player.prototype.init_vjs = function(){
         }).on('cdn_graph_overlay', on_cdn_graph_overlay);
         if (cb)
             try { cb(player); } catch(e){ console.error(e.stack||e); }
-        if (opt.auto_play &&
+        if (opt.autoplay &&
             !videojs.browser.IS_ANDROID && !videojs.browser.IS_IOS)
         {
             player.play();
