@@ -54,14 +54,7 @@ function set_defaults(element, opt){
         var sources = element.querySelectorAll('source');
         if (!sources.length)
             return;
-        opt.sources = Array.prototype.map.call(sources, function(source){
-            return {
-                src: source.getAttribute('src'),
-                type: source.getAttribute('type'),
-                label: source.getAttribute('label'),
-                default: !!source.getAttribute('default')
-            };
-        });
+        opt.sources = Array.prototype.map.call(sources, videojs.getAttributes);
     }
     return opt.sources && opt;
 }
