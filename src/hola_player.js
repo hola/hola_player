@@ -178,7 +178,7 @@ Player.prototype.init_vjs = function(){
     });
     return videojs(this.element, vjs_opt, function(){
         var player = this;
-        if (player.tech_)
+        if (player.tech_ && opt.controls)
             player.controls(true);
         if (opt.thumbnails)
             player.thumbnails(opt.thumbnails);
