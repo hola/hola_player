@@ -37,7 +37,7 @@
   "dependencies": {
     "@hola.org/videojs-hola-skin": ">=0.0.5-38 <0.0.5",
     "@hola.org/videojs-osmf": "0.0.0-35",
-    "@hola.org/videojs-settings": ">=0.0.3-42 <0.0.3",
+    "@hola.org/videojs-settings": ">=0.0.3-43 <0.0.3",
     "@hola.org/videojs-swf": "5.1.0-12",
     "@hola.org/videojs-thumbnails": ">=0.1.1-3 <0.1.1",
     "@hola.org/videojs5-hlsjs-source-handler": ">=0.0.8-16 <0.0.8",
