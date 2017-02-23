@@ -101,12 +101,9 @@ function load_deps(deps){
 
 // XXX bahaa: make these easily replacable for self-hosting
 var swf_urls = {
-    videojs:
-        'http://player.h-cdn.com/player/swf/__VIDEOJS_SWF_VERSION__/'+
-        'videojs.swf',
+    videojs: '//cdn.jsdelivr.net/hola_player/__VERSION__/videojs.swf',
     'videojs-osmf':
-        'http://player.h-cdn.com/player/swf/osmf/__VIDEOJS_OSMF_VERSION__/'+
-        'videojs-osmf.swf',
+        '//cdn.jsdelivr.net/hola_player/__VERSION__/videojs-osmf.swf',
 };
 
 function Player(element, opt, ready_cb){
