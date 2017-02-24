@@ -97,6 +97,11 @@ function load_deps(deps){
         };
         require('videojs-contrib-dash');
     }
+    if (deps.dvr)
+    {
+        require('./dvr.js');
+        require('./css/dvr.css');
+    }
 }
 
 // XXX bahaa: make these easily replacable for self-hosting
@@ -172,6 +177,7 @@ Player.prototype.init_vjs = function(){
         'videojs-contrib-dash': opt.sources.some(function(s){
             return mime.is_dash_link(s.src) || mime.is_dash_type(s.type);
         }),
+        dvr: opt.dvr,
     });
     return videojs(this.element, vjs_opt, function(){
         var player = this;
@@ -273,6 +279,7 @@ Player.prototype.get_vjs_opt = function(){
         tooltips: true,
         plugins: {
             settings: this.get_settings_opt(),
+            dvr: opt.dvr,
             hola_skin: opt.skin ? false : {
                 css: false,
                 no_play_transform: opt.no_play_transform,
