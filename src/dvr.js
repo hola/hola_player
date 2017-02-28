@@ -131,20 +131,30 @@ vjs.registerComponent('DvrLoadProgressBar', vjs.extend(LoadProgressBar, {
             var percent = time / end || 0;
             return (percent >= 1 ? 1 : percent) * 100 + '%';
         };
-        var buff = this.player_.buffered();
         var range = this.player_.dvr.range();
         var start = range ? range.start : 0;
         var end = range ? range.end : 0;
-        var buf_end = Math.min(this.player_.bufferedEnd(), end) - start;
         var children = this.partEls_;
+        var buffered = this.player_.buffered();
+        var buff = [];
         var i;
-        this.el_.style.width = percentify(buf_end, end-start);
+        for (i = 0; i < buffered.length; i++)
+        {
+            if (buffered.end(i)<=start || buffered.start(i)>=end)
+                continue;
+            buff.push({
+                start: Math.max(buffered.start(i), start),
+                end: Math.min(buffered.end(i), end),
+            });
+        }
+        var total = buff.length ? buff[buff.length-1].end - start : 0;
+        this.el_.style.width = percentify(total, end-start);
         for (i = 0; i < buff.length; i++)
         {
             children[i] = children[i] || this.el_.appendChild(vjs.createEl());
             var part = children[i];
-            part.style.left = percentify(buff.start(i)-start, buf_end);
-            part.style.width = percentify(buff.end(i)-buff.start(i), buf_end);
+            part.style.left = percentify(buff[i].start-start, total);
+            part.style.width = percentify(buff[i].end-buff[i].start, total);
         }
         for (i = children.length; i > buff.length; i--)
             this.el_.removeChild(children[i-1]);
