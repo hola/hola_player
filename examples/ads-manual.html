@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src=//imasdk.googleapis.com/js/sdkloader/ima3.js></script>
+    <script src="../dist/hola_player.dev.js"></script>
+</head>
+<body>
+  <div><h1>Video tag with Hola player - playing MP4 with ads</h1></div>
+  <video preload="none" class="video-js vjs-default-skin"
+    width="640" height="360" controls>
+    <source
+      src="http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4"
+      type="video/mp4" label="1080p">
+  </video>
+  <script>
+    (function(){
+      var adTag = 'https://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/124319096/external/single_ad_samples&ciu_szs=300x250&impl=s&gdfp_req=1&env=vp&output=vast&unviewed_position_start=1&cust_params=deployment%3Ddevsite%26sample_ct%3Dskippablelinear&correlator=';
+      window.hola_player({
+        ads: {manual: true},
+      }, function(player){
+        var played_ad = {};
+        player.on('timeupdate', function(){
+          var cur = player.currentTime();
+          var chapter = Math.floor(cur/10);
+          if (!played_ad[chapter])
+          {
+            player.ima.playAd(adTag);
+            played_ad[chapter] = true;
+          }
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
