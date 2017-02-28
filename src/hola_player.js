@@ -290,11 +290,6 @@ Player.prototype.get_vjs_opt = function(){
 };
 
 Player.prototype.init_ads = function(player){
-    var hide_container = function(){
-        // avoid it eating clicks while ad isn't playing
-        if (player.ima.adContainerDiv)
-            player.ima.adContainerDiv.style.display = 'none';
-    };
     var opt = this.opt;
     if (!opt.ads)
         return;
@@ -316,7 +311,9 @@ Player.prototype.init_ads = function(player){
         player.one('touchend', function(){ player.ima.requestAds(); });
     else
         player.ima.requestAds();
-    hide_container();
+    // avoid it eating clicks while ad isn't playing
+    if (player.ima.adContainerDiv)
+        player.ima.adContainerDiv.style.display = 'none';
 };
 
 function reset_native_hls(el, sources){
