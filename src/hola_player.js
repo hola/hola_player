@@ -290,15 +290,15 @@ Player.prototype.get_vjs_opt = function(){
 };
 
 Player.prototype.init_ads = function(player){
-    var hide_container = function(){
-        // avoid it eating clicks while ad isn't playing
-        if (player.ima.adContainerDiv)
-            player.ima.adContainerDiv.style.display = 'none';
+    var init = function(){
+        player.ima.initializeAdDisplayContainer();
+        if (!opt.ads.manual)
+            player.ima.requestAds();
     };
     var opt = this.opt;
     if (!opt.ads)
         return;
-    if (!opt.ads.adTagUrl && !opt.ads.adsResponse) // bad params
+    if (!opt.ads.adTagUrl && !opt.ads.adsResponse && !opt.ads.manual)
         return console.error('missing Ad Tag');
     if (!window.google) // missing external <script> or blocked by AdBlocker
         return console.error('missing IMA HTML5 SDK');
@@ -313,10 +313,12 @@ Player.prototype.init_ads = function(player){
         },
     }, opt.ads));
     if (videojs.browser.IS_ANDROID || videojs.browser.IS_IOS)
-        player.one('touchend', function(){ player.ima.requestAds(); });
+        player.one('touchend', init);
     else
-        player.ima.requestAds();
-    hide_container();
+        init();
+    // avoid it eating clicks while ad isn't playing
+    if (player.ima.adContainerDiv)
+        player.ima.adContainerDiv.style.display = 'none';
 };
 
 function reset_native_hls(el, sources){
