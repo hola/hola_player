@@ -5,26 +5,45 @@ vjs.plugin('dvr', function(){
     var player = this;
     player.ready(function(){
         // XXX andrey: make it work with flashls
-        if (!player.tech_.hlsProvider)
+        var hls = player.tech_.hls_obj;
+        if (!hls)
             return;
         player.controlBar.addClass('vjs-dvr');
         var progressControl = player.controlBar.progressControl;
         progressControl.removeChild('seekBar');
         progressControl.seekBar = progressControl.addChild('DvrSeekBar');
+        player.controlBar.removeChild('liveDisplay');
+        player.controlBar.addChild('LiveButton');
+        player.removeClass('vjs-live');
+        player.on('durationchange', function(){
+            player.removeClass('vjs-live');
+        });
+        player.one('play', function(){
+            player.dvr.seek_to_live();
+        });
+        player.on('timeupdate', function(){
+            player.controlBar.toggleClass('vjs-dvr-live',
+                player.dvr.is_live());
+        });
+        hls.on('hlsLevelUpdated', function(e, data){
+            player.dvr.live_threshold =
+                Math.max(data.details.targetduration*1.5, 10);
+        });
     });
     player.dvr = {
+        live_threshold: 10,
         range: function(){
             var seekable = player.seekable();
             return seekable && seekable.length ?
                 {start: seekable.start(0), end: seekable.end(0)} : null;
         },
         is_live: function(){
-            var range = player.dvr.range();
+            var range = this.range();
             var end = range && range.end;
-            return end && player.currentTime() >= end;
+            return end && (end-player.currentTime()) <= this.live_threshold;
         },
         format_time: function(time){
-            var range = player.dvr.range();
+            var range = this.range();
             if (!range)
                 return '0:00';
             if (!time)
@@ -32,8 +51,15 @@ vjs.plugin('dvr', function(){
                 time = player.scrubbing() ? player.getCache().currentTime :
                     player.currentTime();
             }
+            if (range.end-time < this.live_threshold)
+                return player.localize('Live');
             time = Math.max(range.end-time, 0);
             return (time > 0 ? '-' : '')+vjs.formatTime(time, range.end);
+        },
+        seek_to_live: function(){
+            var range = this.range();
+            if (range && !this.is_live())
+                player.currentTime(range.end);
         },
     };
 });
@@ -59,7 +85,10 @@ vjs.registerComponent('DvrSeekBar', vjs.extend(SeekBar, {
             return;
         var time = range.start + this.calculateDistance(event) *
             (range.end-range.start);
-        this.player_.currentTime(Math.min(time, range.end - 0.1));
+        if (range.end-time < this.player_.dvr.live_threshold)
+            this.player_.dvr.seek_to_live();
+        else
+            this.player_.currentTime(Math.min(time, range.end));
     },
 }));
 
@@ -162,4 +191,24 @@ vjs.registerComponent('DvrLoadProgressBar', vjs.extend(LoadProgressBar, {
     },
 }));
 
-// XXX andrey: implement LiveButton
+var Button = vjs.getComponent('Button');
+vjs.registerComponent('LiveButton', vjs.extend(Button, {
+    controlText_: 'Live',
+    createEl: function(){
+        var el = Button.prototype.createEl.call(this, 'button', {
+            className: 'vjs-live-control vjs-control',
+        });
+        this.contentEl_ = vjs.createEl('div', {
+            className: 'vjs-live-display',
+            innerHTML: this.localize('LIVE'),
+        }, {
+            'aria-live': 'off',
+        });
+        el.appendChild(this.contentEl_);
+        return el;
+    },
+    handleClick: function(){
+        this.player_.dvr.seek_to_live();
+        this.player_.play();
+    },
+}));

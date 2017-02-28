@@ -1,3 +1,21 @@
-.vjs-control-bar.vjs-dvr .vjs-progress-control.vjs-control {
-    display: block;
+.vjs-dvr .vjs-time-control {
+    display: none !important;
+}
+.vjs-dvr .vjs-live-control {
+    flex: inherit;
+}
+.vjs-dvr-live .vjs-live-control {
+    cursor: default;
+}
+.vjs-dvr .vjs-live-display:before {
+    display: inline-block;
+    width: 0.75em;
+    height: 0.75em;
+    margin-right: 0.5em;
+    background: #566377;
+    content: '';
+    border-radius: 50%;
+}
+.vjs-dvr-live .vjs-live-display:before {
+    background: #f51717;
 }
