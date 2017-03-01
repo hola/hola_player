@@ -4,21 +4,24 @@
 .vjs-dvr .vjs-live-control {
     flex: inherit;
 }
+.vjs-dvr .vjs-live-control .vjs-tooltip {
+    line-height: 1em;
+}
 .vjs-dvr-live .vjs-live-control {
     cursor: default;
 }
 .vjs-dvr .vjs-live-display:before {
     display: inline-block;
-    width: 0.75em;
-    height: 0.75em;
+    width: 7px;
+    height: 7px;
     margin-right: 0.5em;
     background: #566377;
     content: '';
     border-radius: 50%;
-    vertical-align: -2%;
 }
 .vjs-large .vjs-dvr .vjs-live-display:before {
-    vertical-align: 0;
+    width: 11px;
+    height: 11px;
 }
 .vjs-dvr-live .vjs-live-display:before {
     background: #f51717;
