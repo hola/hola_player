@@ -3,6 +3,7 @@
 }
 .vjs-dvr .vjs-live-control {
     flex: inherit;
+    cursor: pointer;
 }
 .vjs-dvr .vjs-live-control .vjs-tooltip {
     line-height: 1em;
