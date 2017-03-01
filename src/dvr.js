@@ -1,19 +1,30 @@
 'use strict';
 var vjs = require('video.js');
+var throttle = require('lodash/throttle');
+var get = require('lodash/get');
 
 vjs.plugin('dvr', function(){
     var player = this;
-    player.ready(function(){
+    function remove_child(component, child_name){
+        var child = component.getChild(child_name);
+        component.removeChild(child);
+        child.dispose();
+    }
+    function init(){
         // XXX andrey: make it work with flashls
         var hls = player.tech_.hls_obj;
-        if (!hls)
+        var seekable = player.seekable();
+        if (!hls || player.duration()!=Infinity ||
+            (seekable.end(0)-seekable.start(0))<60)
+        {
             return;
-        player.controlBar.addClass('vjs-dvr');
+        }
         var progressControl = player.controlBar.progressControl;
-        progressControl.removeChild('seekBar');
+        remove_child(progressControl, 'seekBar');
         progressControl.seekBar = progressControl.addChild('DvrSeekBar');
-        player.controlBar.removeChild('liveDisplay');
+        remove_child(player.controlBar, 'liveDisplay');
         player.controlBar.addChild('LiveButton');
+        player.controlBar.addClass('vjs-dvr');
         player.removeClass('vjs-live');
         player.on('durationchange', function(){
             player.removeClass('vjs-live');
@@ -29,6 +40,12 @@ vjs.plugin('dvr', function(){
             player.dvr.live_threshold =
                 Math.max(data.details.targetduration*1.5, 10);
         });
+    }
+    player.ready(function(){
+        if (player.duration())
+            init();
+        else
+            player.one('loadedmetadata', function(){ init(); });
     });
     player.dvr = {
         live_threshold: 10,
@@ -116,7 +133,25 @@ function el_pos(el){
 }
 
 var MouseTimeDisplay = vjs.getComponent('MouseTimeDisplay');
+var Component = vjs.getComponent('Component');
 vjs.registerComponent('DvrMouseTimeDisplay', vjs.extend(MouseTimeDisplay, {
+    constructor: function(player, options){
+        Component.call(this, player, options);
+        this.keepTooltipsInside = get(options,
+            'playerOptions.controlBar.progressControl.keepTooltipsInside');
+        if (this.keepTooltipsInside)
+        {
+            this.tooltip = vjs.createEl('div',
+                {className: 'vjs-time-tooltip'});
+            this.el().appendChild(this.tooltip);
+            this.addClass('vjs-keep-tooltips-inside');
+        }
+        this.update(0, 0, 0);
+        var progressEl = this.player_.controlBar.progressControl.el();
+        progressEl.appendChild(this.tooltip);
+        this.on(progressEl, 'mousemove',
+            throttle(this.handleMouseMove.bind(this)), 25);
+    },
     handleMouseMove: function(event){
         var range = this.player_.dvr.range();
         var time = range ? this.calculateDistance(event) *
