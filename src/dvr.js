@@ -71,7 +71,6 @@ vjs.registerComponent('DvrSeekBar', vjs.extend(SeekBar, {
             'dvrPlayProgressBar'],
         barName: 'dvrPlayProgressBar'
     },
-    // XXX andrey: implement updateAriaAttributes, stepForward, stepBack
     getPercent: function(){
         var dvr = this.player_.dvr;
         var range = dvr.range();
@@ -89,6 +88,10 @@ vjs.registerComponent('DvrSeekBar', vjs.extend(SeekBar, {
             this.player_.dvr.seek_to_live();
         else
             this.player_.currentTime(Math.min(time, range.end));
+    },
+    updateAriaAttributes: function(el){
+        el.setAttribute('aria-valuenow', (this.getPercent() * 100).toFixed(2));
+        el.setAttribute('aria-valuetext', this.player_.dvr.format_time());
     },
 }));
 
