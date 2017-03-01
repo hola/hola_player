@@ -15,6 +15,10 @@
     background: #566377;
     content: '';
     border-radius: 50%;
+    vertical-align: -2%;
+}
+.vjs-large .vjs-dvr .vjs-live-display:before {
+    vertical-align: 0;
 }
 .vjs-dvr-live .vjs-live-display:before {
     background: #f51717;
