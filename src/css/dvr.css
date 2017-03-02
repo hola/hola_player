@@ -8,6 +8,9 @@
 .vjs-dvr .vjs-live-control .vjs-tooltip {
     line-height: 1em;
 }
+.vjs-dvr-live .vjs-live-control .vjs-tooltip {
+    display: none;
+}
 .vjs-dvr-live .vjs-live-control {
     cursor: default;
 }

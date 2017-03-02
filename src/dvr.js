@@ -231,7 +231,7 @@ vjs.registerComponent('DvrLoadProgressBar', vjs.extend(LoadProgressBar, {
 
 var Button = vjs.getComponent('Button');
 vjs.registerComponent('LiveButton', vjs.extend(Button, {
-    controlText_: 'Live',
+    controlText_: 'Skip back to live',
     createEl: function(){
         var el = Button.prototype.createEl.call(this, 'button', {
             className: 'vjs-live-control vjs-control',
