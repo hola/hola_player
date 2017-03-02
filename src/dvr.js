@@ -29,9 +29,8 @@ vjs.plugin('dvr', function(){
         player.on('durationchange', function(){
             player.removeClass('vjs-live');
         });
-        player.one('play', function(){
-            player.dvr.seek_to_live();
-        });
+        if (!player.hasStarted())
+            player.one('play', function(){ player.dvr.seek_to_live(); });
         player.on('timeupdate', function(){
             player.controlBar.toggleClass('vjs-dvr-live',
                 player.dvr.is_live());
