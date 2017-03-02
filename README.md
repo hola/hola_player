@@ -21,13 +21,13 @@ To start using Hola Player, follow these steps:
 1. Add this script to your document's `<head>`:
 
   ```html
-  <script src="//cdn.jsdelivr.net/hola_player/1.0.5/hola_player.js"></script>
+  <script src="//cdn.jsdelivr.net/hola_player/1.0.6/hola_player.js"></script>
   ```
   
   Note: If you would like to use the integrated Hola Video Analytics module, register for an account on [holacdn.com](http://holacdn.com/cp) and include your CustomerID when loading the player as follows:
   
   ```html
-  <script src="//cdn.jsdelivr.net/hola_player/1.0.5/hola_player.js?customer=xxx"></script>
+  <script src="//cdn.jsdelivr.net/hola_player/1.0.6/hola_player.js?customer=xxx"></script>
   ```
   
 2. Add a `<video>` tag on your page:
