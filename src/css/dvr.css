@@ -23,7 +23,8 @@
     content: '';
     border-radius: 50%;
 }
-.vjs-large .vjs-dvr .vjs-live-display:before {
+.vjs-large .vjs-dvr .vjs-live-display:before,
+.vjs-fullscreen .vjs-dvr .vjs-live-display:before {
     width: 11px;
     height: 11px;
 }
