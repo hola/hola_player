@@ -22,7 +22,11 @@ module.exports = function(){
 
 function FlashlsProvider(source, tech){
     var swf = tech.el_, manual_level = -1, player_id = swf.id;
+    var duration = 0, sliding_start = 0;
     var player = find_player(tech);
+    var _this = this;
+    this.avg_duration = 0;
+    this.buffer = 0;
     function level_data(id, label){ return {id: id, label: label}; }
     function level_label(level){
         if (level.height)
@@ -58,10 +62,28 @@ function FlashlsProvider(source, tech){
     function on_msg(e){
         if (!e || !e.data || e.data.player_id!=player_id)
             return;
-        if (e.data.id=='flashls.hlsEventLevelSwitch')
+        switch (e.data.id)
+        {
+        case 'flashls.hlsEventLevelSwitch':
             update_quality();
+            break;
+        case 'flashls.hlsEventManifestLoaded':
+            var level = e.data.levels[0];
+            duration = level.duration;
+            _this.avg_duration = level.averageduration;
+            break;
+        case 'flashls.hlsEventMediaTime':
+            sliding_start = e.data.mediatime.live_sliding_main;
+            duration = e.data.mediatime.duration;
+            _this.buffer = e.data.mediatime.buffer;
+            break;
+        }
     }
     function on_hola_attach(){ player_id = swf.hola_settings({}).player_id; }
+    this.seekable = function(){
+        return videojs.createTimeRanges(duration ? [[sliding_start,
+            duration + sliding_start - 3*_this.avg_duration]] : []);
+    };
     this.dispose = function(){
         window.removeEventListener('message', on_msg);
         player.off('hola.wrapper_attached', on_hola_attach);

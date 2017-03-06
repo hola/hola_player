@@ -11,11 +11,11 @@ vjs.plugin('dvr', function(){
         child.dispose();
     }
     function init(){
-        // XXX andrey: make it work with flashls
         var hls = player.tech_.hls_obj;
+        var flashls = player.tech_.flashlsProvider;
         var seekable = player.seekable();
-        if (!hls || player.duration()!=Infinity ||
-            (seekable.end(0)-seekable.start(0))<60)
+        if (!hls && !flashls || player.duration()!=Infinity || !seekable ||
+            !seekable.length || (seekable.end(0)-seekable.start(0))<60)
         {
             return;
         }
@@ -35,16 +35,22 @@ vjs.plugin('dvr', function(){
             player.controlBar.toggleClass('vjs-dvr-live',
                 player.dvr.is_live());
         });
-        hls.on('hlsLevelUpdated', function(e, data){
-            player.dvr.live_threshold =
-                Math.max(data.details.targetduration*1.5, 10);
-        });
+        if (flashls)
+            player.dvr.live_threshold = Math.max(flashls.avg_duration*1.5, 10);
+        else
+        {
+            hls.on('hlsLevelUpdated', function(e, data){
+                player.dvr.live_threshold =
+                    Math.max(data.details.targetduration*1.5, 10);
+            });
+        }
     }
     player.ready(function(){
-        if (player.duration())
+        var seekable = player.seekable();
+        if (player.duration() && seekable && seekable.length)
             init();
         else
-            player.one('loadedmetadata', function(){ init(); });
+            player.one('loadedmetadata', function(){ setTimeout(init); });
     });
     player.dvr = {
         live_threshold: 10,
@@ -189,10 +195,17 @@ vjs.registerComponent('DvrLoadProgressBar', vjs.extend(LoadProgressBar, {
     constructor: function(player, options){
         LoadProgressBar.call(this, player, options);
         this.partEls_ = [];
+        var flashls;
         if (player.tech_.hls_obj)
             this.on(player.tech_.hls_obj, 'hlsLevelUpdated', this.update);
+        else if (flashls = player.tech_.flashlsProvider)
+        {
+            this.on(player, 'timeupdate', function(){
+                this.update(flashls.buffer);
+            });
+        }
     },
-    update: function(){
+    update: function(buffer){
         var percentify = function(time, end){
             var percent = time / end || 0;
             return (percent >= 1 ? 1 : percent) * 100 + '%';
@@ -201,17 +214,25 @@ vjs.registerComponent('DvrLoadProgressBar', vjs.extend(LoadProgressBar, {
         var start = range ? range.start : 0;
         var end = range ? range.end : 0;
         var children = this.partEls_;
-        var buffered = this.player_.buffered();
         var buff = [];
         var i;
-        for (i = 0; i < buffered.length; i++)
+        if (buffer)
         {
-            if (buffered.end(i)<=start || buffered.start(i)>=end)
-                continue;
-            buff.push({
-                start: Math.max(buffered.start(i), start),
-                end: Math.min(buffered.end(i), end),
-            });
+            var cur = this.player_.currentTime();
+            buff = [{start: cur, end: cur+buffer}];
+        }
+        else
+        {
+            var buffered = this.player_.buffered();
+            for (i = 0; i < buffered.length; i++)
+            {
+                if (buffered.end(i)<=start || buffered.start(i)>=end)
+                    continue;
+                buff.push({
+                    start: Math.max(buffered.start(i), start),
+                    end: Math.min(buffered.end(i), end),
+                });
+            }
         }
         var total = buff.length ? buff[buff.length-1].end - start : 0;
         this.el_.style.width = percentify(total, end-start);
