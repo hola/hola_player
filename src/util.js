@@ -20,9 +20,9 @@ E.current_script = function(){
     if (script = document.currentScript)
         return script;
     if (script = document.querySelector(
-        'script[src*="//player.h-cdn.com/player/"') ||
+        'script[src*="//player.h-cdn.com/player/"]') ||
         document.querySelector(
-        'script[src*="//cdn.jsdelivr.net/hola_player/"'))
+        'script[src*="//cdn.jsdelivr.net/hola_player/"]'))
     {
         return script;
     }
