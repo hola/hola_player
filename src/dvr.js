@@ -50,7 +50,20 @@ vjs.plugin('dvr', function(){
         if (player.duration() && seekable && seekable.length)
             init();
         else
-            player.one('loadedmetadata', function(){ setTimeout(init); });
+            player.one('loadedmetadata', function(){
+                if (!player.tech_.flashlsProvider)
+                {
+                    init();
+                    return;
+                }
+                player.on('timeupdate', function on_timeupdate(){
+                    var seekable = player.seekable();
+                    if (!seekable || !seekable.length)
+                        return;
+                    player.off('timeupdate', on_timeupdate);
+                    init();
+                });
+            });
     });
     player.dvr = {
         live_threshold: 10,
