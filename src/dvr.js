@@ -25,10 +25,6 @@ vjs.plugin('dvr', function(){
         remove_child(player.controlBar, 'liveDisplay');
         player.controlBar.addChild('LiveButton');
         player.controlBar.addClass('vjs-dvr');
-        player.removeClass('vjs-live');
-        player.on('durationchange', function(){
-            player.removeClass('vjs-live');
-        });
         if (!player.hasStarted())
             player.one('play', function(){ player.dvr.seek_to_live(); });
         player.on('timeupdate', function(){

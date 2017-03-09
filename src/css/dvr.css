@@ -1,5 +1,8 @@
-.vjs-dvr .vjs-time-control {
-    display: none !important;
+.vjs-dvr .vjs-progress-control {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
 }
 .vjs-dvr .vjs-live-control {
     flex: inherit;
@@ -14,20 +17,6 @@
 .vjs-dvr-live .vjs-live-control {
     cursor: default;
 }
-.vjs-dvr .vjs-live-display:before {
-    display: inline-block;
-    width: 7px;
-    height: 7px;
-    margin-right: 0.5em;
+.vjs-dvr:not(.vjs-dvr-live) .vjs-live-display:before {
     background: #566377;
-    content: '';
-    border-radius: 50%;
-}
-.vjs-large .vjs-dvr .vjs-live-display:before,
-.vjs-fullscreen .vjs-dvr .vjs-live-display:before {
-    width: 11px;
-    height: 11px;
-}
-.vjs-dvr-live .vjs-live-display:before {
-    background: #f51717;
 }

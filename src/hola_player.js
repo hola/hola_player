@@ -284,6 +284,7 @@ Player.prototype.get_vjs_opt = function(){
                 css: false,
                 no_play_transform: opt.no_play_transform,
                 show_controls_before_start: opt.show_controls_before_start,
+                show_time_for_live: opt.show_time_for_live,
             },
         },
     }, opt.videojs_options);
