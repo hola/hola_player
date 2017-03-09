@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src=//imasdk.googleapis.com/js/sdkloader/ima3.js></script>
+    <script src="id3-parser.js"></script>
+    <script src="../dist/hola_player.dev.js"></script>
+</head>
+<body>
+  <button id="showAd" onclick="insertAd();">Insert Ad</button>
+  <video preload="none" class="video-js vjs-default-skin"
+    width="640" height="360" controls>
+    <source src="http://162.13.178.37:1935/channel/ngrp:od1bDFMO7m_adaptive/manifest.m3u8"
+      type="application/x-mpegurl">
+  </video>
+  <script>
+    function insertAd(){
+      var http = new XMLHttpRequest();
+      http.open("POST",
+          'http://162.13.178.37:8082/insertadmarker?application=channel&streamName=od1bDFMO7m&url=http%3A%2F%2F5d402.v.fwmrm.net%2Fad%2Fg%2F1%3Fnw%3D381954%26resp%3Dvmap1%26mode%3Dlive%26vdty%3Dvariable%26vrdu%3D3000%26flag%3D%2Bemcr%2Baeti%2Bplay%26csid%3Dnoonandummysection%26caid%3Dnoonandummy%26prvn%3D1435317312119%26vprn%3D1435317312120%26metr%3D2047%26prof%3D381954%3AMTG_Ekstrabladet_html5_DK_Live%3B%3Bslid%3Dbreak0%26tpcl%3DPREROLL%26ptgt%3Da%26cpsq%3D1%26slau%3DPreroll%2520Standard%3Bslid%3Dbreak1%26tpcl%3DMIDROLL%26tpos%3D30%26ptgt%3Da%26cpsq%3D1%26slau%3DMidroll%2520Standard%26mind%3D30',
+          true);
+      http.send();
+    }
+    (function(){
+      var adTag = 'https://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/124319096/external/single_ad_samples&ciu_szs=300x250&impl=s&gdfp_req=1&env=vp&output=vast&unviewed_position_start=1&cust_params=deployment%3Ddevsite%26sample_ct%3Dskippablelinear&correlator=';
+      window.hola_player({
+        ads: {manual: true},
+      }, function(player){
+        window.player = player;
+        // XXX bahaa: move to player code with a minimal version of id3-parser
+        player.trigger('adsready');
+        player.trigger('nopreroll');
+        var cues = [], played_cues = {};
+        player.on('timeupdate', function(){
+          var cur = player.currentTime();
+          cues.forEach(function(cue){
+            if (played_cues[cue])
+              return;
+            if (cur<cue || cur-cue>0.5)
+              return;
+            console.log('playing ad');
+            player.ima.playAd(adTag);
+            played_cues[cue] = true;
+          });
+        });
+        player.tech_.on('parsedmetadata', function(e, data){
+          var sample = data && data.samples && data.samples[0];
+          console.log(sample.pts, sample.dts);
+          ID3.parse(sample.data||sample.unit).then(function(tag){
+            var u = tag && tag['user-defined-text-information'];
+            if (u!='adID')
+              return;
+            // XXX bahaa: get adTag from parsed data
+            // XXX bahaa: push correct time instead of dts
+            if (cues.indexOf(sample.dts)<0)
+              cues.push(sample.dts);
+            console.log(cues);
+          });
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
