@@ -1,4 +1,6 @@
 'use strict';
+var E = module.exports;
+
 function read_int(data, offset){
     return data[offset++]<<21 | data[offset++]<<14 | data[offset++]<<7 |
         data[offset++];
@@ -28,14 +30,16 @@ function parse_frames(data){
         offset += 4;
         size = read_int(data, offset);
         offset += 6;
-        if (id == 'TXXX')
+        if (id=='TXXX')
             res.TXXX = parse_txxx(data.subarray(offset, offset+size));
         offset += size;
     }
     return res;
 }
 
-function parse_id3(data){
+E.parse_id3 = function(data){
+    if (!data || !data.length)
+        return {};
     var offset = 0, size, header;
     header = read_utf(data, offset, 3);
     if (header!='ID3')

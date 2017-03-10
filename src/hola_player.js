@@ -3,6 +3,7 @@ var videojs = window.videojs = require('video.js');
 require('./css/videojs.css'); // auto injected
 var mime = require('./mime.js');
 var util = require('./util.js');
+var id3 = require('./id3.js');
 var hlsjs_source_handler = require('./hlsjs_source_handler.js');
 var flashls_source_handler = require('./flashls_source_handler.js');
 var url = require('url');
@@ -299,6 +300,8 @@ Player.prototype.init_ads = function(player){
     var opt = this.opt;
     if (!opt.ads)
         return;
+    if (opt.ads.id3)
+        opt.ads.manual = true;
     if (!opt.ads.adTagUrl && !opt.ads.adsResponse && !opt.ads.manual)
         return console.error('missing Ad Tag');
     if (!window.google) // missing external <script> or blocked by AdBlocker
@@ -320,7 +323,31 @@ Player.prototype.init_ads = function(player){
     // avoid it eating clicks while ad isn't playing
     if (player.ima.adContainerDiv)
         player.ima.adContainerDiv.style.display = 'none';
+    if (opt.ads.id3)
+        init_ads_id3(player);
 };
+
+function init_ads_id3(player){
+    var cues = [], played_cues = {};
+    player.trigger('adsready');
+    player.trigger('nopreroll');
+    player.on('timeupdate', function(){
+        var cur = player.currentTime();
+        cues.forEach(function(cue){
+            if (played_cues[cue.time] || cur<cue.time || cur-cue.time>0.5)
+                return;
+            player.ima.playAd(cue.ad);
+            played_cues[cue.time] = true;
+        });
+    });
+    player.tech_.on('parsedmetadata', function(e, data){
+        var sample = data && data.samples && data.samples[0];
+        var tags = id3.parse_id3(sample.data||sample.unit);
+        var ad = tags.TXXX && tags.TXXX.adID;
+        if (ad && cues.indexOf(sample.dts)<0)
+            cues.push({ad: ad, time: sample.dts});
+    });
+}
 
 function reset_native_hls(el, sources){
     var is_hls = function(s){

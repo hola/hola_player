@@ -2,7 +2,6 @@
 <html>
 <head>
     <script src=//imasdk.googleapis.com/js/sdkloader/ima3.js></script>
-    <script src="id3.js"></script>
     <script src="../dist/hola_player.dev.js"></script>
 </head>
 <body>
@@ -22,30 +21,7 @@
     }
     (function(){
       window.hola_player({
-        ads: {manual: true},
-      }, function(player){
-        window.player = player;
-        player.trigger('adsready');
-        player.trigger('nopreroll');
-        var cues = [], played_cues = {};
-        player.on('timeupdate', function(){
-          var cur = player.currentTime();
-          cues.forEach(function(cue){
-            if (played_cues[cue] || cur<cue.time || cur-cue.time>0.5)
-              return;
-            console.log('playing ad');
-            player.ima.playAd(cue.ad);
-            played_cues[cue] = true;
-          });
-        });
-        player.tech_.on('parsedmetadata', function(e, data){
-          var sample = data && data.samples && data.samples[0];
-          console.log(sample.pts, sample.dts);
-          var id3 = parse_id3(sample.data||sample.unit);
-          var ad = id3.TXXX && id3.TXXX.adID;
-          if (ad && cues.indexOf(sample.dts)<0)
-              cues.push({ad: ad, time: sample.dts});
-        });
+        ads: {id3: true},
       });
     })();
   </script>
