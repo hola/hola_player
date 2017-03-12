@@ -7,6 +7,7 @@ var id3 = require('./id3.js');
 var hlsjs_source_handler = require('./hlsjs_source_handler.js');
 var flashls_source_handler = require('./flashls_source_handler.js');
 var url = require('url');
+var map = require('lodash/map');
 
 (function(){
     hlsjs_source_handler();
@@ -345,7 +346,10 @@ function init_ads_id3(player){
         var tags = id3.parse_id3(sample.data||sample.unit);
         var ad = tags.TXXX && tags.TXXX.adID;
         if (ad && cues.indexOf(sample.dts)<0)
+        {
             cues.push({ad: ad, time: sample.dts});
+            player.trigger('ads-cuepoints', map(cues, 'time'));
+        }
     });
 }
 
