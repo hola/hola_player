@@ -22,6 +22,19 @@
     (function(){
       window.hola_player({
         ads: {id3: true},
+      }).vjs.on('ads-cuepoints', function(e, cuepoints){
+        console.log('ads cuepoints updated', cuepoints);
+      }).on([
+        'ads-ad-started',
+        'ads-ad-ended',
+        'ads-first-quartile',
+        'ads-midpoint',
+        'ads-third-quartile',
+        'ads-pause',
+        'ads-play',
+        'ads-click',
+      ], function(e){
+        console.log(e.type);
       });
     })();
   </script>
