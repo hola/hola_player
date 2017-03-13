@@ -116,6 +116,7 @@ module.exports = function(grunt) {
         },
     });
     require('load-grunt-tasks')(grunt);
+    grunt.loadNpmTasks('chg');
     grunt.registerTask('build', ['clean', 'jshint', 'browserify:dist',
         'browserify:dash', 'exorcise', 'copy', 'uglify']);
     grunt.registerTask('default', ['build']);
