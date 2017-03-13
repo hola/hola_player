@@ -2,9 +2,12 @@ CHANGELOG
 =========
 
 ## HEAD (Unreleased)
-* update videojs-contrib-media-sources dependency. Fixes TypeError: AdtsStream is not a constructor
+_(none)_
 
 --------------------
+
+## 1.0.12 (2017-03-13)
+* update videojs-contrib-media-sources dependency. Fixes TypeError: AdtsStream is not a constructor
 
 ## 1.0.11 (2017-03-13)
 * update videojs-settings dependency. fixes IE11 issue with CustomEvent
