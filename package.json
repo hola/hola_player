@@ -14,7 +14,7 @@
   "scripts": {
     "build": "grunt",
     "login": "c=`npm c ls`; test \"${c#*@hola}\" != \"$c\" || npm login --scope @hola.org",
-    "release": "npm run build && npm run login && npm publish",
+    "release": "npm update && npm run build && npm run login && npm publish",
     "version": "chg release -y && git add CHANGELOG.md",
     "postversion": "git push --tags",
     "test": "echo \"Error: no test specified\" && exit 1"
