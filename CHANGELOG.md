@@ -2,7 +2,7 @@ CHANGELOG
 =========
 
 ## HEAD (Unreleased)
-_(none)_
+* update videojs-contrib-media-sources dependency. Fixes TypeError: AdtsStream is not a constructor
 
 --------------------
 
