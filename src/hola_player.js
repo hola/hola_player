@@ -4,13 +4,13 @@ require('./css/videojs.css'); // auto injected
 var mime = require('./mime.js');
 var util = require('./util.js');
 var id3 = require('./id3.js');
-var hlsjs_source_handler = require('./hlsjs_source_handler.js');
+var hlsjs_source_handler = require('@hola.org/hap.js/lib/hola_videojs_hls.js');
 var flashls_source_handler = require('./flashls_source_handler.js');
 var url = require('url');
 var map = require('lodash/map');
 
 (function(){
-    hlsjs_source_handler();
+    hlsjs_source_handler.attach();
     flashls_source_handler();
     load_cdn_loader();
 })();

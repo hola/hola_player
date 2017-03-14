@@ -34,20 +34,19 @@
     ".jshintrc"
   ],
   "dependencies": {
+    "@hola.org/hap.js": "1.0.12",
+    "@hola.org/videojs-contrib-ads": "4.2.0-4",
+    "@hola.org/videojs-contrib-media-sources": "3.1.0-11",
     "@hola.org/videojs-hola-skin": "0.0.5-40",
+    "@hola.org/videojs-ima": "0.5.0-13",
     "@hola.org/videojs-osmf": "0.0.0-35",
     "@hola.org/videojs-settings": "0.0.3-44",
     "@hola.org/videojs-swf": "5.1.0-12",
     "@hola.org/videojs-thumbnails": "0.1.1-4",
-    "@hola.org/videojs5-hlsjs-source-handler": "0.0.8-26",
-    "@hola.org/videojs-ima": "0.5.0-13",
-    "@hola.org/hls.js": "0.6.1-111",
-    "@hola.org/videojs-contrib-media-sources": "3.1.0-11",
-    "@hola.org/videojs-contrib-ads": "4.2.0-4",
-    "video.js": "hola/video.js#hola_5.10.2",
     "dashjs": "hola/dash.js#development",
-    "videojs-contrib-dash": "2.6.1",
-    "lodash": "4.17.4"
+    "lodash": "4.17.4",
+    "video.js": "hola/video.js#hola_5.10.2",
+    "videojs-contrib-dash": "2.6.1"
   },
   "devDependencies": {
     "browserify-css": "^0.9.2",
