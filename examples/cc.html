@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="../dist/hola_player.dev.js"></script>
+</head>
+<body>
+  <div><h1>Video tag with Hola player - playing HLS with CC</h1></div>
+  <video preload="none" class="video-js vjs-default-skin" width="640" height="360" controls>
+    <source src="http://player.h-cdn.org/static/hls/cpcdemo/cpcdemo1.m3u8" type="application/x-mpegurl">
+  </video>
+  <script>
+    (function(){
+      window.hola_player();
+    })();
+  </script>
+</body>
+</html>
