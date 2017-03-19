@@ -14,9 +14,13 @@
   "scripts": {
     "build": "grunt",
     "login": "c=`npm c ls`; test \"${c#*@hola}\" != \"$c\" || npm login --scope @hola.org",
-    "release": "npm update && npm run build && npm run login && npm publish",
-    "version": "chg release -y && git add CHANGELOG.md",
-    "postversion": "git push --tags",
+    "release": "run-s build login release:*",
+    "release:changelog": "chg release -y && git add CHANGELOG.md && git commit -m \"release v$npm_package_version\"",
+    "release:dist": "git add -f dist && git commit -m \"add dist v$npm_package_version\"",
+    "release:tag": "git tag v$npm_package_version",
+    "release:pushtags": "git push --tags origin",
+    "release:publish": "npm publish",
+    "release:reset": "git reset --hard HEAD~1",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
