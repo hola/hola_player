@@ -2,7 +2,7 @@ CHANGELOG
 =========
 
 ## HEAD (Unreleased)
-_(none)_
+* added option to change swf urls for self hosting
 
 --------------------
 
