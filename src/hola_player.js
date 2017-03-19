@@ -40,6 +40,7 @@ function hola_player(opt, ready_cb){
 
 function set_defaults(element, opt){
     opt.autoplay = opt.auto_play || opt.autoplay; // allow both
+    opt.base_url = opt.base_url||'//cdn.jsdelivr.net/hola_player/__VERSION__';
     if (opt.video_url)
     {
         opt.sources = [{
@@ -105,13 +106,6 @@ function load_deps(deps){
         require('./css/dvr.css');
     }
 }
-
-// XXX bahaa: make these easily replacable for self-hosting
-var swf_urls = {
-    videojs: '//cdn.jsdelivr.net/hola_player/__VERSION__/videojs.swf',
-    'videojs-osmf':
-        '//cdn.jsdelivr.net/hola_player/__VERSION__/videojs-osmf.swf',
-};
 
 function Player(element, opt, ready_cb){
     this.ready_cb = ready_cb;
@@ -251,9 +245,10 @@ Player.prototype.get_vjs_opt = function(){
     var opt = this.opt;
     return videojs.mergeOptions({
         sources: opt.sources,
-        osmf: {swf: swf_urls['videojs-osmf']}, // XXX arik: unite swf to one
+        // XXX arik: unite swf to one
+        osmf: {swf: opt.osmf_swf||opt.base_url+'/videojs-osmf.swf'},
         flash: {
-            swf: swf_urls.videojs,
+            swf: opt.swf||opt.base_url+'/videojs.swf',
             accelerated: opt.accelerated,
         },
         html5: {
