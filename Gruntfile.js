@@ -103,10 +103,19 @@ module.exports = function(grunt) {
                 files: {'dist/hola_player.dash.js': 'dist/hola_player.dash.dev.js'},
             },
         },
+        zip: {
+            dist: {
+                router: function(filepath){
+                    return path.relative('dist', filepath);
+                },
+                src: ['dist/**/*'],
+                dest: 'dist/hola-player-'+pkg.version+'.zip',
+            },
+        },
     });
     require('load-grunt-tasks')(grunt);
     grunt.loadNpmTasks('chg');
     grunt.registerTask('build', ['clean', 'jshint', 'browserify:dist',
-        'browserify:dash', 'exorcise', 'copy', 'uglify']);
+        'browserify:dash', 'exorcise', 'copy', 'uglify', 'zip']);
     grunt.registerTask('default', ['build']);
 };
