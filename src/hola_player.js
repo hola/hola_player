@@ -167,7 +167,7 @@ Player.prototype.init_vjs = function(){
     load_deps({
         'videojs-settings': !!vjs_opt.plugins.settings,
         'videojs-hola-skin': !!vjs_opt.plugins.hola_skin,
-        'videojs-thumbnails': !!opt.thumbnails,
+        'videojs-thumbnails': !!opt.thumbnails || opt.thumbnails===undefined,
         'videojs-contrib-ads': !!opt.ads,
         'videojs-ima': !!opt.ads,
         'videojs-contrib-dash': opt.sources.some(function(s){
