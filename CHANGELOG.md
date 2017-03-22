@@ -2,9 +2,12 @@ CHANGELOG
 =========
 
 ## HEAD (Unreleased)
-* update videojs-thumbnails dependency. Add support for auto-generated thumbnails
+_(none)_
 
 --------------------
+
+## 1.0.15 (2017-03-22)
+* update videojs-thumbnails dependency. Add support for auto-generated thumbnails
 
 ## 1.0.14 (2017-03-19)
 * added option to change swf urls for self hosting
