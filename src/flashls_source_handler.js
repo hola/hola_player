@@ -2,6 +2,7 @@
 var videojs = require('video.js');
 var mime = require('./mime.js');
 var util = require('./util.js');
+var some = require('lodash/some');
 
 module.exports = function(){
     videojs.getComponent('Flash').registerSourceHandler({
@@ -27,16 +28,21 @@ function FlashlsProvider(source, tech){
     var _this = this;
     this.avg_duration = 0;
     this.buffer = 0;
-    function level_data(id, label){ return {id: id, label: label}; }
-    function level_label(level){
-        if (level.height)
-            return level.height + 'p';
-        else if (level.width)
-            return Math.round(level.width * 9 / 16) + 'p';
-        else if (level.bitrate)
-            return util.scaled_number(level.bitrate) + 'bps';
-        else
-            return 0;
+    function height_label(level){
+        var height = level.height || Math.round(level.width * 9 / 16);
+        return height ? height + 'p' : '';
+    }
+    function bitrate_label(level){
+        return level.bitrate ? util.scaled_number(level.bitrate) + 'bps' : '';
+    }
+    function level_label(level, levels){
+        var label = height_label(level);
+        if (!label)
+            return bitrate_label(level);
+        var duplicated = some(levels, function(l){
+            return l!=level && height_label(l)==label;
+        });
+        return  duplicated ? label+' '+bitrate_label(level) : label;
     }
     function switch_quality(qualityId){
         manual_level = qualityId;
@@ -47,9 +53,12 @@ function FlashlsProvider(source, tech){
         var levels = swf.hola_hls_get_levels();
         var list = [];
         if (levels.length>1)
-            list.push(level_data(-1, 'auto'));
+            list.push({id: -1, label: 'Auto'});
         for (var i=0; i<levels.length; i++)
-            list.push(level_data(levels[i].index, level_label(levels[i])));
+        {
+            list.push({id: levels[i].index, label: level_label(levels[i],
+                levels)});
+        }
         tech.trigger('loadedqualitydata', {
             quality: {
                 list: list,
