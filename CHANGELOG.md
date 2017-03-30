@@ -2,7 +2,8 @@ CHANGELOG
 =========
 
 ## HEAD (Unreleased)
-_(none)_
+* fixed duplicated quality level labels
+* show current quality label
 
 --------------------
 
