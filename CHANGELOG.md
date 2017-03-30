@@ -2,10 +2,13 @@ CHANGELOG
 =========
 
 ## HEAD (Unreleased)
-* fixed duplicated quality level labels
-* show current quality label
+_(none)_
 
 --------------------
+
+## 1.0.16 (2017-03-30)
+* fixed duplicated quality level labels
+* show current quality label
 
 ## 1.0.15 (2017-03-22)
 * update videojs-thumbnails dependency. Add support for auto-generated thumbnails
