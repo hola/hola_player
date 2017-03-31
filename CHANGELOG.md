@@ -6,6 +6,9 @@ _(none)_
 
 --------------------
 
+## 1.0.17 (2017-03-31)
+_(none)_
+
 ## 1.0.16 (2017-03-30)
 * fixed duplicated quality level labels
 * show current quality label
