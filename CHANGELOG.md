@@ -2,9 +2,12 @@ CHANGELOG
 =========
 
 ## HEAD (Unreleased)
-* update videojs-thumbnails. Fixes thumbnails reinitialization
+_(none)_
 
 --------------------
+
+## 1.0.18 (2017-03-31)
+* update videojs-thumbnails. Fixes thumbnails reinitialization
 
 ## 1.0.16 (2017-03-30)
 * fixed duplicated quality level labels
