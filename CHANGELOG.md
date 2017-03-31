@@ -2,7 +2,7 @@ CHANGELOG
 =========
 
 ## HEAD (Unreleased)
-_(none)_
+* update videojs-thumbnails. Fixes thumbnails reinitialization
 
 --------------------
 
