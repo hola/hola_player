@@ -6,6 +6,10 @@ _(none)_
 
 --------------------
 
+## 1.0.19 (2017-04-03)
+* update hap.js dependency. Improved HLS playlist fetching when
+hola_adaptive is enabled
+
 ## 1.0.18 (2017-03-31)
 * update videojs-thumbnails. Fixes thumbnails reinitialization
 
