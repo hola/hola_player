@@ -7,6 +7,9 @@ _(none)_
 --------------------
 
 ## 1.0.19 (2017-04-03)
+_(none)_
+
+## 1.0.19 (2017-04-03)
 * update hap.js dependency. Improved HLS playlist fetching when
 hola_adaptive is enabled
 
