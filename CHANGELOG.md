@@ -2,9 +2,12 @@ CHANGELOG
 =========
 
 ## HEAD (Unreleased)
-* update videojs-thumbnails dependency. Add support for WebVTT thumbnails
+_(none)_
 
 --------------------
+
+## 1.0.20 (2017-04-07)
+* update videojs-thumbnails dependency. Add support for WebVTT thumbnails
 
 ## 1.0.19 (2017-04-03)
 _(none)_
