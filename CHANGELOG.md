@@ -2,7 +2,7 @@ CHANGELOG
 =========
 
 ## HEAD (Unreleased)
-_(none)_
+* update videojs-hola-skin dependency. Fixes UI bugs on Firefox and IE
 
 --------------------
 
