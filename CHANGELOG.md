@@ -2,10 +2,13 @@ CHANGELOG
 =========
 
 ## HEAD (Unreleased)
-* update videojs-hola-skin dependency. Fixes UI bugs on Firefox and IE
-* update videojs-settings dependency. Fixes popup menu bugs on touch devices
+_(none)_
 
 --------------------
+
+## 1.0.21 (2017-04-10)
+* update videojs-hola-skin dependency. Fixes UI bugs on Firefox and IE
+* update videojs-settings dependency. Fixes popup menu bugs on touch devices
 
 ## 1.0.20 (2017-04-07)
 * update videojs-thumbnails dependency. Add support for WebVTT thumbnails
