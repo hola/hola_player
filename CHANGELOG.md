@@ -3,6 +3,7 @@ CHANGELOG
 
 ## HEAD (Unreleased)
 * update videojs-hola-skin dependency. Fixes UI bugs on Firefox and IE
+* update videojs-settings dependency. Fixes popup menu bugs on touch devices
 
 --------------------
 
