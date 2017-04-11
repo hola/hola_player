@@ -170,9 +170,7 @@ Player.prototype.init_vjs = function(){
         'videojs-thumbnails': !!opt.thumbnails || opt.thumbnails===undefined,
         'videojs-contrib-ads': !!opt.ads,
         'videojs-ima': !!opt.ads,
-        'videojs-contrib-dash': opt.sources.some(function(s){
-            return mime.is_dash_link(s.src) || mime.is_dash_type(s.type);
-        }),
+        'videojs-contrib-dash': opt.sources.some(is_dash),
         dvr: opt.dvr,
     });
     return videojs(this.element, vjs_opt, function(){
@@ -236,8 +234,11 @@ Player.prototype.get_settings_opt = function(){
     if (s===false)
         return;
     s = videojs.mergeOptions({graph: opt.graph, volume: opt.volume}, s);
+    var sources = opt.sources && opt.sources.filter(function(source){
+        return !is_adaptive(source);
+    });
     if (s.quality!==false)
-        s.quality = {sources: opt.sources};
+        s.quality = {sources: sources};
     return s;
 };
 
@@ -348,9 +349,23 @@ function init_ads_id3(player){
     });
 }
 
+function is_hls(s){
+    return mime.is_hls_link(s.src) || mime.is_hls_type(s.type);
+}
+
+function is_dash(s){
+    return mime.is_dash_link(s.src) || mime.is_dash_type(s.type);
+}
+
+function is_hds(s){
+    return mime.is_hds_link(s.src) || mime.is_hds_type(s.type);
+}
+
+function is_adaptive(s){
+    return is_hls(s) || is_dash(s) || is_hds(s);
+}
+
 function reset_native_hls(el, sources){
-    var is_hls = function(s){
-        return mime.is_hls_link(s.src) || mime.is_hls_type(s.type); };
     // not using el.currentSrc because it might not be selected yet.
     if (!el.canPlayType('application/x-mpegurl') || !sources.some(is_hls))
         return;
