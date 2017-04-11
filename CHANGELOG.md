@@ -2,9 +2,12 @@ CHANGELOG
 =========
 
 ## HEAD (Unreleased)
-* fixed handling multiple sources
+_(none)_
 
 --------------------
+
+## 1.0.22 (2017-04-11)
+* fixed handling multiple sources
 
 ## 1.0.21 (2017-04-10)
 * update videojs-hola-skin dependency. Fixes UI bugs on Firefox and IE
