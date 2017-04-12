@@ -175,6 +175,8 @@ Player.prototype.init_vjs = function(){
     });
     return videojs(this.element, vjs_opt, function(){
         var player = this;
+        // enable tap events to make popup menu and ads work correctly
+        player.emitTapEvents();
         if (player.tech_ && opt.controls)
             player.controls(true);
         if (opt.thumbnails)
@@ -314,7 +316,7 @@ Player.prototype.init_ads = function(player){
         },
     }, opt.ads));
     if (videojs.browser.IS_ANDROID || videojs.browser.IS_IOS)
-        player.one('touchend', init);
+        player.one('tap', init);
     else
         init();
     // avoid it eating clicks while ad isn't playing
