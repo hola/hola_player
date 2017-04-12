@@ -2,9 +2,12 @@ CHANGELOG
 =========
 
 ## HEAD (Unreleased)
-* fixed ads handling on Android
+_(none)_
 
 --------------------
+
+## 1.0.23 (2017-04-12)
+* fixed ads handling on Android
 
 ## 1.0.22 (2017-04-11)
 * fixed handling multiple sources
