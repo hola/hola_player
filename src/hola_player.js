@@ -316,7 +316,12 @@ Player.prototype.init_ads = function(player){
         },
     }, opt.ads));
     if (videojs.browser.IS_ANDROID || videojs.browser.IS_IOS)
-        player.one('tap', init);
+    {
+        player.on(['tap', 'click'], function on_gesture(){
+            player.off(['tap', 'click'], on_gesture);
+            init();
+        });
+    }
     else
         init();
     // avoid it eating clicks while ad isn't playing
