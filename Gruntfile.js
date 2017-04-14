@@ -66,7 +66,10 @@ module.exports = function(grunt) {
             dist: {
                 files: {'dist/hola_player.dev.js': ['src/hola_player.js']},
                 options: {
-                    ignore: ['videojs-contrib-dash', 'dashjs'],
+                    ignore: [
+                        'videojs-contrib-dash',
+                        './node_modules/@hola.org/dashjs/**'
+                    ],
                 },
             },
             dash: {

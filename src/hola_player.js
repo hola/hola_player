@@ -96,7 +96,7 @@ function load_deps(deps){
     if (deps['videojs-contrib-dash'])
     {
         window.dashjs = {
-            MediaPlayer: require('dashjs/dist/dash.mediaplayer.debug.js'),
+            MediaPlayer: require('@hola.org/dashjs/dist/dash.mediaplayer.debug.js'),
         };
         require('videojs-contrib-dash');
     }
