@@ -84,7 +84,7 @@ Hola analytics module provides the following information using the free dashboar
 - Bandwidth saved using Bandwidth Saver
 - And more..
 
-The use of this feature requires a free hola account. To learn more about the hola analytics dashboard and to create your free account, visit [www.holacdn.com](www.holacdn.com).
+The use of this feature requires a free hola account. To learn more about the hola analytics dashboard and to create your free account, visit [www.holacdn.com](http://www.holacdn.com).
 
 ## Integrated bandwidth saver for progressive http
 
