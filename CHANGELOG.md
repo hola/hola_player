@@ -2,9 +2,13 @@ CHANGELOG
 =========
 
 ## HEAD (Unreleased)
-* fixed ads initialization on Android
+_(none)_
 
---------------------
+## 1.0.24
+* update videojs-hola-skin dependency. Fixes CC button.
+* depend on dashjs from npm
+* update hap.js dependency
+* fixed ads initialization on Android
 
 ## 1.0.23 (2017-04-12)
 * fixed ads handling on Android
