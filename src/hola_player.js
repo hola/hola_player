@@ -317,17 +317,19 @@ Player.prototype.init_ads = function(player){
     }, opt.ads));
     if (videojs.browser.IS_ANDROID || videojs.browser.IS_IOS)
     {
-        // ios: sometimes 'tap' event not fired or fired after .play() called
-        player.on(['tap', 'click', 'touchstart'], function on_gesture(){
-            player.off(['tap', 'click', 'touchstart'], on_gesture);
+        player.on(['tap', 'click'], function on_gesture(){
+            player.off(['tap', 'click'], on_gesture);
             init();
+            player.play();
         });
     }
     else
+    {
         init();
-    // avoid it eating clicks while ad isn't playing
-    if (player.ima.adContainerDiv)
-        player.ima.adContainerDiv.style.display = 'none';
+        // avoid it eating clicks while ad isn't playing
+        if (player.ima.adContainerDiv)
+            player.ima.adContainerDiv.style.display = 'none';
+    }
     if (opt.ads.id3)
         init_ads_id3(player);
 };
