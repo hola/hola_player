@@ -317,8 +317,9 @@ Player.prototype.init_ads = function(player){
     }, opt.ads));
     if (videojs.browser.IS_ANDROID || videojs.browser.IS_IOS)
     {
-        player.on(['tap', 'click'], function on_gesture(){
-            player.off(['tap', 'click'], on_gesture);
+        // ios: sometimes 'tap' event not fired or fired after .play() called
+        player.on(['tap', 'click', 'touchstart'], function on_gesture(){
+            player.off(['tap', 'click', 'touchstart'], on_gesture);
             init();
         });
     }
