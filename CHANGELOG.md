@@ -4,7 +4,9 @@ CHANGELOG
 ## HEAD (Unreleased)
 _(none)_
 
-## 1.0.24
+--------------------
+
+## 1.0.24 (2017-04-15)
 * update videojs-hola-skin dependency. Fixes CC button.
 * depend on dashjs from npm
 * update hap.js dependency
