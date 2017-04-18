@@ -2,9 +2,12 @@ CHANGELOG
 =========
 
 ## HEAD (Unreleased)
-* fixed ads initialization on iOS
+_(none)_
 
 --------------------
+
+## 1.0.25 (2017-04-18)
+* fixed ads initialization on iOS
 
 ## 1.0.24 (2017-04-15)
 * update videojs-hola-skin dependency. Fixes CC button.
