@@ -2,11 +2,14 @@ CHANGELOG
 =========
 
 ## HEAD (Unreleased)
+_(none)_
+
+--------------------
+
+## 1.0.26 (2017-04-19)
 * fixed popup menu link item padding
 * fixed display of non-linear ads
 * fixed error when localStorage access is denied
-
---------------------
 
 ## 1.0.25 (2017-04-18)
 * fixed ads initialization on iOS
