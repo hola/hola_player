@@ -291,11 +291,6 @@ Player.prototype.get_vjs_opt = function(){
 };
 
 Player.prototype.init_ads = function(player){
-    var init = function(){
-        player.ima.initializeAdDisplayContainer();
-        if (!opt.ads.manual)
-            player.ima.requestAds();
-    };
     var opt = this.opt;
     if (!opt.ads)
         return;
@@ -315,21 +310,18 @@ Player.prototype.init_ads = function(player){
             disablePlayContentBehindAd: true,
         },
     }, opt.ads));
-    if (videojs.browser.IS_ANDROID || videojs.browser.IS_IOS)
-    {
-        player.on(['tap', 'click'], function on_gesture(){
-            player.off(['tap', 'click'], on_gesture);
-            init();
-            player.play();
-        });
-    }
-    else
-    {
-        init();
-        // avoid it eating clicks while ad isn't playing
+    if (player.ima.adContainerDiv)
+        player.ima.adContainerDiv.style.cursor = 'pointer';
+    player.on(['tap', 'click', 'play'], function on_gesture(e){
+        player.off(['tap', 'click', 'play'], on_gesture);
         if (player.ima.adContainerDiv)
-            player.ima.adContainerDiv.style.display = 'none';
-    }
+            player.ima.adContainerDiv.style.cursor = '';
+        player.ima.initializeAdDisplayContainer();
+        if (!opt.ads.manual)
+            player.ima.requestAds();
+        if (e.type!='play')
+            player.play();
+    });
     if (opt.ads.id3)
         init_ads_id3(player);
 };
