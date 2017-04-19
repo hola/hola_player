@@ -4,6 +4,7 @@ CHANGELOG
 ## HEAD (Unreleased)
 * fixed popup menu link item padding
 * fixed display of non-linear ads
+* fixed error when localStorage access is denied
 
 --------------------
 
