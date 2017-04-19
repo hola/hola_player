@@ -2,7 +2,8 @@ CHANGELOG
 =========
 
 ## HEAD (Unreleased)
-_(none)_
+* fixed popup menu link item padding
+* fixed display of non-linear ads
 
 --------------------
 
