@@ -2,9 +2,12 @@ CHANGELOG
 =========
 
 ## HEAD (Unreleased)
-* fix UI bug in fullscreen portrait mode
+_(none)_
 
 --------------------
+
+## 1.0.27 (2017-04-20)
+* fix UI bug in fullscreen portrait mode
 
 ## 1.0.26 (2017-04-19)
 * fixed popup menu link item padding
