@@ -2,7 +2,7 @@ CHANGELOG
 =========
 
 ## HEAD (Unreleased)
-_(none)_
+* fix UI bug in fullscreen portrait mode
 
 --------------------
 
