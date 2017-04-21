@@ -2,7 +2,7 @@ CHANGELOG
 =========
 
 ## HEAD (Unreleased)
-_(none)_
+* improved seeking UI on mobile devices
 
 --------------------
 
