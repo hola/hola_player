@@ -2,9 +2,12 @@ CHANGELOG
 =========
 
 ## HEAD (Unreleased)
-* improved seeking UI on mobile devices
+_(none)_
 
 --------------------
+
+## 1.0.28 (2017-04-21)
+* improved seeking UI on mobile devices
 
 ## 1.0.27 (2017-04-20)
 * fix UI bug in fullscreen portrait mode
