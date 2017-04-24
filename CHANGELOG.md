@@ -2,7 +2,7 @@ CHANGELOG
 =========
 
 ## HEAD (Unreleased)
-_(none)_
+* Do not start loading hls video before play if preload=='none'
 
 --------------------
 
