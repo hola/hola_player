@@ -2,9 +2,12 @@ CHANGELOG
 =========
 
 ## HEAD (Unreleased)
-* Do not start loading hls video before play if preload=='none'
+_(none)_
 
 --------------------
+
+## 1.0.29 (2017-04-24)
+* Do not start loading hls video before play if preload=='none'
 
 ## 1.0.28 (2017-04-21)
 * improved seeking UI on mobile devices
