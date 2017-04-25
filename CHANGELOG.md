@@ -2,9 +2,12 @@ CHANGELOG
 =========
 
 ## HEAD (Unreleased)
-* Updated hap.js dependency. Added extra logging for hls
+_(none)_
 
 --------------------
+
+## 1.0.30 (2017-04-25)
+* Updated hap.js dependency. Added extra logging for hls
 
 ## 1.0.29 (2017-04-24)
 * Do not start loading hls video before play if preload=='none'
