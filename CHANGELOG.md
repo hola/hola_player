@@ -2,7 +2,7 @@ CHANGELOG
 =========
 
 ## HEAD (Unreleased)
-_(none)_
+* Updated hap.js dependency. Fixed extra logging for hls and hls provider initialization if loaded as a part of loader.js
 
 --------------------
 
