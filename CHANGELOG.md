@@ -2,9 +2,12 @@ CHANGELOG
 =========
 
 ## HEAD (Unreleased)
-* Updated hap.js dependency. Fixed extra logging for hls and hls provider initialization if loaded as a part of loader.js
+_(none)_
 
 --------------------
+
+## 1.0.31 (2017-04-26)
+* Updated hap.js dependency. Fixed extra logging for hls and hls provider initialization if loaded as a part of loader.js
 
 ## 1.0.30 (2017-04-25)
 * Updated hap.js dependency. Added extra logging for hls
