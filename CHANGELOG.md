@@ -2,9 +2,12 @@ CHANGELOG
 =========
 
 ## HEAD (Unreleased)
-* Update videojs-settings dependency. Fixes manual quality selection after changing video source
+_(none)_
 
 --------------------
+
+## 1.0.32 (2017-04-27)
+* Update videojs-settings dependency. Fixes manual quality selection after changing video source
 
 ## 1.0.31 (2017-04-26)
 * Updated hap.js dependency. Fixed extra logging for hls and hls provider initialization if loaded as a part of loader.js
