@@ -2,7 +2,7 @@ CHANGELOG
 =========
 
 ## HEAD (Unreleased)
-_(none)_
+* Update videojs-settings dependency. Fixes manual quality selection after changing video source
 
 --------------------
 
