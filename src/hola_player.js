@@ -294,6 +294,12 @@ Player.prototype.init_ads = function(player){
     var opt = this.opt;
     if (!opt.ads)
         return;
+    if(!window.google || !window.google.ima)
+    {
+        util.load_script('//imasdk.googleapis.com/js/sdkloader/ima3.js',
+            this.init_ads.bind(this, player));
+        return;
+    }
     if (opt.ads.id3)
         opt.ads.manual = true;
     if (!opt.ads.adTagUrl && !opt.ads.adsResponse && !opt.ads.manual)
@@ -312,16 +318,20 @@ Player.prototype.init_ads = function(player){
     }, opt.ads));
     if (player.ima.adContainerDiv)
         player.ima.adContainerDiv.style.cursor = 'pointer';
-    player.on(['tap', 'click', 'play'], function on_gesture(e){
-        player.off(['tap', 'click', 'play'], on_gesture);
+    function init(e){
+        player.off(['tap', 'click', 'play'], init);
         if (player.ima.adContainerDiv)
             player.ima.adContainerDiv.style.cursor = '';
         player.ima.initializeAdDisplayContainer();
         if (!opt.ads.manual)
             player.ima.requestAds();
-        if (e.type!='play')
+        if (e && e.type!='play')
             player.play();
-    });
+    }
+    if (player.paused())
+        player.on(['tap', 'click', 'play'], init);
+    else
+        init();
     if (opt.ads.id3)
         init_ads_id3(player);
 };
