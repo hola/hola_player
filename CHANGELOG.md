@@ -2,7 +2,8 @@ CHANGELOG
 =========
 
 ## HEAD (Unreleased)
-_(none)_
+* Load ima sdk script automatically
+* Fixed ad controls on touch devices
 
 --------------------
 
