@@ -2,10 +2,13 @@ CHANGELOG
 =========
 
 ## HEAD (Unreleased)
-* Load ima sdk script automatically
-* Fixed ad controls on touch devices
+_(none)_
 
 --------------------
+
+## 1.0.33 (2017-04-28)
+* Load ima sdk script automatically
+* Fixed ad controls on touch devices
 
 ## 1.0.32 (2017-04-27)
 * Update videojs-settings dependency. Fixes manual quality selection after changing video source
