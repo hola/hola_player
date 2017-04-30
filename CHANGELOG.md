@@ -6,6 +6,9 @@ _(none)_
 
 --------------------
 
+## 1.0.34 (2017-04-30)
+_(none)_
+
 ## 1.0.33 (2017-04-28)
 * Load ima sdk script automatically
 * Fixed ad controls on touch devices
