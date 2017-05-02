@@ -2,9 +2,12 @@ CHANGELOG
 =========
 
 ## HEAD (Unreleased)
-* Added videojs-watermark plugin
+_(none)_
 
 --------------------
+
+## 1.0.35 (2017-05-02)
+* Added videojs-watermark plugin
 
 ## 1.0.33 (2017-04-28)
 * Load ima sdk script automatically
