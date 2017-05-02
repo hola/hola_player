@@ -2,9 +2,12 @@ CHANGELOG
 =========
 
 ## HEAD (Unreleased)
-* Updated hap.js dependency. Fixes hls source handler registration
+_(none)_
 
 --------------------
+
+## 1.0.36 (2017-05-02)
+* Updated hap.js dependency. Fixes hls source handler registration
 
 ## 1.0.35 (2017-05-02)
 * Added videojs-watermark plugin
