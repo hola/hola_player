@@ -2,7 +2,7 @@ CHANGELOG
 =========
 
 ## HEAD (Unreleased)
-_(none)_
+* Updated hap.js dependency. Fixes hls source handler registration
 
 --------------------
 
