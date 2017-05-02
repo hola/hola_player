@@ -50,7 +50,8 @@
     "@hola.org/dashjs": "2.1.0-3",
     "lodash": "4.17.4",
     "video.js": "hola/video.js#hola_5.10.2",
-    "videojs-contrib-dash": "2.6.1"
+    "videojs-contrib-dash": "2.6.1",
+    "videojs-watermark": "1.0.1"
   },
   "devDependencies": {
     "browserify-css": "^0.9.2",

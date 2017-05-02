@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="../dist/hola_player.dev.js"></script>
+</head>
+<body>
+  <div><h1>Video tag with Hola player - playing MP4</h1></div>
+  <video preload="none" class="video-js vjs-default-skin" width="640" height="360" controls>
+    <source src="http://player.h-cdn.org/static/mp4/bbb_sunflower_360p_30fps.mp4" type="video/mp4">
+  </video>
+  <script>
+    (function(){
+      window.hola_player({
+        poster: 'http://player.h-cdn.org/static/mp4/bbb.jpg',
+        watermark: {
+          image: 'logo.svg',
+          position: 'top-left',
+          fadeTime: null,
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
