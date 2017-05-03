@@ -2,9 +2,12 @@ CHANGELOG
 =========
 
 ## HEAD (Unreleased)
-* Updated hap.js and videojs-settings dependencies. Fixed TypeError on old browsers
+_(none)_
 
 --------------------
+
+## 1.0.37 (2017-05-03)
+* Updated hap.js and videojs-settings dependencies. Fixed TypeError on old browsers
 
 ## 1.0.36 (2017-05-02)
 * Updated hap.js dependency. Fixes hls source handler registration
