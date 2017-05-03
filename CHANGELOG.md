@@ -2,7 +2,7 @@ CHANGELOG
 =========
 
 ## HEAD (Unreleased)
-_(none)_
+* Updated hap.js and videojs-settings dependencies. Fixed TypeError on old browsers
 
 --------------------
 
