@@ -12,6 +12,7 @@
   "undef": true,
   "laxbreak": true,
   "strict": "global",
+  "esversion": 6,
   "predef": [
     "__dirname",
     "require",

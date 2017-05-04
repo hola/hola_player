@@ -18,10 +18,21 @@ module.exports = function(grunt) {
         pkg: pkg,
         clean: {
             dist: ['dist/*'],
+            patched: ['src/hola_player.patched.js'],
         },
         jshint: {
             options: {jshintrc: '.jshintrc'},
             all: ['src/*.js', './*.js'],
+        },
+        replace: {
+            dist: {
+                src: ['src/hola_player.js'],
+                dest: 'src/hola_player.patched.js',
+                replacements: [{
+                    from: 'require(\'@hola.org/hap.js/lib/hola_videojs_hls.js\')',
+                    to: 'hola_vjs_provider_require()'
+                }]
+            }
         },
         browserify: {
             options: {
@@ -64,7 +75,11 @@ module.exports = function(grunt) {
                 files: {'dist/hola_player.dev.js': ['src/hola_player.js']},
             },
             dist: {
-                files: {'dist/hola_player.dev.js': ['src/hola_player.js']},
+                files: {
+                    'work/hola_player.dev.js': ['src/hola_player.patched.js'],
+                    'work/hola_vjs.dev.js':
+                        ['./node_modules/@hola.org/hap.js/lib/hola_videojs_hls.js']
+                },
                 options: {
                     ignore: [
                         'videojs-contrib-dash',
@@ -78,9 +93,13 @@ module.exports = function(grunt) {
         },
         exorcise: {
             dist: {
-                options: {},
                 files: {
-                    'dist/hola_player.dev.js.map': ['dist/hola_player.dev.js'],
+                    'work/hola_player.dev.js.map': ['work/hola_player.dev.js'],
+                    'work/hola_vjs.dev.js.map': ['work/hola_vjs.dev.js'],
+                },
+            },
+            dash: {
+                files: {
                     'dist/hola_player.dash.dev.js.map': ['dist/hola_player.dash.dev.js'],
                 },
             },
@@ -98,13 +117,49 @@ module.exports = function(grunt) {
         uglify : {
             options: {sourceMap: true},
             dist: {
-                options: {sourceMapIn: 'dist/hola_player.dev.js.map'},
-                files: {'dist/hola_player.js': 'dist/hola_player.dev.js'},
+                options: {sourceMapIn: 'work/hola_player.dev.js.map'},
+                files: {'work/hola_player.js': 'work/hola_player.dev.js',
+                    'work/hola_vjs.js': 'work/hola_vjs.dev.js'},
             },
             dash: {
                 options: {sourceMapIn: 'dist/hola_player.dash.dev.js.map'},
                 files: {'dist/hola_player.dash.js': 'dist/hola_player.dash.dev.js'},
             },
+        },
+        concat: {
+            dist: {
+                options: {
+                    banner: `(function(){
+var hola_vjs_provider_require, E = {};
+E.zdot = function(name){
+    // zdot_stub:
+    // zdot_stub:return {
+    // zdot_stub:customer: {[=json it.customer]},
+    // zdot_stub:}[name];
+    return {}[name];
+};
+E.customer = E.zdot('customer');
+E.disable = function(){};
+function hola_player_init(){
+`, separator: `
+};
+hola_vjs_provider_require = function(){
+var res, define = (name, fn)=>res=fn();
+define.amd = true;
+// REQUIRE_START: hola_videojs_hls.js
+`, footer: `
+// REQUIRE_END: hola_videojs_hls.js
+return res;
+};
+hola_player_init();
+})();`, sourceMap: true,
+                },
+                files: {'dist/hola_player.js':
+                    ['work/hola_player.js', 'work/hola_vjs.js'],
+                    'dist/hola_player.dev.js':
+                    ['work/hola_player.dev.js', 'work/hola_vjs.dev.js'],
+                }
+            }
         },
         zip: {
             dist: {
@@ -118,7 +173,8 @@ module.exports = function(grunt) {
     });
     require('load-grunt-tasks')(grunt);
     grunt.loadNpmTasks('chg');
-    grunt.registerTask('build', ['clean', 'jshint', 'browserify:dist',
-        'browserify:dash', 'exorcise', 'copy', 'uglify', 'zip']);
+    grunt.registerTask('build', ['clean', 'jshint', 'replace',
+        'browserify:dist', 'clean:patched', 'browserify:dash', 'exorcise',
+        'copy', 'uglify', 'concat', 'zip']);
     grunt.registerTask('default', ['build']);
 };
