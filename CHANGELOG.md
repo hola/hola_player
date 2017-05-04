@@ -2,9 +2,12 @@ CHANGELOG
 =========
 
 ## HEAD (Unreleased)
-* Updated hap.js
+_(none)_
 
 --------------------
+
+## 1.0.41 (2017-05-04)
+* Updated hap.js
 
 ## 1.0.39 (2017-05-04)
 * Made the imported version of hola_vjs replaceable
