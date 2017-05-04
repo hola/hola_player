@@ -6,6 +6,9 @@ _(none)_
 
 --------------------
 
+## 1.0.39 (2017-05-04)
+_(none)_
+
 ## 1.0.37 (2017-05-03)
 * Updated hap.js and videojs-settings dependencies. Fixed TypeError on old browsers
 
