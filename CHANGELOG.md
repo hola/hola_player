@@ -6,6 +6,9 @@ _(none)_
 
 --------------------
 
+## 1.0.40 (2017-05-04)
+_(none)_
+
 ## 1.0.39 (2017-05-04)
 * Made the imported version of hola_vjs replaceable
 
