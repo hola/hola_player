@@ -155,7 +155,7 @@ function hola_player_init(){
 `, separator: `
 };
 hola_vjs_provider_require = function(){
-var res, define = (name, fn)=>res=fn();
+var res, define = function(name, fn){res=fn();};
 define.amd = true;
 // REQUIRE_START: hola_videojs_hls.js
 `, footer: `
