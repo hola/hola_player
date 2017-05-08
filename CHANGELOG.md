@@ -6,6 +6,9 @@ _(none)_
 
 --------------------
 
+## 1.0.43 (2017-05-08)
+* Updated hap.js
+
 ## 1.0.42 (2017-05-08)
 * Updated hap.js
 * Removed arrow functions from the require wrapper
