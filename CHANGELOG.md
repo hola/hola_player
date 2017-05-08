@@ -6,6 +6,11 @@ _(none)_
 
 --------------------
 
+## 1.0.42 (2017-05-08)
+* Updated hap.js
+* Removed arrow functions from the require wrapper
+* Made hola_vjs replaceable in hola_player.dash.js, too
+
 ## 1.0.41 (2017-05-04)
 * Updated hap.js
 
