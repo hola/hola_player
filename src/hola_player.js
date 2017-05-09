@@ -40,7 +40,7 @@ function hola_player(opt, ready_cb){
 
 function set_defaults(element, opt){
     opt.autoplay = opt.auto_play || opt.autoplay; // allow both
-    opt.base_url = opt.base_url||'//cdn.jsdelivr.net/hola_player/__VERSION__';
+    opt.base_url = opt.base_url||'//player2.h-cdn.com/';
     if (opt.video_url)
     {
         opt.sources = [{
@@ -252,12 +252,16 @@ Player.prototype.get_settings_opt = function(){
 
 Player.prototype.get_vjs_opt = function(){
     var opt = this.opt;
+    var script = util.current_script();
+    var customer = script && url.parse(script.src, true, true).query.customer;
     return videojs.mergeOptions({
         sources: opt.sources,
         // XXX arik: unite swf to one
-        osmf: {swf: opt.osmf_swf||opt.base_url+'/videojs-osmf.swf'},
+        osmf: {swf: opt.osmf_swf||
+            opt.base_url+'/videojs-osmf.swf?customer='+customer
+        },
         flash: {
-            swf: opt.swf||opt.base_url+'/videojs.swf',
+            swf: opt.swf||opt.base_url+'/videojs.swf?customer='+customer,
             accelerated: opt.accelerated,
         },
         html5: {
