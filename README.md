@@ -18,19 +18,15 @@ Hola Player is a web video player based on the popular video.js open source proj
 
 To start using Hola Player, follow these steps:
 
-1. Add this script to your document's `<head>`:
+1. Register for an account on [holacdn.com](http://holacdn.com/cp)
+
+2. Add this script to your document's `<head>`, including your CustomerID as follows:
 
   ```html
-  <script src="//cdn.jsdelivr.net/hola_player/1.0.43/hola_player.js"></script>
+  <script src="http://player2.h-cdn.com/hola_player.dash.dev.js?customer=xxx"></script>
   ```
   
-  Note: If you would like to use the integrated Hola Video Analytics module, register for an account on [holacdn.com](http://holacdn.com/cp) and include your CustomerID when loading the player as follows:
-  
-  ```html
-  <script src="//cdn.jsdelivr.net/hola_player/1.0.43/hola_player.js?customer=xxx"></script>
-  ```
-  
-2. Add a `<video>` tag on your page:
+3. Add a `<video>` tag on your page:
 
   ```html
   <video class="video-js vjs-default-skin" poster="http://player.h-cdn.org/static/mp4/tears_of_steel_1080p_MP4.jpg" width="640" height="360" controls>
@@ -38,7 +34,7 @@ To start using Hola Player, follow these steps:
   </video>
   ```
 
-3. Initialize player:
+4. Initialize player:
 
   ```html
   <script>
@@ -46,7 +42,7 @@ To start using Hola Player, follow these steps:
   </script>
   ```
 
-4. Done!
+5. Done!
 
 ## Self hosting
 
