@@ -21,6 +21,7 @@ E.current_script = function(){
         return script;
     if (script = document.querySelector(
         'script[src*="//player.h-cdn.com/player/"]') ||
+        document.querySelector('script[src*="//player2.h-cdn.com/"]') ||
         document.querySelector(
         'script[src*="//cdn.jsdelivr.net/hola_player/"]'))
     {

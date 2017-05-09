@@ -40,7 +40,7 @@ function hola_player(opt, ready_cb){
 
 function set_defaults(element, opt){
     opt.autoplay = opt.auto_play || opt.autoplay; // allow both
-    opt.base_url = opt.base_url||'//player2.h-cdn.com/';
+    opt.base_url = opt.base_url||'//player2.h-cdn.com';
     if (opt.video_url)
     {
         opt.sources = [{
