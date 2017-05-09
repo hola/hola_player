@@ -6,6 +6,9 @@ _(none)_
 
 --------------------
 
+## 1.0.45 (2017-05-09)
+* Added detection for being loaded from player2.h-cdn.com
+
 ## 1.0.44 (2017-05-09)
 * Updated hap.js
 * hola_player.js and videojs.swf are now used from player2.h-cdn.com instead of jsdelivr
