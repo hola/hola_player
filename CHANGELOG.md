@@ -6,6 +6,9 @@ _(none)_
 
 --------------------
 
+## 1.0.46 (2017-05-10)
+* Update hap.js (preloading of level playlists)
+
 ## 1.0.45 (2017-05-09)
 * Added detection for being loaded from player2.h-cdn.com
 
