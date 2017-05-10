@@ -23,14 +23,14 @@ To start using Hola Player, follow these steps:
 2. Add this script to your document's `<head>`, including your CustomerID as follows:
 
   ```html
-  <script src="http://player2.h-cdn.com/hola_player.dash.dev.js?customer=xxx"></script>
+  <script src="//player2.h-cdn.com/hola_player.dash.dev.js?customer=xxx"></script>
   ```
   
 3. Add a `<video>` tag on your page:
 
   ```html
-  <video class="video-js vjs-default-skin" poster="http://player.h-cdn.org/static/mp4/tears_of_steel_1080p_MP4.jpg" width="640" height="360" controls>
-      <source src="http://player.h-cdn.org/static/mp4/tears_of_steel_360p_MP4.mp4" type="video/mp4">
+  <video class="video-js vjs-default-skin" poster="//player.h-cdn.org/static/mp4/tears_of_steel_1080p_MP4.jpg" width="640" height="360" controls>
+      <source src="//player.h-cdn.org/static/mp4/tears_of_steel_360p_MP4.mp4" type="video/mp4">
   </video>
   ```
 
