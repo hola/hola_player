@@ -38,9 +38,9 @@
     ".jshintrc"
   ],
   "dependencies": {
-    "@hola.org/hap.js": "1.0.53",
+    "@hola.org/hap.js": "1.0.56",
     "@hola.org/videojs-contrib-ads": "4.2.0-4",
-    "@hola.org/videojs-contrib-media-sources": "3.1.0-11",
+    "@hola.org/videojs-contrib-media-sources": "3.1.0-12",
     "@hola.org/videojs-hola-skin": "0.0.5-46",
     "@hola.org/videojs-ima": "0.5.0-15",
     "@hola.org/videojs-osmf": "0.0.0-35",
