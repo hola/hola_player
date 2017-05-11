@@ -6,6 +6,12 @@ _(none)_
 
 --------------------
 
+## 1.0.47 (2017-05-11)
+_(none)_
+
+## 1.0.47 (2017-05-11)
+* Updated hap.js and videojs-contrib-media-sources dependencies
+
 ## 1.0.46 (2017-05-10)
 * Update hap.js (preloading of level playlists)
 
