@@ -23,7 +23,7 @@ To start using Hola Player, follow these steps:
 2. Add this script to your document's `<head>`, including your CustomerID as follows:
 
   ```html
-  <script src="//player2.h-cdn.com/hola_player.dash.dev.js?customer=xxx"></script>
+  <script src="//player2.h-cdn.com/hola_player.dev.js?customer=xxx"></script>
   ```
   
 3. Add a `<video>` tag on your page:
