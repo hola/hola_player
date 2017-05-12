@@ -6,6 +6,9 @@ _(none)_
 
 --------------------
 
+## 1.0.48 (2017-05-12)
+* Update hap.js (on the fly manifest and playlist replacement)
+
 ## 1.0.47 (2017-05-11)
 * Updated hap.js and videojs-contrib-media-sources dependencies
 
