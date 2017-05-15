@@ -6,6 +6,9 @@ _(none)_
 
 --------------------
 
+## 1.0.50 (2017-05-15)
+* Added it.json into zdot_stub
+
 ## 1.0.49 (2017-05-15)
 * Added workaround for google ima bug on old android
 
