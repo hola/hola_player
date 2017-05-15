@@ -23,7 +23,9 @@ E.current_script = function(){
         'script[src*="//player.h-cdn.com/player/"]') ||
         document.querySelector('script[src*="//player2.h-cdn.com/"]') ||
         document.querySelector(
-        'script[src*="//cdn.jsdelivr.net/hola_player/"]'))
+        'script[src*="//cdn.jsdelivr.net/hola_player/"]') ||
+        document.querySelector(
+        'script[src*="//cdn.jsdelivr.net/npm/@hola.org/hola_player@"'))
     {
         return script;
     }
