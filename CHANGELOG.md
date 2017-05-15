@@ -2,9 +2,12 @@ CHANGELOG
 =========
 
 ## HEAD (Unreleased)
-* Added workaround for google ima bug on old android
+_(none)_
 
 --------------------
+
+## 1.0.49 (2017-05-15)
+* Added workaround for google ima bug on old android
 
 ## 1.0.48 (2017-05-12)
 * Update hap.js (on the fly manifest and playlist replacement)
