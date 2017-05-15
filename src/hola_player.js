@@ -328,11 +328,22 @@ Player.prototype.init_ads = function(player){
         },
     }, opt.ads));
     if (player.ima.adContainerDiv)
+    {
         player.ima.adContainerDiv.style.cursor = 'pointer';
+        // XXX andrey: workaround for an old android versions (4.4) where click
+        // on imasdk iframe doesn't start the video. Need to check whether
+        // we can enable it by default
+        if (opt.ads.hideAdContainer)
+            player.ima.adContainerDiv.style.display = 'none';
+    }
     function init(e){
         player.off(['tap', 'click', 'play'], init);
         if (player.ima.adContainerDiv)
+        {
             player.ima.adContainerDiv.style.cursor = '';
+            if (opt.ads.hideAdContainer)
+                player.ima.adContainerDiv.style.display = 'block';
+        }
         player.ima.initializeAdDisplayContainer();
         if (!opt.ads.manual)
             player.ima.requestAds();
