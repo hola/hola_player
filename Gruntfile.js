@@ -146,6 +146,7 @@ E.zdot = function(name){
     // zdot_stub:
     // zdot_stub:return {
     // zdot_stub:customer: {[=json it.customer]},
+    // zdot_stub:json: {[=json it.json]},
     // zdot_stub:}[name];
     return {}[name];
 };
