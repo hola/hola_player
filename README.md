@@ -25,7 +25,7 @@ To start using Hola Player, follow these steps:
   ```html
   <script src="//player2.h-cdn.com/hola_player.js?customer=xxx"></script>
   ```
-  
+
 3. Add a `<video>` tag on your page:
 
   ```html
@@ -46,7 +46,7 @@ To start using Hola Player, follow these steps:
 
 ## Self hosting
 
-You can also [Download](https://github.com/hola/hola_player/raw/v1.0.50/dist/hola-player-1.0.50.zip) prebuilt package and host it on your website.
+You can also [Download](https://github.com/hola/hola_player/raw/v1.0.52/dist/hola-player-1.0.52.zip) prebuilt package and host it on your website.
 You will also need to to update the location of the swf files `videojs.swf` and `videojs-osmf.swf`.
 
 ```html
