@@ -2,7 +2,7 @@ CHANGELOG
 =========
 
 ## HEAD (Unreleased)
-_(none)_
+* Fixed current_script() to return <script> which loaded hola_player, not <script> which invokes it
 
 --------------------
 
