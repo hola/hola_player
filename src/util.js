@@ -17,8 +17,6 @@ E.load_script = function(url, onload, attrs){
 
 E.current_script = function(){
     var script;
-    if (script = document.currentScript)
-        return script;
     if (script = document.querySelector(
         'script[src*="//player.h-cdn.com/player/"]') ||
         document.querySelector('script[src*="//player2.h-cdn.com/"]') ||
@@ -29,6 +27,8 @@ E.current_script = function(){
     {
         return script;
     }
+    if (script = document.currentScript)
+        return script;
     // assumes wasn't loaded async
     var scripts = document.getElementsByTagName('script');
     return scripts[scripts.length-1];

@@ -6,6 +6,9 @@ _(none)_
 
 --------------------
 
+## 1.0.51 (2017-05-16)
+* Fixed current_script() to return <script> which loaded hola_player, not <script> which invokes it
+
 ## 1.0.50 (2017-05-15)
 * Added it.json into zdot_stub
 
