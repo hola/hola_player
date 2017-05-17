@@ -2,9 +2,12 @@ CHANGELOG
 =========
 
 ## HEAD (Unreleased)
-* Improve thumbnails styles
+_(none)_
 
 --------------------
+
+## 1.0.53 (2017-05-17)
+* Improve thumbnails styles
 
 ## 1.0.52 (2017-05-16)
 * Update videojs-ima
