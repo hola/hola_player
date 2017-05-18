@@ -188,6 +188,7 @@ Player.prototype.init_vjs = function(){
         if (opt.thumbnails)
             player.thumbnails(opt.thumbnails);
         hola_player.init_ads(player);
+        hola_player.init_watermark(player, opt.controls_watermark);
         player.on('pause', function(e){
             if (player.scrubbing()) // XXX bahaa: do we need this?
                 e.stopImmediatePropagation();
@@ -356,6 +357,12 @@ Player.prototype.init_ads = function(player){
         init();
     if (opt.ads.id3)
         init_ads_id3(player);
+};
+
+Player.prototype.init_watermark = function(player, src){
+    if (!src)
+        return;
+    player.getChild('controlBar').addChild('controlsWatermark', {src: src});
 };
 
 function init_ads_id3(player){
