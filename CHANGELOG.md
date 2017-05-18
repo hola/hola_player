@@ -6,6 +6,9 @@ _(none)_
 
 --------------------
 
+## 1.0.54 (2017-05-18)
+* Add options to put watermark onto controls bar
+
 ## 1.0.53 (2017-05-17)
 * Improve thumbnails styles
 
