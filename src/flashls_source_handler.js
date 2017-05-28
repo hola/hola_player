@@ -91,7 +91,7 @@ function FlashlsProvider(source, tech){
     function on_hola_attach(){ player_id = swf.hola_settings({}).player_id; }
     this.seekable = function(){
         return videojs.createTimeRanges(duration ? [[sliding_start,
-            duration + sliding_start - 3*_this.avg_duration]] : []);
+            duration + sliding_start]] : []);
     };
     this.dispose = function(){
         window.removeEventListener('message', on_msg);
