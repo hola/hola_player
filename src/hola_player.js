@@ -179,6 +179,7 @@ Player.prototype.init_vjs = function(){
         dvr: opt.dvr,
         'videojs-watermark': !!vjs_opt.plugins.watermark,
     });
+    var element = this.element;
     return videojs(this.element, vjs_opt, function(){
         var player = this;
         // enable tap events to make popup menu and ads work correctly
@@ -188,6 +189,7 @@ Player.prototype.init_vjs = function(){
         if (opt.thumbnails)
             player.thumbnails(opt.thumbnails);
         hola_player.init_ads(player);
+        hola_player.init_captions(player, element);
         hola_player.init_watermark(player, opt.controls_watermark);
         player.on('pause', function(e){
             if (player.scrubbing()) // XXX bahaa: do we need this?
@@ -357,6 +359,32 @@ Player.prototype.init_ads = function(player){
         init();
     if (opt.ads.id3)
         init_ads_id3(player);
+};
+
+Player.prototype.init_captions = function(player, element){
+    if (!element || !element.textTracks || !player)
+        return;
+    var tt = element.textTracks;
+    // push native text tracks to simulated vjs text tracks
+    var player_tracks = player.textTracks();
+    tt.addEventListener('addtrack', function(e){
+        if (!e || !e.track)
+            return;
+        player_tracks.addTrack_(e.track);
+    });
+    tt.addEventListener('removetrack', function(e){
+        if (!e || !e.track)
+            return;
+        player_tracks.removeTrack_(e.track);
+    });
+    tt.addEventListener('change', function(){
+        player_tracks.trigger({
+            type: 'change',
+            target: player_tracks,
+            currentTarget: player_tracks,
+            srcElement: player_tracks
+        });
+    });
 };
 
 Player.prototype.init_watermark = function(player, src){
