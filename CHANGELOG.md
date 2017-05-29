@@ -5,7 +5,10 @@ CHANGELOG
 _(none)_
 
 --------------------
-## 1.0.55 (2017-05-22)
+## 1.0.57 (2017-05-29)
+* Handle native text tracks
+
+## 1.0.56 (2017-05-29)
 * Fix seeking issue in flash mode
 
 ## 1.0.55 (2017-05-22)
