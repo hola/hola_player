@@ -90,8 +90,15 @@ function FlashlsProvider(source, tech){
     }
     function on_hola_attach(){ player_id = swf.hola_settings({}).player_id; }
     this.seekable = function(){
-        return videojs.createTimeRanges(duration ? [[sliding_start,
-            duration + sliding_start]] : []);
+        if (!duration)
+            return videojs.createTimeRanges([]);
+        if (!player.dvr || !swf.hola_hls_get_type ||
+            swf.hola_hls_get_type()!='LIVE')
+        {
+            return videojs.createTimeRanges([[0, duration]]);
+        }
+        return videojs.createTimeRanges([[sliding_start,
+            duration + sliding_start - 3*_this.avg_duration]]);
     };
     this.dispose = function(){
         window.removeEventListener('message', on_msg);
