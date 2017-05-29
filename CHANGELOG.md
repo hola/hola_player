@@ -5,6 +5,8 @@ CHANGELOG
 _(none)_
 
 --------------------
+## 1.0.55 (2017-05-22)
+* Fix seeking issue in flash mode
 
 ## 1.0.55 (2017-05-22)
 * Update hap.js dependency
