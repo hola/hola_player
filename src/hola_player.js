@@ -325,7 +325,7 @@ Player.prototype.init_ads = function(player){
     player.ima(videojs.mergeOptions({
         id: player.id(),
         contribAdsSettings: {
-            prerollTimeout: 1000,
+            prerollTimeout: 10000,
             postrollTimeout: 1000,
             disablePlayContentBehindAd: true,
         },
