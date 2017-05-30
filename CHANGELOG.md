@@ -5,6 +5,10 @@ CHANGELOG
 _(none)_
 
 --------------------
+## 1.0.58 (2017-05-30)
+* Changed preroll timeout to 10 seconds
+* IMA resume action now continues main video playback
+
 ## 1.0.57 (2017-05-29)
 * Handle native text tracks
 
