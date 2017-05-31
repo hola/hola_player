@@ -2,8 +2,14 @@ CHANGELOG
 =========
 
 ## HEAD (Unreleased)
+_(none)_
 
 --------------------
+
+## 1.0.59 (2017-05-31)
+* Update videojs-ima. Fixes non-linear ads with VMAP
+* Update hap.js
+
 ## 1.0.58 (2017-05-30)
 * Changed preroll timeout to 10 seconds
 * IMA resume action now continues main video playback
@@ -149,6 +155,3 @@ hola_adaptive is enabled
 ## 1.0.10 (2017-03-13)
 * improve styles for live video, add show_time_for_live option
 * add support for server-inserted ads by id3 metadata
-
-* Update videojs-ima. Fixes non-linear ads with VMAP
-* Update hap.js
