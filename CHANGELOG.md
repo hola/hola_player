@@ -2,7 +2,6 @@ CHANGELOG
 =========
 
 ## HEAD (Unreleased)
-_(none)_
 
 --------------------
 ## 1.0.58 (2017-05-30)
@@ -151,3 +150,5 @@ hola_adaptive is enabled
 * improve styles for live video, add show_time_for_live option
 * add support for server-inserted ads by id3 metadata
 
+* Update videojs-ima. Fixes non-linear ads with VMAP
+* Update hap.js
