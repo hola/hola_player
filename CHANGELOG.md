@@ -6,6 +6,10 @@ _(none)_
 
 --------------------
 
+## 1.0.60 (2017-06-02)
+* Handle playbackRates vjs option from data-setup
+* Update vjs-hola-skin & vjs-settings. Fixes buttons order
+
 ## 1.0.59 (2017-05-31)
 * Update videojs-ima. Fixes non-linear ads with VMAP
 * Update hap.js
