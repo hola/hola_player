@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="../dist/hola_player.dev.js"></script>
+</head>
+<body>
+  <div><h1>Video tag with Hola Player - playing HLS with different playback rates</h1></div>
+  <video preload="none" data-setup='{ "playbackRates": [0.5, 1, 1.5, 2] }' class="video-js vjs-default-skin" width="640" height="360" controls>
+    <source src="http://player.h-cdn.org/static/hls/cdn2/master.m3u8" type="application/x-mpegurl">
+  </video>
+  <script>
+    (function(){
+        window.hola_player({auto_play: true});
+    })();
+  </script>
+</body>
+</html>

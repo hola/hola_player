@@ -8,6 +8,7 @@ var hlsjs_source_handler = require('@hola.org/hap.js/lib/hola_videojs_hls.js');
 var flashls_source_handler = require('./flashls_source_handler.js');
 var url = require('url');
 var map = require('lodash/map');
+var pick = require('lodash/pick');
 
 (function(){
     hlsjs_source_handler.attach();
@@ -127,7 +128,6 @@ Player.prototype.init_element = function(element){
         element.autoplay = false;
         element.controls = false;
         // with Hola player wrapper there is no autoSetup mode
-        // XXX: maybe we should merge data-setup conf with vjs_opt
         element.removeAttribute('data-setup');
         // XXX bahaa: find a better solution
         reset_native_hls(element, opt.sources);
@@ -257,6 +257,15 @@ Player.prototype.get_vjs_opt = function(){
     var opt = this.opt;
     var script = util.current_script();
     var customer = script && url.parse(script.src, true, true).query.customer;
+    var origin_opts = this.opt['data-setup']||{};
+    if (origin_opts && typeof origin_opts=='string')
+    {
+        try {
+            origin_opts = JSON.parse(origin_opts);
+        } catch(e){}
+    }
+    // XXX: maybe we should merge all data-setup conf with vjs_opt
+    origin_opts = pick(origin_opts, ['playbackRates']);
     return videojs.mergeOptions({
         sources: opt.sources,
         // XXX arik: unite swf to one
@@ -301,7 +310,7 @@ Player.prototype.get_vjs_opt = function(){
                 show_time_for_live: opt.show_time_for_live,
             },
         },
-    }, opt.videojs_options);
+    }, origin_opts, opt.videojs_options);
 };
 
 Player.prototype.init_ads = function(player){
