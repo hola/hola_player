@@ -6,6 +6,12 @@ _(none)_
 
 --------------------
 
+## 1.0.62 (2017-06-13)
+* re-release poster fix
+
+## 1.0.61 (2017-06-13)
+* Fix poster option for native poster processing (e.g. iOS)
+
 ## 1.0.60 (2017-06-02)
 * Handle playbackRates vjs option from data-setup
 * Update vjs-hola-skin & vjs-settings. Fixes buttons order
