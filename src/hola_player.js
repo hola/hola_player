@@ -129,6 +129,8 @@ Player.prototype.init_element = function(element){
         element.controls = false;
         // with Hola player wrapper there is no autoSetup mode
         element.removeAttribute('data-setup');
+        if (opt.poster)
+            element.poster = opt.poster;
         // XXX bahaa: find a better solution
         reset_native_hls(element, opt.sources);
     }
