@@ -6,6 +6,10 @@ _(none)_
 
 --------------------
 
+## 1.0.63 (2017-06-16)
+* Update hap.js dependency (cherry picked mediaDetach
+  fix from upstream)
+
 ## 1.0.62 (2017-06-13)
 * re-release poster fix
 
