@@ -23,7 +23,7 @@ E.current_script = function(){
         document.querySelector(
         'script[src*="//cdn.jsdelivr.net/hola_player/"]') ||
         document.querySelector(
-        'script[src*="//cdn.jsdelivr.net/npm/@hola.org/hola_player@"'))
+        'script[src*="//cdn.jsdelivr.net/npm/@hola.org/hola_player@"]'))
     {
         return script;
     }
