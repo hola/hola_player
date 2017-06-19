@@ -6,6 +6,10 @@ _(none)_
 
 --------------------
 
+## 1.0.64 (2017-06-19)
+* Fixed bug on Mac/Safari when Hola Player code is self-hosted
+* Added no_vjs_large option
+
 ## 1.0.63 (2017-06-16)
 * Update hap.js dependency (cherry picked mediaDetach
   fix from upstream)
