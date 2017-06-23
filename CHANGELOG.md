@@ -6,6 +6,9 @@ _(none)_
 
 --------------------
 
+## 1.0.65 (2017-06-23)
+* update vjs-hola-skin. Hide big-play-button for native controls
+
 ## 1.0.64 (2017-06-19)
 * Fixed bug on Mac/Safari when Hola Player code is self-hosted
 * Added no_vjs_large option
