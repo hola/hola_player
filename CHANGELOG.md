@@ -6,6 +6,9 @@ _(none)_
 
 --------------------
 
+## 1.0.66 (2017-07-06)
+_(none)_
+
 ## 1.0.65 (2017-06-23)
 * update vjs-hola-skin. Hide big-play-button for native controls
 
