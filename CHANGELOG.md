@@ -6,8 +6,14 @@ _(none)_
 
 --------------------
 
-## 1.0.66 (2017-07-06)
+## 1.0.67 (2017-07-13)
 _(none)_
+
+## 1.0.67 (2017-07-13)
+* update vjs-hola-skin. Show loading-spinner when loading ads
+
+## 1.0.66 (2017-07-06)
+* update vjs-hola-skin. Hide big-play-button when loading ads
 
 ## 1.0.65 (2017-06-23)
 * update vjs-hola-skin. Hide big-play-button for native controls
