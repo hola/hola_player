@@ -6,6 +6,9 @@ _(none)_
 
 --------------------
 
+## 1.0.68 (2017-07-31)
+_(none)_
+
 ## 1.0.68 (2017-07-24)
 * update vjs-settings. Add new methods to programmatically enable and disable
   right click menu
