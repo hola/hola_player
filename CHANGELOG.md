@@ -6,6 +6,9 @@ _(none)_
 
 --------------------
 
+## 1.0.70 (2017-07-31)
+* Update hap.js dependency (pixelRatio patch)
+
 ## 1.0.69 (2017-07-31)
 * use vjs.play|pause methods to control ima ads playback
 
