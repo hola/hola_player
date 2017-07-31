@@ -118,6 +118,9 @@ function Player(element, opt, ready_cb){
     this.opt = opt;
     this.element = this.init_element(element);
     this.vjs = this.init_vjs();
+    this.tech_call_rewrites = {};
+    this.vjs.hola = this.vjs.hola||{};
+    this.vjs.hola.tech_call = this.tech_call.bind(this);
     E.players[this.id = this.vjs.id()] = this;
 }
 
@@ -316,6 +319,44 @@ Player.prototype.get_vjs_opt = function(){
     }, origin_opts, opt.videojs_options);
 };
 
+function get_existing_handler(list, method, fn) {
+    if (!list || !list[method])
+        return;
+    return list[method].filter(function(handler){
+        return handler==fn; })[0];
+}
+
+Player.prototype.add_rewrite = function(method, fn){
+    var handlers = this.tech_call_rewrites[method];
+    if (get_existing_handler(handlers, method, fn))
+        return;
+    if (!handlers)
+        handlers = this.tech_call_rewrites[method] = [];
+    handlers.push(fn);
+};
+
+Player.prototype.remove_rewrite = function(method, fn){
+    var handlers = this.tech_call_rewrites[method];
+    var existing = get_existing_handler(handlers, method, fn);
+    if (!existing)
+        return;
+    var index = handlers.indexOf(existing);
+    if (index>=0)
+        handlers.splice(index, 1);
+};
+
+Player.prototype.tech_call = function(method, arg){
+    var handlers = this.tech_call_rewrites[method];
+    if (!handlers)
+        return false;
+    var preventDefault = false;
+    handlers.forEach(function(handler){
+        if (handler(method, arg))
+            preventDefault = true;
+    });
+    return preventDefault;
+};
+
 Player.prototype.init_ads = function(player){
     var opt = this.opt;
     if (!opt.ads)
@@ -365,6 +406,33 @@ Player.prototype.init_ads = function(player){
         if (e && e.type!='play')
             player.play();
     }
+    function get_ima(){
+        var ima = player.ima;
+        if (!ima || !ima.adsActive)
+            return;
+        return ima;
+    }
+    function handle_play_pause(method, arg){
+        var ima = get_ima();
+        // proceed with default action if no ima active
+        if (!ima)
+            return;
+        if (method=='play')
+        {
+            if (ima.adPlaying)
+                return true;
+            ima.resumeAd();
+        }
+        if (method=='pause')
+        {
+            if (!ima.adPlaying)
+                return true;
+            ima.pauseAd();
+        }
+        return true;
+    }
+    this.add_rewrite('play', handle_play_pause);
+    this.add_rewrite('pause', handle_play_pause);
     if (player.paused())
         player.on(['tap', 'click', 'play'], init);
     else
