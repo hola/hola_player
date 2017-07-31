@@ -24,13 +24,11 @@ vjs.plugin('dvr', function(){
         progressControl.seekBar = progressControl.addChild('DvrSeekBar');
         remove_child(player.controlBar, 'liveDisplay');
         player.controlBar.addChild('LiveButton');
-        player.controlBar.addClass('vjs-dvr');
+        player.addClass('vjs-dvr');
         if (!player.hasStarted())
             player.one('play', function(){ player.dvr.seek_to_live(); });
         player.on('timeupdate', function(){
-            player.controlBar.toggleClass('vjs-dvr-live',
-                player.dvr.is_live());
-        });
+            player.toggleClass('vjs-dvr-live', player.dvr.is_live()); });
         if (flashls)
             player.dvr.live_threshold = Math.max(flashls.avg_duration*1.5, 10);
         else
