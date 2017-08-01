@@ -6,6 +6,9 @@ _(none)_
 
 --------------------
 
+## 1.0.72 (2017-08-01)
+* fix typeerror for IE10
+
 ## 1.0.71 (2017-08-01)
 * Improve settings menu UI
 
