@@ -6,6 +6,9 @@ _(none)_
 
 --------------------
 
+## 1.0.71 (2017-08-01)
+* Improve settings menu UI
+
 ## 1.0.70 (2017-07-31)
 * Update hap.js dependency (pixelRatio patch)
 
