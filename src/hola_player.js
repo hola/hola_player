@@ -445,6 +445,9 @@ Player.prototype.init_captions = function(player, element){
     if (!element || !element.textTracks || !player)
         return;
     var tt = element.textTracks;
+    // native text tracks are not working in IE10
+    if (!tt || !tt.addEventListener)
+      return;
     // push native text tracks to simulated vjs text tracks
     var player_tracks = player.textTracks();
     tt.addEventListener('addtrack', function(e){
