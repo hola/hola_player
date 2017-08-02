@@ -6,6 +6,9 @@ _(none)_
 
 --------------------
 
+## 1.0.73 (2017-08-02)
+* Update hola/video.js to use custom UI for ios
+
 ## 1.0.72 (2017-08-01)
 * fix typeerror for IE10
 
