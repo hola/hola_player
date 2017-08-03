@@ -77147,7 +77147,7 @@ var pick = _dereq_('lodash/pick');
 })();
 
 var E = window.hola_player = module.exports = hola_player;
-E.VERSION = '1.0.73';
+E.VERSION = '1.0.74';
 E.players = {};
 
 function hola_player(opt, ready_cb){
@@ -85426,7 +85426,7 @@ var Hls = function () {
     key: 'version',
     get: function get() {
       // replaced with browserify-versionify transform
-      return '1.0.73';
+      return '1.0.74';
     }
   }, {
     key: 'Events',
@@ -89827,7 +89827,7 @@ var E = module.exports;
 var hlsjsConfig;
 var attached = false, disabled = false;
 
-E.VERSION = '1.0.73';
+E.VERSION = '1.0.74';
 E.name = 'HolaProviderHLS';
 
 E.attach = function(obsolete_param, videojs, Hls, hlsjsConfig_){
