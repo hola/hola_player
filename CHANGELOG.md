@@ -9,6 +9,9 @@ _(none)_
 ## 1.0.74 (2017-08-03)
 _(none)_
 
+## 1.0.74 (2017-08-03)
+_(none)_
+
 ## 1.0.73 (2017-08-03)
 * Two level settings menu
 * Improve UI
