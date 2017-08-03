@@ -6,6 +6,10 @@ _(none)_
 
 --------------------
 
+## 1.0.73 (2017-08-03)
+* Two level settings menu
+* Improve UI
+
 ## 1.0.73 (2017-08-02)
 * Update hola/video.js to use custom UI for ios
 
