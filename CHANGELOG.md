@@ -6,6 +6,11 @@ _(none)_
 
 --------------------
 
+## 1.0.76 (2017-08-04)
+* Toggle fullscreen mode by double click
+* Sort quality items from high to low
+* Fixed handling settings menu click events on touch devices
+
 ## 1.0.75 (2017-08-03)
 * Two level settings menu
 * Improve UI
