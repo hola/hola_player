@@ -57,7 +57,7 @@ function FlashlsProvider(source, tech){
         for (var i=0; i<levels.length; i++)
         {
             list.push({id: levels[i].index, label: level_label(levels[i],
-                levels)});
+                levels), bitrate: levels[i].bitrate});
         }
         tech.trigger('loadedqualitydata', {
             quality: {
