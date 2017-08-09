@@ -6,6 +6,10 @@ _(none)_
 
 --------------------
 
+## 1.0.77 (2017-08-09)
+* Changed play/pause animation
+* Added HD icon
+
 ## 1.0.76 (2017-08-04)
 * Toggle fullscreen mode by double click
 * Sort quality items from high to low
