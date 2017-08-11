@@ -59,14 +59,15 @@ function FlashlsProvider(source, tech){
             list.push({id: levels[i].index, label: level_label(levels[i],
                 levels), bitrate: levels[i].bitrate});
         }
-        tech.trigger('loadedqualitydata', {
+        var data = tech.quality_data = {
             quality: {
                 list: list,
                 selected: manual_level,
                 current: swf.vjs_getProperty('level'),
             },
             callback: switch_quality,
-        });
+        };
+        tech.trigger('loadedqualitydata', data);
     }
     function on_msg(e){
         if (!e || !e.data || e.data.player_id!=player_id)
