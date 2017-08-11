@@ -4,8 +4,6 @@ CHANGELOG
 ## HEAD (Unreleased)
 _(none)_
 
---------------------
-
 ## 1.0.77 (2017-08-09)
 * Changed play/pause animation
 * Added HD icon
