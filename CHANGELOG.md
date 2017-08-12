@@ -4,6 +4,14 @@ CHANGELOG
 ## HEAD (Unreleased)
 _(none)_
 
+## 1.0.78 (2017-08-11)
+* Improved control bar UI
+* Added 4K quality icon
+* New buffering animation
+* Fixed player resize after exit fullscreen
+* Fixed bug with missing settings button
+* Fixed quality items order
+
 ## 1.0.77 (2017-08-09)
 * Changed play/pause animation
 * Added HD icon
