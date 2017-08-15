@@ -4,6 +4,15 @@ CHANGELOG
 ## HEAD (Unreleased)
 _(none)_
 
+--------------------
+
+## 1.0.79 (2017-08-15)
+* Changed buffering animation
+* Fixed volume bar on focus behaviour
+* Changed settings icon
+* Fixed full screen transition by double click on IE11
+* Toggle pause/play and full screen by tap on video on mobile
+
 ## 1.0.78 (2017-08-11)
 * Improved control bar UI
 * Added 4K quality icon
