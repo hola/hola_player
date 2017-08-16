@@ -377,6 +377,7 @@ Player.prototype.init_ads = function(player){
         return console.error('missing ad modules');
     player.ima(videojs.mergeOptions({
         id: player.id(),
+        vjsControls: true,
         contribAdsSettings: {
             prerollTimeout: 10000,
             postrollTimeout: 1000,
