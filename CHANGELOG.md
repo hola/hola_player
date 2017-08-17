@@ -6,6 +6,10 @@ _(none)_
 
 --------------------
 
+## 1.0.80 (2017-08-17)
+* Use original videojs control bar to control ads
+* Changed volume button icon and animation
+
 ## 1.0.79 (2017-08-15)
 * Changed buffering animation
 * Fixed volume bar on focus behaviour
