@@ -6,6 +6,11 @@ _(none)_
 
 --------------------
 
+## 1.0.81 (2017-08-19)
+* Added playback speed control to the settings menu
+* Settings button is always visible
+* Fixed bug with thumbnails while ad is playing
+
 ## 1.0.80 (2017-08-17)
 * Use original videojs control bar to control ads
 * Changed volume button icon and animation
