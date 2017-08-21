@@ -453,24 +453,33 @@ Player.prototype.init_captions = function(player, element){
     if (!tt || !tt.addEventListener)
       return;
     // push native text tracks to simulated vjs text tracks
-    var player_tracks = player.textTracks();
+    var hook = function(obj, method, fn){
+        var orig = obj[method];
+        obj[method] = function(){
+            fn.apply(this, arguments);
+            return orig.apply(this, arguments);
+        };
+    };
     tt.addEventListener('addtrack', function(e){
-        if (!e || !e.track)
+        var track = e&&e.track;
+        if (!track)
             return;
-        player_tracks.addTrack_(e.track);
-    });
-    tt.addEventListener('removetrack', function(e){
-        if (!e || !e.track)
-            return;
-        player_tracks.removeTrack_(e.track);
-    });
-    tt.addEventListener('change', function(){
-        player_tracks.trigger({
-            type: 'change',
-            target: player_tracks,
-            currentTarget: player_tracks,
-            srcElement: player_tracks
+        var new_track = player.tech_.addTextTrack(track.kind, track.label,
+            track.language);
+        for (var i=0; i<track.cues.length; i++)
+            new_track.addCue(track.cues[i]);
+        hook(track, 'addCue', function(cue){
+            for (var i=0; i<new_track.cues.length; i++)
+            {
+                if (new_track.cues[i].startTime==cue.startTime &&
+                    new_track.cues[i].text==cue.text)
+                {
+                    new_track.removeCue(new_track.cues[i]);
+                }
+            }
+            new_track.addCue(cue);
         });
+        hook(track, 'removeCue', function(cue){ new_track.removeCue(cue); });
     });
 };
 
