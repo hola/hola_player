@@ -73,7 +73,10 @@ function load_deps(deps){
     require('@hola.org/videojs-osmf');
     require('@hola.org/videojs-contrib-media-sources');
     if (deps['videojs-settings'])
+    {
         require('@hola.org/videojs-settings');
+        require('./css/videojs-settings.css');
+    }
     if (deps['videojs-hola-skin'])
     {
         require('@hola.org/videojs-hola-skin');
