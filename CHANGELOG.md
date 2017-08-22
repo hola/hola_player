@@ -6,6 +6,11 @@ _(none)_
 
 --------------------
 
+## 1.0.82 (2017-08-22)
+* Fixed bug with duplicated internal captions
+* Added captions selection to the settings menu
+* Added captions toggle button
+
 ## 1.0.81 (2017-08-19)
 * Added playback speed control to the settings menu
 * Settings button is always visible
