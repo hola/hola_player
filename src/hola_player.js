@@ -464,8 +464,14 @@ Player.prototype.init_captions = function(player, element){
         var track = e&&e.track;
         if (!track)
             return;
-        var new_track = player.tech_.addTextTrack(track.kind, track.label,
-            track.language);
+        var opt = {
+            kind: track.kind,
+            label: track.label,
+            language: track.language,
+            mode: track.mode,
+        };
+        opt['default'] = track['default'];
+        var new_track = player.addRemoteTextTrack(opt).track;
         for (var i=0; i<track.cues.length; i++)
             new_track.addCue(track.cues[i]);
         hook(track, 'addCue', function(cue){
