@@ -6,6 +6,9 @@ _(none)_
 
 --------------------
 
+## 1.0.83 (2017-08-23)
+* Added url option to controls bar watermark
+
 ## 1.0.82 (2017-08-22)
 * Fixed bug with duplicated internal captions
 * Added captions selection to the settings menu
