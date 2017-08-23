@@ -489,10 +489,12 @@ Player.prototype.init_captions = function(player, element){
     });
 };
 
-Player.prototype.init_watermark = function(player, src){
-    if (!src)
+Player.prototype.init_watermark = function(player, opt){
+    if (!opt)
         return;
-    player.getChild('controlBar').addChild('controlsWatermark', {src: src});
+    if (typeof opt=='string')
+        opt = {image: opt};
+    player.getChild('controlBar').addChild('controlsWatermark', opt);
 };
 
 function init_ads_id3(player){
