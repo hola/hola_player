@@ -6,6 +6,13 @@ _(none)_
 
 --------------------
 
+## 1.0.84 (2017-08-25)
+* Added captions options menu
+* Save captions settings and speed to local storage
+* Added 'Copy video URL' popup menu item
+* Added embed_code option and 'Copy embed code' popup menu item
+* Fixed bug when player remains paused after non-linear ad is loaded
+
 ## 1.0.83 (2017-08-23)
 * Added url option to controls bar watermark
 
