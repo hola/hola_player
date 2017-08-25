@@ -252,7 +252,8 @@ Player.prototype.get_settings_opt = function(){
     var opt = this.opt, s = opt.settings;
     if (s===false)
         return;
-    s = videojs.mergeOptions({graph: opt.graph, volume: opt.volume}, s);
+    s = videojs.mergeOptions({graph: opt.graph, volume: opt.volume,
+        embed_code: opt.embed_code}, s);
     var sources = opt.sources && opt.sources.filter(function(source){
         return !is_adaptive(source);
     });
