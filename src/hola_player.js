@@ -297,6 +297,7 @@ Player.prototype.get_vjs_opt = function(){
                     xhr.withCredentials = true;
                 },
             },
+            nativeTextTracks: false,
         },
         inactivityTimeout: opt.inactivity_timeout===undefined ?
             2000 : opt.inactivity_timeout,
