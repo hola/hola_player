@@ -9,6 +9,11 @@ _(none)_
 ## 1.0.85 (2017-08-29)
 * videojs-ima: added an option to totally disable control bar during
   ads
+* Improved thumbnails styles
+* Added copy_url and copy_url_with_time player options
+* Improved popup menu behaviour
+* Fixed UI bugs on Safari and IE
+* Fixed captions options button on mobile devices
 
 ## 1.0.84 (2017-08-25)
 * Added captions options menu
