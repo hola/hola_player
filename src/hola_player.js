@@ -252,8 +252,13 @@ Player.prototype.get_settings_opt = function(){
     var opt = this.opt, s = opt.settings;
     if (s===false)
         return;
-    s = videojs.mergeOptions({graph: opt.graph, volume: opt.volume,
-        embed_code: opt.embed_code}, s);
+    s = videojs.mergeOptions({
+        graph: opt.graph,
+        volume: opt.volume,
+        embed_code: opt.embed_code,
+        copy_url: opt.copy_url,
+        copy_url_with_time: opt.copy_url_with_time,
+    }, s);
     var sources = opt.sources && opt.sources.filter(function(source){
         return !is_adaptive(source);
     });
