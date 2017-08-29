@@ -6,6 +6,10 @@ _(none)_
 
 --------------------
 
+## 1.0.85 (2017-08-29)
+* videojs-ima: added an option to totally disable control bar during
+  ads
+
 ## 1.0.84 (2017-08-25)
 * Added captions options menu
 * Save captions settings and speed to local storage
