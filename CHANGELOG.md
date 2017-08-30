@@ -6,6 +6,11 @@ _(none)_
 
 --------------------
 
+## 1.0.86 (2017-08-30)
+* Improved settings menu UI
+* Changed replay button icon and tooltip
+* Removed pause/play tooltips
+
 ## 1.0.85 (2017-08-29)
 * videojs-ima: added an option to totally disable control bar during
   ads
