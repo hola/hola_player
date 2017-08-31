@@ -6,6 +6,9 @@ _(none)_
 
 --------------------
 
+## 1.0.87 (2017-08-31)
+* Add enable_autoplay_on_mobile option
+
 ## 1.0.86 (2017-08-30)
 * Improved settings menu UI
 * Changed replay button icon and tooltip
