@@ -328,10 +328,11 @@ Player.prototype.get_vjs_opt = function(){
             watermark: opt.watermark,
             hola_skin: opt.skin ? false : {
                 css: false,
-                no_play_transform: opt.no_play_transform,
                 no_vjs_large: opt.no_vjs_large,
                 show_controls_before_start: opt.show_controls_before_start,
                 show_time_for_live: opt.show_time_for_live,
+                play_button_color: opt.play_button_color,
+                seek_bar_color: opt.seek_bar_color,
             },
         },
     }, origin_opts, opt.videojs_options);
