@@ -22,7 +22,7 @@ E.players = {};
 var hola_conf;
 try {
     /* global hola_player_api */
-    hola_conf = JSON.parse(hola_player_api&&hola_player_api.zdot('json')||'{}');
+    hola_conf = JSON.parse(hola_player_api&&hola_player_api.zdot('json'));
 } catch(e){}
 hola_conf = hola_conf||{};
 
@@ -46,9 +46,9 @@ function hola_player(opt, ready_cb){
 }
 
 function set_defaults(element, opt){
+    if (hola_conf&&hola_conf.spark&&hola_conf.spark.player)
+        opt = videojs.mergeOptions(hola_conf.spark.player, opt);
     opt.autoplay = opt.auto_play || opt.autoplay; // allow both
-    opt.enable_autoplay_on_mobile = opt.enable_autoplay_on_mobile||
-        hola_conf.player&&hola_conf.player.enable_autoplay_on_mobile;
     opt.base_url = opt.base_url||'//player2.h-cdn.com';
     if (opt.video_url)
     {
