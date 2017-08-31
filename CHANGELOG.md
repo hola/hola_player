@@ -6,6 +6,9 @@ _(none)_
 
 --------------------
 
+## 1.0.88 (2017-08-31)
+* merge all conf.spark.player options to hola_player opt
+
 ## 1.0.87 (2017-08-31)
 * Add enable_autoplay_on_mobile option
 
