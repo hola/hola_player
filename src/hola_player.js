@@ -333,6 +333,7 @@ Player.prototype.get_vjs_opt = function(){
                 show_time_for_live: opt.show_time_for_live,
                 play_button_color: opt.play_button_color,
                 seek_bar_color: opt.seek_bar_color,
+                title: opt.title,
             },
         },
     }, origin_opts, opt.videojs_options);
