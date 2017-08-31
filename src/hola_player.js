@@ -19,6 +19,12 @@ var pick = require('lodash/pick');
 var E = window.hola_player = module.exports = hola_player;
 E.VERSION = '__VERSION__';
 E.players = {};
+var hola_conf;
+try {
+    /* global hola_player_api */
+    hola_conf = JSON.parse(hola_player_api&&hola_player_api.zdot('json')||'{}');
+} catch(e){}
+hola_conf = hola_conf||{};
 
 function hola_player(opt, ready_cb){
     if (typeof opt=='function')
@@ -41,6 +47,8 @@ function hola_player(opt, ready_cb){
 
 function set_defaults(element, opt){
     opt.autoplay = opt.auto_play || opt.autoplay; // allow both
+    opt.enable_autoplay_on_mobile = opt.enable_autoplay_on_mobile||
+        hola_conf.player&&hola_conf.player.enable_autoplay_on_mobile;
     opt.base_url = opt.base_url||'//player2.h-cdn.com';
     if (opt.video_url)
     {
@@ -209,7 +217,7 @@ Player.prototype.init_vjs = function(){
         }).on('cdn_graph_overlay', on_cdn_graph_overlay);
         if (cb)
             try { cb(player); } catch(e){ console.error(e.stack||e); }
-        if (opt.autoplay &&
+        if (opt.enable_autoplay_on_mobile || opt.autoplay &&
             !videojs.browser.IS_ANDROID && !videojs.browser.IS_IOS)
         {
             player.play();

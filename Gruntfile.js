@@ -141,7 +141,7 @@ module.exports = function(grunt) {
         concat: {
             options: {
                 banner: `(function(){
-var hola_vjs_provider_require, E = {};
+var hola_vjs_provider_require, E = hola_player_api = {};
 E.zdot = function(name){
     // zdot_stub:
     // zdot_stub:return {
