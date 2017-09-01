@@ -6,6 +6,9 @@ _(none)_
 
 --------------------
 
+## 1.0.90 (2017-09-01)
+* Fix poster opacity
+
 ## 1.0.89 (2017-09-01)
 * Change big play button icon
 * Configurable play button and seek bar colors
