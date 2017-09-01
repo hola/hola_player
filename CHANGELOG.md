@@ -6,6 +6,13 @@ _(none)_
 
 --------------------
 
+## 1.0.89 (2017-09-01)
+* Change big play button icon
+* Configurable play button and seek bar colors
+* Show poster after video ends
+* Add video title
+* Fix captions bug on IE11
+
 ## 1.0.88 (2017-08-31)
 * merge all conf.spark.player options to hola_player opt
 
