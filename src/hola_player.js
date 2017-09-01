@@ -182,6 +182,15 @@ Player.prototype.init_element = function(element){
     return element;
 };
 
+Player.prototype.add_languages = function(){
+    var langs = hola_conf&&hola_conf.spark&&hola_conf.spark.strings||{};
+    for (var key in langs)
+    {
+        if (langs[key] && typeof langs[key]=='object')
+            videojs.addLanguage(key, langs[key]);
+    }
+};
+
 Player.prototype.init_vjs = function(){
     var opt = this.opt, cb = this.ready_cb, hola_player = this;
     var vjs_opt = this.get_vjs_opt();
@@ -196,6 +205,7 @@ Player.prototype.init_vjs = function(){
         'videojs-watermark': !!vjs_opt.plugins.watermark,
     });
     var element = this.element;
+    this.add_languages();
     return videojs(this.element, vjs_opt, function(){
         var player = this;
         // enable tap events to make popup menu and ads work correctly
@@ -234,7 +244,10 @@ Player.prototype.init_vjs = function(){
         var flash = videojs.getTech('Flash');
         var modal = player.getChild('errorDisplay');
         if (modal && only_flash && (!flash || !flash.isSupported()))
-            modal.fillWith('Flash plugin is required to play this media');
+        {
+            modal.fillWith(player.localize(
+                'Flash plugin is required to play this media'));
+        }
     });
 };
 
