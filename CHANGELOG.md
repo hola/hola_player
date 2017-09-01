@@ -6,6 +6,11 @@ _(none)_
 
 --------------------
 
+## 1.0.91 (2017-09-01)
+* Add localization support
+* Fix title style
+* Fix settings menu zindex during non-linear ad
+
 ## 1.0.90 (2017-09-01)
 * Fix poster opacity
 
