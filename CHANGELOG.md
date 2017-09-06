@@ -6,6 +6,9 @@ _(none)_
 
 --------------------
 
+## 1.0.94 (2017-09-06)
+* Fix mute button bug in flash mode
+
 ## 1.0.93 (2017-09-06)
 * Fix mute button and ads bugs when there are multiple players on the page
 
