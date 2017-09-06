@@ -6,6 +6,15 @@ _(none)_
 
 --------------------
 
+## 1.0.92 (2017-09-06)
+* Improve volume button behavior
+* Improve fonts: add text-shadow and font-smoothing
+* Do not hide controls when mouse is over the control bar
+* Fix tooltips style
+* Show pause/play tooltip
+* Do not hide tooltips on timeout
+* Fix thumbnails position
+
 ## 1.0.91 (2017-09-01)
 * Add localization support
 * Fix title style
