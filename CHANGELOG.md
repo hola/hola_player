@@ -6,6 +6,9 @@ _(none)_
 
 --------------------
 
+## 1.0.93 (2017-09-06)
+* Fix mute button and ads bugs when there are multiple players on the page
+
 ## 1.0.92 (2017-09-06)
 * Improve volume button behavior
 * Improve fonts: add text-shadow and font-smoothing
