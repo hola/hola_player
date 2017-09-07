@@ -78,6 +78,8 @@ function set_defaults(element, opt){
 
 function load_deps(deps){
     deps = deps||{};
+    if (!window.WebVTT)
+        require('videojs-vtt.js');
     require('@hola.org/videojs-osmf');
     require('@hola.org/videojs-contrib-media-sources');
     if (deps['videojs-settings'])

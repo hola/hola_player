@@ -51,7 +51,8 @@
     "lodash": "4.17.4",
     "video.js": "github:hola/video.js#hola_5.10.2",
     "videojs-contrib-dash": "2.6.1",
-    "videojs-watermark": "1.0.1"
+    "videojs-watermark": "1.0.1",
+    "videojs-vtt.js": "0.12.3"
   },
   "devDependencies": {
     "browserify-css": "^0.9.2",
