@@ -6,6 +6,16 @@ _(none)_
 
 --------------------
 
+## 1.0.95 (2017-09-08)
+* Add 'Subtitles will look like this' message
+* Add captions configuration hint
+* Add 'Powered by Hola Player' popup menu title
+* Hide controls on mouseleave
+* Hide ad controls when user is inactive
+* Improve subtitles style
+* Ignore #t=<time> url param in case of multiple players on the page
+* Do not load external vtt.js from cdn.rawgit.com
+
 ## 1.0.94 (2017-09-06)
 * Fix mute button bug in flash mode
 
