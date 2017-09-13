@@ -9,6 +9,7 @@ var flashls_source_handler = require('./flashls_source_handler.js');
 var url = require('url');
 var map = require('lodash/map');
 var pick = require('lodash/pick');
+var omit = require('lodash/omit');
 
 (function(){
     hlsjs_source_handler.attach();
@@ -46,8 +47,12 @@ function hola_player(opt, ready_cb){
 }
 
 function set_defaults(element, opt){
-    if (hola_conf&&hola_conf.spark&&hola_conf.spark.player)
-        opt = videojs.mergeOptions(hola_conf.spark.player, opt);
+    var spark_conf = hola_conf&&hola_conf.spark&&hola_conf.spark.player;
+    if (spark_conf)
+    {
+        spark_conf = omit(spark_conf, 'strings');
+        opt = videojs.mergeOptions(spark_conf, opt);
+    }
     opt.autoplay = opt.auto_play || opt.autoplay; // allow both
     opt.base_url = opt.base_url||'//player2.h-cdn.com';
     if (opt.video_url)
@@ -185,7 +190,13 @@ Player.prototype.init_element = function(element){
 };
 
 Player.prototype.add_languages = function(){
-    var langs = hola_conf&&hola_conf.spark&&hola_conf.spark.strings||{};
+    var spark_conf = hola_conf&&hola_conf.spark&&hola_conf.spark.player;
+    var strings = spark_conf&&spark_conf.strings, langs;
+    try {
+        langs = strings&&JSON.parse(strings);
+    } catch(e){}
+    if (!langs)
+        return;
     for (var key in langs)
     {
         if (langs[key] && typeof langs[key]=='object')
@@ -333,6 +344,7 @@ Player.prototype.get_vjs_opt = function(){
         loop: opt.loop,
         muted: opt.muted,
         preload: opt.preload,
+        language: opt.force_language,
         techOrder:
             (opt.tech=='flash' ? ['flash', 'html5'] : ['html5', 'flash'])
             .concat('osmf'),
