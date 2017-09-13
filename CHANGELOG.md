@@ -6,6 +6,10 @@ _(none)_
 
 --------------------
 
+## 1.0.96 (2017-09-13)
+* Take localization strings from spark.player.strings
+* Add force_language option
+
 ## 1.0.95 (2017-09-08)
 * Add 'Subtitles will look like this' message
 * Add captions configuration hint
