@@ -6,6 +6,9 @@ _(none)_
 
 --------------------
 
+## 1.0.97 (2017-09-15)
+* Add social sharing button
+
 ## 1.0.96 (2017-09-13)
 * Take localization strings from spark.player.strings
 * Add force_language option
