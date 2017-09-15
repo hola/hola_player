@@ -78,6 +78,7 @@ function set_defaults(element, opt){
         }
         opt = videojs.mergeOptions(videojs.getAttributes(element), opt);
     }
+    opt.share = opt.share===undefined ? {} : opt.share;
     return opt.sources && opt;
 }
 
@@ -123,6 +124,11 @@ function load_deps(deps){
     {
         require('./dvr.js');
         require('./css/dvr.css');
+    }
+    if (deps.share)
+    {
+        require('./share.js');
+        require('./css/share.css');
     }
     if (deps['videojs-watermark'])
     {
@@ -215,6 +221,7 @@ Player.prototype.init_vjs = function(){
         'videojs-ima': !!opt.ads,
         'videojs-contrib-dash': opt.sources.some(is_dash),
         dvr: opt.dvr,
+        share: opt.share,
         'videojs-watermark': !!vjs_opt.plugins.watermark,
     });
     var element = this.element;
@@ -352,6 +359,7 @@ Player.prototype.get_vjs_opt = function(){
         plugins: {
             settings: this.get_settings_opt(),
             dvr: opt.dvr,
+            share: opt.share,
             watermark: opt.watermark,
             hola_skin: opt.skin ? false : {
                 css: false,
