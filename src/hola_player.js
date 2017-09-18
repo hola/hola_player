@@ -78,7 +78,8 @@ function set_defaults(element, opt){
         }
         opt = videojs.mergeOptions(videojs.getAttributes(element), opt);
     }
-    opt.share = opt.share===undefined ? {} : opt.share;
+    opt.share = videojs.mergeOptions(opt.share===undefined ? {} : opt.share,
+        {title: opt.title});
     return opt.sources && opt;
 }
 

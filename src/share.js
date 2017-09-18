@@ -1,5 +1,53 @@
 'use strict';
 var vjs = require('video.js');
+var fs = require('fs');
+var services = {
+    facebook: {
+        text: 'Facebook',
+        link: 'https://www.facebook.com/sharer/sharer.php?u={url}',
+        svg: fs.readFileSync('./src/img/facebook.svg', 'utf8'),
+    },
+    twitter: {
+        text: 'Twitter',
+        link: 'https://twitter.com/intent/tweet?url={url}&text={title}',
+        svg: fs.readFileSync('./src/img/twitter.svg', 'utf8'),
+    },
+    'google+': {
+        text: 'Google+',
+        link: 'https://plus.google.com/share?url={url}',
+        svg: fs.readFileSync('./src/img/google+.svg', 'utf8'),
+    },
+    blogger: {
+        text: 'Blogger',
+        link: 'https://www.blogger.com/blog-this.g?u={url}&n={title}',
+        svg: fs.readFileSync('./src/img/blogger.svg', 'utf8'),
+    },
+    reddit: {
+        text: 'Reddit',
+        link: 'https://reddit.com/submit?url={url}',
+        svg: fs.readFileSync('./src/img/reddit.svg', 'utf8'),
+    },
+    tumblr: {
+        text: 'Tumblr',
+        link: 'https://www.tumblr.com/widgets/share/tool?canonicalUrl={url}',
+        svg: fs.readFileSync('./src/img/tumblr.svg', 'utf8'),
+    },
+    vk: {
+        text: 'VK',
+        link: 'https://vk.com/share.php?url={url}',
+        svg: fs.readFileSync('./src/img/vk.svg', 'utf8'),
+    },
+    linkedin: {
+        text: 'LinkedIn',
+        link: 'https://www.linkedin.com/shareArticle?url={url}&title={title}',
+        svg: fs.readFileSync('./src/img/linkedin.svg', 'utf8'),
+    },
+    email: {
+        text: 'Email',
+        link: 'mailto:?body={url}',
+        svg: fs.readFileSync('./src/img/email.svg', 'utf8'),
+    },
+};
 
 vjs.plugin('share', function(opt){
     var player = this;
@@ -53,7 +101,7 @@ vjs.registerComponent('ShareDialog', vjs.extend(ModalDialog, {
         });
         el.appendChild(btns_el);
         this.contentEl_ = btns_el;
-        var all_btns = ['facebook', 'twitter', 'email'];
+        var all_btns = Object.keys(services);
         var buttons = options.buttons || all_btns;
         var _this = this;
         buttons.forEach(function(b){
@@ -75,21 +123,15 @@ vjs.registerComponent('ShareLink', vjs.extend(ClickableComponent, {
         ClickableComponent.call(this, player, options);
         this.on(events, prevent_click);
         this.type_ = options.type;
-        var map = {
-            facebook: {text: 'Facebook',
-                link: 'https://www.facebook.com/sharer/sharer.php?u=%s'},
-            twitter: {text: 'Twitter',
-                link: 'https://twitter.com/intent/tweet?url=%s'},
-            email: {text: 'Email', link: 'mailto:?body=%s'},
-        };
-        var item = map[this.type_];
+        var item = services[this.type_];
         this.controlText(item.text);
         this.addClass('vjs-share-'+this.type_);
-        this.link = vjs.createEl('a', {className: 'vjs-share-link'}, {
-            target: '_blank',
-            href: !item.link ? '#' : item.link.replace('%s',
-                encodeURIComponent(this.options_.url||get_top_url())),
-        });
+        var url = this.options_.url||get_top_url();
+        var href = item.link
+            .replace('{url}', encodeURIComponent(url))
+            .replace('{title}', encodeURIComponent(this.options_.title||''));
+        this.link = vjs.createEl('a', {className: 'vjs-share-link',
+            innerHTML: item.svg}, {target: '_blank', href: href});
         this.link.addEventListener('touchstart', function(e){
             e.stopPropagation(); });
         this.el_.appendChild(this.link);

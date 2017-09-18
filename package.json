@@ -60,6 +60,7 @@
     "browserify-shim": "^3.8.13",
     "browserify-transform-tools": "^1.7.0",
     "browserify-versionify": "^1.0.6",
+    "brfs": "^1.4.3",
     "chg": "^0.3.2",
     "grunt": "^1.0.1",
     "grunt-browserify": "^5.2.0",

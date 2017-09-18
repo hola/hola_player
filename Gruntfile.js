@@ -52,6 +52,7 @@ module.exports = function(grunt) {
                         version: pkg.version,
                     }],
                     'browserify-css',
+                    'brfs',
                     [require_transform, {
                         global: true,
                         shims: absolute({
