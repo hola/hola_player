@@ -6,6 +6,9 @@ _(none)_
 
 --------------------
 
+## 1.0.98 (2017-09-18)
+* Fix conflicts with third party css
+
 ## 1.0.97 (2017-09-15)
 * Add social sharing button
 
