@@ -69,6 +69,14 @@ vjs.registerComponent('ShareButton', vjs.extend(Button, {
         Button.call(this, player, options);
         this.on(events, prevent_click);
     },
+    createEl: function(){
+        var el = Button.prototype.createEl.apply(this, arguments);
+        el.appendChild(vjs.createEl('div', {
+            className: 'vjs-button-icon',
+            innerHTML: fs.readFileSync('./src/img/share.svg', 'utf8'),
+        }));
+        return el;
+    },
     buildCSSClass: function(){
         return 'vjs-share-button '+Button.prototype.buildCSSClass.call(this);
     },
