@@ -6,6 +6,13 @@ _(none)_
 
 --------------------
 
+## 1.0.99 (2017-09-19)
+* Add social social share options
+* Fix quality menu item style when scrolling
+* Fix autoreplay when post-roll is non-linear
+* Hide time controls when ad duration is unknown
+* Hide big play button during post-roll
+
 ## 1.0.98 (2017-09-18)
 * Fix conflicts with third party css
 
