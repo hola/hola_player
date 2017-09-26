@@ -6,6 +6,11 @@ _(none)_
 
 --------------------
 
+## 1.0.99 (2017-09-26)
+* Do not enlarge controls if player width is more than 768px
+* Fix popup menu title padding
+* Fix handling share button options
+
 ## 1.0.99 (2017-09-19)
 * Add social social share options
 * Fix quality menu item style when scrolling
