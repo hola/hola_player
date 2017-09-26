@@ -6,6 +6,9 @@ _(none)_
 
 --------------------
 
+## 1.0.100 (2017-09-26)
+_(none)_
+
 ## 1.0.99 (2017-09-26)
 * Do not enlarge controls if player width is more than 768px
 * Fix popup menu title padding
