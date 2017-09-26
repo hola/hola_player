@@ -72,9 +72,7 @@
     pointer-events: none;
 }
 
-.video-js.vjs-large .vjs-button.vjs-share-button,
 .video-js.vjs-fullscreen:not(.vjs-small) .vjs-button.vjs-share-button,
-.video-js.vjs-large .vjs-modal-dialog.vjs-share-dialog,
 .video-js.vjs-fullscreen:not(.vjs-small) .vjs-modal-dialog.vjs-share-dialog {
     font-size: 150%;
 }
