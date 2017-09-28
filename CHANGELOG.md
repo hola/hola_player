@@ -6,10 +6,11 @@ _(none)_
 
 --------------------
 
-## 1.0.100 (2017-09-26)
-_(none)_
+## 1.0.101 (2017-09-28)
+* Fix popup menu position when player container overflow is not visible
+* Fix big play button and share button z-index
 
-## 1.0.99 (2017-09-26)
+## 1.0.100 (2017-09-26)
 * Do not enlarge controls if player width is more than 768px
 * Fix popup menu title padding
 * Fix handling share button options
