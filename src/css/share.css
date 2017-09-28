@@ -6,7 +6,7 @@
     right: 1.2em;
     border-radius: 50%;
     cursor: pointer;
-    z-index: 1112;
+    z-index: 5;
     background: rgba(28, 28, 28, 0.9);
 }
 
@@ -35,6 +35,10 @@
 
 .video-js .vjs-modal-dialog.vjs-share-dialog {
     background-color: rgba(0, 0, 0, 0.7);
+    z-index: 5;
+}
+.video-js.vjs-ima-ad .vjs-modal-dialog.vjs-share-dialog,
+.video-js.vjs-ima-ad .vjs-button.vjs-share-button {
     z-index: 1112;
 }
 
