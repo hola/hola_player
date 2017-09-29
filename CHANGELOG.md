@@ -6,6 +6,9 @@ _(none)_
 
 --------------------
 
+## 1.0.102 (2017-09-29)
+* Fix handling clicks on the video when non-linear ad is active
+
 ## 1.0.101 (2017-09-28)
 * Fix popup menu position when player container overflow is not visible
 * Fix big play button and share button z-index
