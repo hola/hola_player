@@ -6,6 +6,10 @@ _(none)_
 
 --------------------
 
+## 1.0.103 (2017-10-03)
+* Fix handling ads in manual mode
+* Don not toggle pause/play on click on ad close button
+
 ## 1.0.102 (2017-09-29)
 * Fix handling clicks on the video when non-linear ad is active
 
