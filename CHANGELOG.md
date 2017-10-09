@@ -6,6 +6,9 @@ _(none)_
 
 --------------------
 
+## 1.0.104 (2017-10-09)
+* Fix dispatching ad events
+
 ## 1.0.103 (2017-10-03)
 * Fix handling ads in manual mode
 * Don not toggle pause/play on click on ad close button
