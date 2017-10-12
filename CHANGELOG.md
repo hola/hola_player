@@ -6,6 +6,9 @@ _(none)_
 
 --------------------
 
+## 1.0.106 (2017-10-12)
+* Fix initialization order
+
 ## 1.0.105 (2017-10-12)
 * Add debug logs
 
