@@ -27,6 +27,12 @@ try {
 } catch(e){}
 hola_conf = hola_conf||{};
 
+E.log = {
+    info: log.bind(E.log, 'info'),
+    warn: log.bind(E.log, 'warn'),
+    error: log.bind(E.log, 'error'),
+};
+
 function hola_player(opt, ready_cb){
     if (typeof opt=='function')
     {
@@ -53,6 +59,8 @@ function set_defaults(element, opt){
         spark_conf = omit(spark_conf, 'strings');
         opt = videojs.mergeOptions(spark_conf, opt);
     }
+    E.debug = hola_conf.spark&&hola_conf.spark.debug || opt.debug ||
+        get_top_url().indexOf('hola_debug_spark')!=-1;
     opt.autoplay = opt.auto_play || opt.autoplay; // allow both
     opt.base_url = opt.base_url||'//player2.h-cdn.com';
     if (opt.video_url)
@@ -143,6 +151,7 @@ function load_deps(deps){
 }
 
 function Player(element, opt, ready_cb){
+    E.log.info('init Hola Player v'+E.VERSION);
     this.ready_cb = ready_cb;
     this.opt = opt;
     this.element = this.init_element(element);
@@ -251,7 +260,7 @@ Player.prototype.init_vjs = function(){
             // XXX bahaa: TODO
         }).on('cdn_graph_overlay', on_cdn_graph_overlay);
         if (cb)
-            try { cb(player); } catch(e){ console.error(e.stack||e); }
+            try { cb(player); } catch(e){ E.log.error(e.stack||e); }
         if (opt.enable_autoplay_on_mobile || opt.autoplay &&
             !videojs.browser.IS_ANDROID && !videojs.browser.IS_IOS)
         {
@@ -272,6 +281,7 @@ Player.prototype.init_vjs = function(){
         {
             modal.fillWith(player.localize(
                 'Flash plugin is required to play this media'));
+           E.log.error('flash plugin is required');
         }
     });
 };
@@ -291,7 +301,7 @@ function on_cdn_graph_overlay(){
         var url = '//player.h-cdn.com'+hola_cdn.require.zdot('cdngraph_js');
         ldr.util.load_script(url, function(){
             window.cdn_graph.init(gopt, bws, ldr); });
-    } catch(err){ console.error(err.stack||err); }
+    } catch(err){ E.log.error(err.stack||err); }
 }
 
 Player.prototype.get_settings_opt = function(){
@@ -424,16 +434,17 @@ Player.prototype.init_ads = function(player){
     {
         util.load_script('//imasdk.googleapis.com/js/sdkloader/ima3.js',
             this.init_ads.bind(this, player));
+        E.log.info('loading imasdk...');
         return;
     }
     if (opt.ads.id3)
         opt.ads.manual = true;
     if (!opt.ads.adTagUrl && !opt.ads.adsResponse && !opt.ads.manual)
-        return console.error('missing Ad Tag');
+        return E.log.error('missing Ad Tag');
     if (!window.google) // missing external <script> or blocked by AdBlocker
-        return console.error('missing IMA HTML5 SDK');
+        return E.log.error('missing IMA HTML5 SDK');
     if (!player.ads || !player.ima) // shouldn't happen as they're bundled
-        return console.error('missing ad modules');
+        return E.log.error('missing ad modules');
     player.ima(videojs.mergeOptions({
         id: player.id(),
         vjsControls: true,
@@ -443,6 +454,7 @@ Player.prototype.init_ads = function(player){
             disablePlayContentBehindAd: true,
         },
     }, opt.ads));
+    E.log.info('init ima plugin');
     if (player.ima.adContainerDiv)
     {
         player.ima.adContainerDiv.style.cursor = 'pointer';
@@ -460,6 +472,7 @@ Player.prototype.init_ads = function(player){
             if (opt.ads.hideAdContainer)
                 player.ima.adContainerDiv.style.display = 'block';
         }
+        E.log.info('init ad container');
         player.ima.initializeAdDisplayContainer();
         if (!opt.ads.manual)
             player.ima.requestAds();
@@ -481,12 +494,14 @@ Player.prototype.init_ads = function(player){
         {
             if (ima.adPlaying)
                 return true;
+            E.log.info('resume ad');
             ima.resumeAd();
         }
         if (method=='pause')
         {
             if (!ima.adPlaying)
                 return true;
+            E.log.info('pause ad');
             ima.pauseAd();
         }
         return true;
@@ -527,6 +542,7 @@ Player.prototype.init_captions = function(player, element){
             mode: track.mode,
         };
         opt['default'] = track['default'];
+        E.log.info('add text track');
         var new_track = player.addRemoteTextTrack(opt).track;
         for (var i=0; i<track.cues.length; i++)
             new_track.addCue(track.cues[i]);
@@ -613,11 +629,34 @@ function load_cdn_loader(){
         return;
     if (document.querySelector('script[src*="//player.h-cdn.com/loader"]'))
     {
-        console.warn('Hola loader.js is included with Hola Player. '
+        E.log.warn('Hola loader.js is included with Hola Player. '
             +'There is no need to load it separately');
         return;
     }
-    console.log('Adding CDN loader...');
+    E.log.info('Adding CDN loader...');
     util.load_script('//player.h-cdn.com/loader.js?customer='+customer,
         undefined, {async: true, crossOrigin: 'anonymous'});
+}
+
+function pad(num, size){
+    return ('000'+num).slice(-size);
+}
+
+function date_str(){
+    var d = new Date();
+    return pad(d.getUTCFullYear(), 4)+'-'+pad(d.getUTCMonth()+1, 2)
+    +'-'+pad(d.getUTCDate(), 2)
+    +' '+pad(d.getUTCHours(), 2)+':'+pad(d.getUTCMinutes(), 2)
+    +':'+pad(d.getUTCSeconds(), 2)
+    +'.'+pad(d.getUTCMilliseconds(), 3);
+}
+
+function log(type, msg){
+    if (type=='info' && !E.debug)
+        return;
+    console[type=='info' ? 'log' : type](date_str()+' hola_player: '+msg);
+}
+
+function get_top_url(){
+    return window.top==window ? location.href : document.referrer;
 }
