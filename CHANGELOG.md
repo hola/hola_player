@@ -6,6 +6,9 @@ _(none)_
 
 --------------------
 
+## 1.0.105 (2017-10-12)
+* Add debug logs
+
 ## 1.0.104 (2017-10-09)
 * Fix dispatching ad events
 
