@@ -11,12 +11,6 @@ var map = require('lodash/map');
 var pick = require('lodash/pick');
 var omit = require('lodash/omit');
 
-(function(){
-    hlsjs_source_handler.attach();
-    flashls_source_handler();
-    load_cdn_loader();
-})();
-
 var E = window.hola_player = module.exports = hola_player;
 E.VERSION = '__VERSION__';
 E.players = {};
@@ -32,6 +26,12 @@ E.log = {
     warn: log.bind(E.log, 'warn'),
     error: log.bind(E.log, 'error'),
 };
+
+(function(){
+    hlsjs_source_handler.attach();
+    flashls_source_handler();
+    load_cdn_loader();
+})();
 
 function hola_player(opt, ready_cb){
     if (typeof opt=='function')
