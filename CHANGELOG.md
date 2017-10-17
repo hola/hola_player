@@ -6,6 +6,12 @@ _(none)_
 
 --------------------
 
+## 1.0.107 (2017-10-17)
+_(none)_
+
+## 1.0.107 (2017-10-17)
+* Added conf option to prevent player errors from being displayed to the user
+
 ## 1.0.106 (2017-10-12)
 * Fix initialization order
 
