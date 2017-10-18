@@ -1,0 +1,32 @@
+.video-js .vjs-button.vjs-next-button {
+  order: 0.1;
+}
+
+.video-js .vjs-button.vjs-next-button .vjs-button-icon {
+  width: 3.6em;
+  height: 100%;
+  cursor: pointer;
+  opacity: 0.9;
+}
+
+.video-js .vjs-button.vjs-next-button .vjs-button-icon > svg {
+  position: absolute;
+  width: 90%;
+  height: 90%;
+  padding: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  display: block;
+  transition: opacity 200ms ease;
+}
+
+.video-js .vjs-button.vjs-next-button .vjs-button-icon:hover {
+  opacity: 1;
+}
+
+.video-js.vjs-ad-playing .vjs-button.vjs-next-button {
+  display: none;
+}

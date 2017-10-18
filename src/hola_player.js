@@ -53,14 +53,15 @@ function hola_player(opt, ready_cb){
 }
 
 function set_defaults(element, opt){
-    var spark_conf = hola_conf&&hola_conf.spark&&hola_conf.spark.player;
-    if (spark_conf)
+    var next_conf, player_conf, spark_conf = hola_conf&&hola_conf.spark;
+    var url = get_top_url();
+    if (player_conf = spark_conf&&spark_conf.player)
     {
-        spark_conf = omit(spark_conf, 'strings');
-        opt = videojs.mergeOptions(spark_conf, opt);
+        player_conf = omit(player_conf, 'strings');
+        opt = videojs.mergeOptions(player_conf, opt);
     }
     E.debug = hola_conf.spark&&hola_conf.spark.debug || opt.debug ||
-        get_top_url().indexOf('hola_debug_spark')!=-1;
+        url.indexOf('hola_debug_spark')!=-1;
     opt.autoplay = opt.auto_play || opt.autoplay; // allow both
     opt.base_url = opt.base_url||'//player2.h-cdn.com';
     if (opt.video_url)
@@ -92,6 +93,12 @@ function set_defaults(element, opt){
         opt.share = undefined;
     else
         opt.share = videojs.mergeOptions(opt.share, {title: opt.title});
+    if ((next_conf = spark_conf&&spark_conf.playlist) && next_conf.next_btn &&
+        ((next_conf.enable || window.hola_ve_playlist || (url &&
+        url.match(/hola_ve_playlist=(1|on)/)))))
+    {
+        opt.next = {};
+    }
     return opt.sources && opt;
 }
 
@@ -142,6 +149,11 @@ function load_deps(deps){
     {
         require('./share.js');
         require('./css/share.css');
+    }
+    if (deps.next)
+    {
+        require('./next.js');
+        require('./css/next.css');
     }
     if (deps['videojs-watermark'])
     {
@@ -236,6 +248,7 @@ Player.prototype.init_vjs = function(){
         'videojs-contrib-dash': opt.sources.some(is_dash),
         dvr: opt.dvr,
         share: opt.share,
+        next: opt.next,
         'videojs-watermark': !!vjs_opt.plugins.watermark,
     });
     var element = this.element;
@@ -375,6 +388,7 @@ Player.prototype.get_vjs_opt = function(){
             settings: this.get_settings_opt(),
             dvr: opt.dvr,
             share: opt.share,
+            next: opt.next,
             watermark: opt.watermark,
             hola_skin: opt.skin ? false : {
                 css: false,
