@@ -385,6 +385,8 @@ Player.prototype.get_vjs_opt = function(){
                 title: opt.title,
             },
         },
+        // hola-custom component configuration
+        errorDisplay: {ignoreErr: opt.hide_err_display},
     }, origin_opts, opt.videojs_options);
 };
 
