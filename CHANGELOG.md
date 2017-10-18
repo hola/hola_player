@@ -5,6 +5,8 @@ CHANGELOG
 _(none)_
 
 --------------------
+## 1.0.108 (2017-10-18)
+* Added better styling of videojs components when errors not displayed to user
 
 ## 1.0.107 (2017-10-17)
 * Added conf option to prevent player errors from being displayed to the user
