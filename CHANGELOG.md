@@ -5,6 +5,9 @@ CHANGELOG
 _(none)_
 
 --------------------
+## 1.0.109 (2017-10-19)
+* Added initial commit of next button for video suggestions
+
 ## 1.0.108 (2017-10-18)
 * Added better styling of videojs components when errors not displayed to user
 
