@@ -217,6 +217,7 @@ Player.prototype.init_element = function(element){
     }
     if (!element.id)
         element.id = util.unique_id('hola_player');
+    element.setAttribute('playsinline', '');
     element.hola_player = this;
     return element;
 };
