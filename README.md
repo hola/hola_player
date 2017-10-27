@@ -46,7 +46,7 @@ To start using Hola Player, follow these steps:
 
 ## Self hosting
 
-You can also [Download](https://github.com/hola/hola_player/raw/v1.0.109/dist/hola-player-1.0.109.zip) prebuilt package and host it on your website.
+You can also [Download](https://github.com/hola/hola_player/raw/v1.0.110/dist/hola-player-1.0.110.zip) prebuilt package and host it on your website.
 You will also need to to update the location of the swf files `videojs.swf` and `videojs-osmf.swf`.
 
 ```html
