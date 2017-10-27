@@ -5,6 +5,12 @@ CHANGELOG
 _(none)_
 
 --------------------
+## 1.0.110 (2017-10-27)
+* Fixed bug with duplicated controls on iOS
+* Show mute button on iOS
+* Pause the video on click on controlbar watermark
+* Added controlbar watermark tooltip
+
 ## 1.0.109 (2017-10-19)
 * Added initial commit of next button for video suggestions
 
