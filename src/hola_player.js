@@ -99,6 +99,8 @@ function set_defaults(element, opt){
     {
         opt.next = {};
     }
+    if (opt.watermark && !opt.watermark.fadeTime)
+        opt.watermark.fadeTime = null;
     return opt.sources && opt;
 }
 
