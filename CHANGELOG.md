@@ -5,6 +5,10 @@ CHANGELOG
 _(none)_
 
 --------------------
+
+## 1.0.111 (2017-10-30)
+* Fixed duplicated ad countdown on Android
+
 ## 1.0.110 (2017-10-27)
 * Fixed bug with duplicated controls on iOS
 * Show mute button on iOS
