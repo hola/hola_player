@@ -6,6 +6,9 @@ _(none)_
 
 --------------------
 
+## 1.0.112 (2017-10-31)
+* Fixed wrong play button state when autoplaying an ad on Safari 11
+
 ## 1.0.111 (2017-10-30)
 * Fixed duplicated ad countdown on Android
 
