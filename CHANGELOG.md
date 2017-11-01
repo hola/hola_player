@@ -6,6 +6,10 @@ _(none)_
 
 --------------------
 
+## 1.0.113 (2017-11-01)
+* Fixed looping ads on iPhone when has loop attribute
+* Fixed ad progress bar on iPhone
+
 ## 1.0.112 (2017-10-31)
 * Fixed wrong play button state when autoplaying an ad on Safari 11
 
