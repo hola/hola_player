@@ -6,6 +6,9 @@ _(none)_
 
 --------------------
 
+## 1.0.114 (2017-11-06)
+* Fixed quality selection when sources are used without specifying protocol
+
 ## 1.0.113 (2017-11-01)
 * Fixed looping ads on iPhone when has loop attribute
 * Fixed ad progress bar on iPhone
