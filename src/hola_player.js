@@ -87,6 +87,12 @@ function set_defaults(element, opt){
         }
         opt = videojs.mergeOptions(videojs.getAttributes(element), opt);
     }
+    if (opt.sources)
+    {
+        opt.sources.forEach(function(s){
+            s.type = s.type||mime.guess_link_type(s.src);
+        });
+    }
     if (opt.share===undefined)
         opt.share = {};
     if (!opt.share || opt.share.buttons && !opt.share.buttons.length)
