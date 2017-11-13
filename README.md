@@ -89,9 +89,10 @@ Bandwidth saver works with MP4/FLV streams.
 
 ## Examples
 
-* [MP4](http://hola.github.io/examples/cdn/#hola_player) | [HLS](http://hola.github.io/examples/cdn/#hola_player_hls) | [HDS](http://hola.github.io/examples/cdn/#hola_player_hds)
-
-* [HolaCDN + IMA ads](http://hola.github.io/examples/cdn/#hola_player_ima)
+* [MP4](http://hola.github.io/examples/cdn/#hola_player)
+* [HLS](http://hola.github.io/examples/cdn/#hola_player_hls)
+* [HDS](http://hola.github.io/examples/cdn/#hola_player_hds)
+* [IMA ads](http://hola.github.io/examples/cdn/#hola_player_ima)
 
 ## Building your own copy of Hola Player
 
