@@ -1,5 +1,5 @@
 # Hola Player - Enhanced HTML5 Video Player
-Hola Player is a web video player based on the popular video.js open source project world. It supports HTML5 and Flash video. It supports video playback on desktops and mobile devices. Hola Player integrates advanced features from [holacdn.com](http://www.holacdn.com)
+Hola Player is a web video player based on the popular video.js open source project world. It supports HTML5 and Flash video. It supports video playback on desktops and mobile devices. Hola Player integrates advanced features from [holaspark.com](http://www.holaspark.com)
 
 ## Features
 
@@ -18,7 +18,7 @@ Hola Player is a web video player based on the popular video.js open source proj
 
 To start using Hola Player, follow these steps:
 
-1. Register for an account on [holacdn.com](http://holacdn.com/cp)
+1. Register for an account on [holaspark.com](http://holaspark.com/cp)
 
 2. Add this script to your document's `<head>`, including your CustomerID as follows:
 
@@ -71,7 +71,7 @@ or alternatively, specify swf locations explicitly
 
 ## Integrated video analytics
 
-Hola Player comes integrated with the free hola video analytics module. To open your free account and have access to the analytics dashboard, check out holacdn.
+Hola Player comes integrated with the free hola video analytics module. To open your free account and have access to the analytics dashboard, check out holaspark.
 Hola analytics module provides the following information using the free dashboard:
 - Start buffering times
 - Total views
@@ -80,7 +80,7 @@ Hola analytics module provides the following information using the free dashboar
 - Bandwidth saved using Bandwidth Saver
 - And more..
 
-The use of this feature requires a free hola account. To learn more about the hola analytics dashboard and to create your free account, visit [www.holacdn.com](http://www.holacdn.com).
+The use of this feature requires a free hola account. To learn more about the hola analytics dashboard and to create your free account, visit [www.holaspark.com](http://www.holaspark.com).
 
 ## Integrated bandwidth saver for progressive http
 
@@ -89,9 +89,7 @@ Bandwidth saver works with MP4/FLV streams.
 
 ## Examples
 
-* Without HolaCDN: [MP4](http://hola.github.io/examples/cdn/#hola_player) | [HLS](http://hola.github.io/examples/cdn/#hola_player_hls) | [HDS](http://hola.github.io/examples/cdn/#hola_player_hds)
-
-* With HolaCDN: [MP4](http://hola.github.io/examples/cdn/#hola_player_cdn) | [HLS](http://hola.github.io/examples/cdn/#hola_player_hls_cdn) | [HDS](http://hola.github.io/examples/cdn/#hola_player_hds_cdn)
+* [MP4](http://hola.github.io/examples/cdn/#hola_player) | [HLS](http://hola.github.io/examples/cdn/#hola_player_hls) | [HDS](http://hola.github.io/examples/cdn/#hola_player_hds)
 
 * [HolaCDN + IMA ads](http://hola.github.io/examples/cdn/#hola_player_ima)
 
