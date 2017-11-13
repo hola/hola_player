@@ -6,6 +6,10 @@ _(none)_
 
 --------------------
 
+## 1.0.115 (2017-11-13)
+* Fixed playing hls on ios when source type is not specified
+* Hide controls in case of videojs error
+
 ## 1.0.114 (2017-11-06)
 * Fixed quality selection when sources are used without specifying protocol
 
