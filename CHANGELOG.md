@@ -6,6 +6,10 @@ _(none)_
 
 --------------------
 
+## 1.0.116 (2017-11-14)
+* Open share dialog in popup
+* Change 'About Hola Player' link
+
 ## 1.0.115 (2017-11-13)
 * Fixed playing hls on ios when source type is not specified
 * Hide controls in case of videojs error
