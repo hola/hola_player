@@ -6,41 +6,49 @@ var services = {
         text: 'Facebook',
         link: 'https://www.facebook.com/sharer/sharer.php?u={url}',
         svg: fs.readFileSync('./src/img/facebook.svg', 'utf8'),
+        popup: {width: 560, height: 610},
     },
     twitter: {
         text: 'Twitter',
         link: 'https://twitter.com/intent/tweet?url={url}&text={title}',
         svg: fs.readFileSync('./src/img/twitter.svg', 'utf8'),
+        popup: {width: 500, height: 260},
     },
     'google+': {
         text: 'Google+',
         link: 'https://plus.google.com/share?url={url}',
         svg: fs.readFileSync('./src/img/google+.svg', 'utf8'),
+        popup: {width: 400, height: 500},
     },
     blogger: {
         text: 'Blogger',
         link: 'https://www.blogger.com/blog-this.g?u={url}&n={title}',
         svg: fs.readFileSync('./src/img/blogger.svg', 'utf8'),
+        popup: {width: 705, height: 455},
     },
     reddit: {
         text: 'Reddit',
         link: 'https://reddit.com/submit?url={url}',
         svg: fs.readFileSync('./src/img/reddit.svg', 'utf8'),
+        popup: {width: 860, height: 770},
     },
     tumblr: {
         text: 'Tumblr',
         link: 'https://www.tumblr.com/widgets/share/tool?canonicalUrl={url}',
         svg: fs.readFileSync('./src/img/tumblr.svg', 'utf8'),
+        popup: {width: 600, height: 500},
     },
     vk: {
         text: 'VK',
         link: 'https://vk.com/share.php?url={url}',
         svg: fs.readFileSync('./src/img/vk.svg', 'utf8'),
+        popup: {width: 650, height: 580},
     },
     linkedin: {
         text: 'LinkedIn',
         link: 'https://www.linkedin.com/shareArticle?url={url}&title={title}',
         svg: fs.readFileSync('./src/img/linkedin.svg', 'utf8'),
+        popup: {width: 550, height: 470},
     },
     email: {
         text: 'Email',
@@ -135,13 +143,23 @@ vjs.registerComponent('ShareLink', vjs.extend(ClickableComponent, {
         this.controlText(item.text);
         this.addClass('vjs-share-'+this.type_);
         var url = this.options_.url||get_top_url();
-        var href = item.link
+        this.href = item.link
             .replace('{url}', encodeURIComponent(url))
             .replace('{title}', encodeURIComponent(this.options_.title||''));
         this.link = vjs.createEl('a', {className: 'vjs-share-link',
-            innerHTML: item.svg}, {target: '_blank', href: href});
+            innerHTML: item.svg}, {target: this.type_!='email' ? '_blank' : '',
+            href: this.href});
         this.link.addEventListener('touchstart', function(e){
             e.stopPropagation(); });
+        this.link.addEventListener('click', this.on_click.bind(this));
         this.el_.appendChild(this.link);
+    },
+    on_click: function(e){
+        var item = services[this.type_], popup;
+        if (!(popup = item.popup))
+            return;
+        e.preventDefault();
+        window.open(this.href, this.type_,'left=20,top=20,height='+
+            popup.height+',width='+popup.width+',resizable=1');
     },
 }));
