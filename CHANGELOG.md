@@ -6,6 +6,9 @@ _(none)_
 
 --------------------
 
+## 1.0.117 (2017-11-24)
+* Fixed getting stuck on ad error
+
 ## 1.0.116 (2017-11-14)
 * Open share dialog in popup
 * Change 'About Hola Player' link
