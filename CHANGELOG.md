@@ -7,6 +7,9 @@ _(none)_
 --------------------
 
 ## 1.0.118 (2017-11-27)
+_(none)_
+
+## 1.0.118 (2017-11-27)
 * Fixed wrong play button icon after ad error
 * Fixed error on player dispose
 
