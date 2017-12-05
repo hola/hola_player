@@ -6,8 +6,9 @@ _(none)_
 
 --------------------
 
-## 1.0.118 (2017-11-27)
-_(none)_
+## 1.0.119 (2017-12-05)
+* Fixed controlbar watermark style
+* Fixed conflicts with third party css
 
 ## 1.0.118 (2017-11-27)
 * Fixed wrong play button icon after ad error
