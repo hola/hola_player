@@ -314,15 +314,14 @@ function on_cdn_graph_overlay(){
     if (window.cdn_graph || !bws || hola_cdn._get_mode()!='cdn')
         return;
     try {
-        var ldr = hola_cdn.get_wrapper().loader;
         var gopt = {
             graph: 'newgraph_progress_mode_highlight_tips',
             player_obj: bws.player,
             video: bws.player.vjs
         };
         var url = '//player.h-cdn.com'+hola_cdn.require.zdot('cdngraph_js');
-        ldr.util.load_script(url, function(){
-            window.cdn_graph.init(gopt, bws, ldr); });
+        hola_cdn.util.load_script(url, function(){
+            window.cdn_graph.init(gopt, bws, hola_cdn); });
     } catch(err){ E.log.error(err.stack||err); }
 }
 
