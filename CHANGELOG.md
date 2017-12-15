@@ -6,6 +6,9 @@ _(none)_
 
 --------------------
 
+## 1.0.121 (2017-12-15)
+* Added license_init request
+
 ## 1.0.120 (2017-12-13)
 * Force muted autoplay on mobile when enable_autoplay_on_mobile=true
 
