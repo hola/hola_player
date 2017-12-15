@@ -355,8 +355,6 @@ Player.prototype.get_settings_opt = function(){
 
 Player.prototype.get_vjs_opt = function(){
     var opt = this.opt;
-    var script = util.current_script();
-    var customer = script && url.parse(script.src, true, true).query.customer;
     var origin_opts = this.opt['data-setup']||{};
     if (origin_opts && typeof origin_opts=='string')
     {
