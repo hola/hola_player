@@ -14,7 +14,7 @@ var omit = require('lodash/omit');
 var E = window.hola_player = module.exports = hola_player;
 E.VERSION = '__VERSION__';
 E.players = {};
-var hola_conf;
+var hola_conf, customer;
 try {
     /* global hola_player_api */
     hola_conf = JSON.parse(hola_player_api&&hola_player_api.zdot('json'));
@@ -28,9 +28,12 @@ E.log = {
 };
 
 (function(){
+    var script = util.current_script();
+    customer = script && url.parse(script.src, true, true).query.customer;
     hlsjs_source_handler.attach();
     flashls_source_handler();
     load_cdn_loader();
+    license_init();
 })();
 
 function hola_player(opt, ready_cb){
@@ -651,10 +654,6 @@ function reset_native_hls(el, sources){
 }
 
 function load_cdn_loader(){
-    var script = util.current_script();
-    if (!script)
-        return;
-    var customer = url.parse(script.src, true, true).query.customer;
     if (!customer)
         return;
     if (document.querySelector('script[src*="//player.h-cdn.com/loader"]'))
@@ -666,6 +665,25 @@ function load_cdn_loader(){
     E.log.info('Adding CDN loader...');
     util.load_script('//player.h-cdn.com/loader.js?customer='+customer,
         undefined, {async: true, crossOrigin: 'anonymous'});
+}
+
+function license_init(){
+    var xhr = new XMLHttpRequest();
+    var script = util.current_script();
+    var opt = {
+        v: E.VERSION,
+        loader: window.hola_cdn && window.hola_cdn.ver,
+        hls: window.Hls && window.Hls.version,
+        customer: customer,
+        hosted: !script || !script.src.match(/^(https?:)?\/\/\w*\.h-cdn\.com/),
+        url: get_top_url(),
+    };
+    var qs = Object.keys(opt)
+        .filter(function(key){ return !!opt[key]; })
+        .map(function(key){ return key+'='+encodeURIComponent(opt[key]); })
+        .join('&');
+    xhr.open('GET', 'https://client.h-cdn.com/hola_player/license_init?'+qs);
+    xhr.send();
 }
 
 function pad(num, size){
