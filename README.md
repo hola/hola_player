@@ -49,17 +49,20 @@ To start using Hola Player, follow these steps:
 You can also [Download](https://github.com/hola/hola_player/raw/v1.0.121/dist/hola-player-1.0.121.zip) prebuilt package and host it on your website.
 You will also need to update the location of the swf files `videojs.swf` and `videojs-osmf.swf`.
 
+Important: If you are using HolaSpark or HolaCDN features you must retain the 'customer=<id>' param of the url even after moving Hola player to your servers.
+  
 ```html
 <script src="//www.example.com/path/to/hola_player/hola_player.js?customer=xxx"></script>
-<script>
-    window.hola_player({base_url: "//www.example.com/path/to/hola_player"});
-</script>
+```
+Otherwise no param is required
+
+```html
+<script src="//www.example.com/path/to/hola_player/hola_player.js"></script>
 ```
 
-or alternatively, specify swf locations explicitly
+Also you MUST specify new swf locations explicitly. Copy our swf files to a location on your site and setup the paths as follows:
 
 ```html
-<script src="//www.example.com/path/to/hola_player/hola_player.js?customer=xxx"></script>
 <script>
     window.hola_player({
         swf: "//www.example2.com/other/path/to/swf/videojs.swf",
@@ -67,7 +70,6 @@ or alternatively, specify swf locations explicitly
     });
 </script>
 ```
-
 
 ## Integrated video analytics
 
