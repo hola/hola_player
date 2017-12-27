@@ -28,12 +28,14 @@ E.log = {
 };
 
 (function(){
-    var script = util.current_script();
-    customer = script && url.parse(script.src, true, true).query.customer;
-    hlsjs_source_handler.attach();
-    flashls_source_handler();
-    load_cdn_loader();
-    license_init();
+    try {
+        var script = util.current_script();
+        customer = script && url.parse(script.src, true, true).query.customer;
+        hlsjs_source_handler.attach();
+        flashls_source_handler();
+        load_cdn_loader();
+        license_init();
+    } catch(err){ E.log.error(err.stack||err); }
 })();
 
 function hola_player(opt, ready_cb){
