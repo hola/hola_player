@@ -6,6 +6,9 @@ _(none)_
 
 --------------------
 
+## 1.0.122 (2017-12-27)
+* Show circle on progress bar during seeking on mobile
+
 ## 1.0.121 (2017-12-15)
 * Added license_init request
 
