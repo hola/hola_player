@@ -10,6 +10,14 @@
     background: rgba(28, 28, 28, 0.9);
 }
 
+.vjs-ios-skin .vjs-button.vjs-share-button {
+    background: 0 0;
+}
+
+.vjs-ios-skin.vjs-has-started .vjs-button.vjs-share-button {
+    top: 45px;
+}
+
 .video-js .vjs-button.vjs-share-button .vjs-button-icon {
     position: absolute;
     width: 2em;

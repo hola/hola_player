@@ -366,6 +366,9 @@ Player.prototype.get_vjs_opt = function(){
     }
     // XXX: maybe we should merge all data-setup conf with vjs_opt
     origin_opts = pick(origin_opts, ['playbackRates']);
+    var is_mobile = videojs.browser.IS_ANDROID || videojs.browser.IS_IOS;
+    var class_name = is_mobile&&!opt.use_desktop_skin ? 'vjs-ios-skin' :
+        undefined;
     return videojs.mergeOptions({
         sources: opt.sources,
         // XXX arik: unite swf to one
@@ -409,6 +412,7 @@ Player.prototype.get_vjs_opt = function(){
             watermark: opt.watermark,
             hola_skin: opt.skin ? false : {
                 css: false,
+                className: class_name,
                 show_controls_before_start: opt.show_controls_before_start,
                 show_time_for_live: opt.show_time_for_live,
                 play_button_color: opt.play_button_color,
