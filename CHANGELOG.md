@@ -6,6 +6,9 @@ _(none)_
 
 --------------------
 
+## 1.0.124 (2018-01-18)
+* Add ios-like skin
+
 ## 1.0.123 (2018-01-02)
 * Always show circle on progress bar on mobile
 
