@@ -6,6 +6,9 @@ _(none)_
 
 --------------------
 
+## 1.0.125 (2018-01-21)
+* Fix important urgent bug: hide menu scrollbar for touch UI
+
 ## 1.0.124 (2018-01-18)
 * Add ios-like skin
 
