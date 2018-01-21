@@ -6,6 +6,9 @@ _(none)_
 
 --------------------
 
+## 1.0.126 (2018-01-21)
+* Fix scaling for the vjs-settings menu
+
 ## 1.0.125 (2018-01-21)
 * Fix important urgent bug: hide menu scrollbar for touch UI
 
