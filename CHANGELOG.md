@@ -6,6 +6,9 @@ _(none)_
 
 --------------------
 
+## 1.0.128 (2018-01-22)
+* Fix width & height when creating a new video element
+
 ## 1.0.127 (2018-01-22)
 * Fix styles for vjs-setting menu in fullscreen
 
