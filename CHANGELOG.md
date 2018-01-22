@@ -6,6 +6,9 @@ _(none)_
 
 --------------------
 
+## 1.0.129 (2018-01-22)
+* Update styles for ios-skin menus
+
 ## 1.0.128 (2018-01-22)
 * Fix width & height when creating a new video element
 
