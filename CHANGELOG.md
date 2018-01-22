@@ -6,6 +6,9 @@ _(none)_
 
 --------------------
 
+## 1.0.127 (2018-01-22)
+* Fix styles for vjs-setting menu in fullscreen
+
 ## 1.0.126 (2018-01-21)
 * Fix scaling for the vjs-settings menu
 
