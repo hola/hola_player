@@ -215,12 +215,20 @@ Player.prototype.init_element = function(element){
             id: util.unique_id('hola_player'),
             class: 'video-js',
             preload: opt.preload||'auto',
-            width: opt.width||parseFloat(style.width),
-            height: opt.height||parseFloat(style.height),
         };
+        var auto_height = !opt.height || isNaN(opt.height);
+        var auto_width = !opt.width || isNaN(opt.width);
+        if (!auto_height)
+            attrs.height = opt.height||parseFloat(style.height);
+        if (!auto_width)
+            attrs.width = opt.width||parseFloat(style.width);
         if (opt.poster)
             attrs.poster = opt.poster;
         var videoel = videojs.createEl('video', {}, attrs);
+        if (auto_width)
+            videoel.style.width = '100%';
+        if (auto_height)
+            videoel.style.height = '100%';
         videojs.appendContent(videoel, opt.sources.map(function(source){
             return videojs.createEl('source', {}, source);
         }));
