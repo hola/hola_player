@@ -6,6 +6,9 @@ _(none)_
 
 --------------------
 
+## 1.0.130 (2018-01-23)
+* Fix getting current script on IE11
+
 ## 1.0.129 (2018-01-22)
 * Update styles for ios-skin menus
 
