@@ -27,12 +27,21 @@ E.current_script = function(){
     {
         return script;
     }
-    if (script = document.currentScript)
+    if (script = document.currentScript || current_script_ie())
         return script;
     // assumes wasn't loaded async
     var scripts = document.getElementsByTagName('script');
     return scripts[scripts.length-1];
 };
+
+function current_script_ie(){
+    try { throw new Error(); }
+    catch(err) {
+      var res = (/.*at [^\(]*\((.*):.+:.+\)$/ig).exec(err.stack);
+      if (res)
+          return document.querySelector('script[src="'+res[1]+'"]');
+    }
+}
 
 var id_counter = 0;
 var rand = Math.floor(Math.random()*10000)+'';
