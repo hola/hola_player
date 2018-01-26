@@ -46,7 +46,7 @@ To start using Hola Player, follow these steps:
 
 ## Self hosting
 
-You can also [Download](https://github.com/hola/hola_player/raw/v1.0.131/dist/hola-player-1.0.131.zip) prebuilt package and host it on your website.
+You can also [Download](https://github.com/hola/hola_player/raw/v1.0.132/dist/hola-player-1.0.132.zip) prebuilt package and host it on your website.
 You will also need to update the location of the swf files `videojs.swf` and `videojs-osmf.swf`.
 
 Important: If you are using HolaSpark or HolaCDN features you must retain the 'customer=<id>' param of the url even after moving Hola player to your servers.
