@@ -6,6 +6,9 @@ _(none)_
 
 --------------------
 
+## 1.0.131 (2018-01-26)
+* Add picker menu for ios skin
+
 ## 1.0.130 (2018-01-23)
 * Fix getting current script on IE11
 
