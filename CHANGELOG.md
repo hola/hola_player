@@ -6,6 +6,9 @@ _(none)_
 
 --------------------
 
+## 1.0.132 (2018-01-26)
+* Fix picker menu for old android
+
 ## 1.0.131 (2018-01-26)
 * Add picker menu for ios skin
 
