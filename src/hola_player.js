@@ -245,6 +245,8 @@ Player.prototype.init_element = function(element){
     if (!element.id)
         element.id = util.unique_id('hola_player');
     element.setAttribute('playsinline', '');
+    // disable forced native controls in Facebook Instant Articles
+    element.setAttribute('data-fb-disable-controls', '');
     element.hola_player = this;
     return element;
 };
