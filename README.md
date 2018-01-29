@@ -29,8 +29,8 @@ To start using Hola Player, follow these steps:
 3. Add a `<video>` tag on your page:
 
   ```html
-  <video class="video-js vjs-default-skin" poster="//player.h-cdn.org/static/mp4/tears_of_steel_1080p_MP4.jpg" width="640" height="360" controls>
-      <source src="//player.h-cdn.org/static/mp4/tears_of_steel_360p_MP4.mp4" type="video/mp4">
+  <video class="video-js vjs-default-skin" poster="//video.h-cdn.com/static/mp4/tears_of_steel_1080p_MP4.jpg" width="640" height="360" controls>
+      <source src="//video.h-cdn.com/static/mp4/tears_of_steel_360p_MP4.mp4" type="video/mp4">
   </video>
   ```
 
@@ -50,7 +50,7 @@ You can also [Download](https://github.com/hola/hola_player/raw/v1.0.132/dist/ho
 You will also need to update the location of the swf files `videojs.swf` and `videojs-osmf.swf`.
 
 Important: If you are using HolaSpark or HolaCDN features you must retain the 'customer=<id>' param of the url even after moving Hola player to your servers.
-  
+
 ```html
 <script src="//www.example.com/path/to/hola_player/hola_player.js?customer=xxx"></script>
 ```
