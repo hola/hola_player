@@ -4,8 +4,6 @@ CHANGELOG
 ## HEAD (Unreleased)
 _(none)_
 
---------------------
-
 ## 1.0.132 (2018-01-26)
 * Fix picker menu for old android
 
