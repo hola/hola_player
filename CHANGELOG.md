@@ -4,6 +4,13 @@ CHANGELOG
 ## HEAD (Unreleased)
 _(none)_
 
+---------------------
+
+## 1.0.133 (2018-01-29)
+* disable native controls for Facebook Instant Articles
+* update Picker menus
+* update video example urls
+
 ## 1.0.132 (2018-01-26)
 * Fix picker menu for old android
 
