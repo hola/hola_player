@@ -6,6 +6,10 @@ _(none)_
 
 ---------------------
 
+## 1.0.134 (2018-01-30)
+* Dont hide Quality menu in picker mode
+* Fix items skipping when scrolling Picker menu
+
 ## 1.0.133 (2018-01-29)
 * disable native controls for Facebook Instant Articles
 * update Picker menus
