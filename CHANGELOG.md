@@ -6,6 +6,9 @@ _(none)_
 
 ---------------------
 
+## 1.0.135 (2018-01-30)
+* Adjust Picker scrolling for zoomed UI
+
 ## 1.0.134 (2018-01-30)
 * Dont hide Quality menu in picker mode
 * Fix items skipping when scrolling Picker menu
