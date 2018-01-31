@@ -7,7 +7,7 @@ _(none)_
 ---------------------
 
 ## 1.0.137 (2018-01-31)
-_(none)_
+* Fixed large nonlinear ad triggers ima sdk error googleads/videojs-ima#476
 
 ## 1.0.136 (2018-01-31)
 * Make seek bar handle more responsible for ios skin
