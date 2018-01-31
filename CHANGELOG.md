@@ -6,6 +6,9 @@ _(none)_
 
 ---------------------
 
+## 1.0.136 (2018-01-31)
+* Make seek bar handle more responsible for ios skin
+
 ## 1.0.135 (2018-01-30)
 * Adjust Picker scrolling for zoomed UI
 
