@@ -6,6 +6,10 @@ _(none)_
 
 ---------------------
 
+## 1.0.138 (2018-02-01)
+* Allow to use seekbar before metadata & duration is loaded
+* Fixed Live mode for ios skin
+
 ## 1.0.137 (2018-01-31)
 * Fixed large nonlinear ad triggers ima sdk error googleads/videojs-ima#476
 
