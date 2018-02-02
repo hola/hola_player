@@ -6,6 +6,12 @@ _(none)_
 
 ---------------------
 
+## 1.0.139 (2018-02-02)
+* Add Skip 15sec buttons (back and forward)
+* Add controls hiding for small player width
+* Fixed Live mode for custom buttons
+* Fixed Ads UI progress bar in inactive mode
+
 ## 1.0.138 (2018-02-01)
 * Allow to use seekbar before metadata & duration is loaded
 * Fixed Live mode for ios skin
