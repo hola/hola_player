@@ -6,6 +6,9 @@ _(none)_
 
 ---------------------
 
+## 1.0.140 (2018-02-09)
+* Fix seeking for Android
+
 ## 1.0.139 (2018-02-02)
 * Add Skip 15sec buttons (back and forward)
 * Add controls hiding for small player width
