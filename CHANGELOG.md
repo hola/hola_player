@@ -6,6 +6,9 @@ _(none)_
 
 ---------------------
 
+## 1.0.141 (2018-02-09)
+* Add option to hide skip buttons for mobile skin
+
 ## 1.0.140 (2018-02-09)
 * Fix seeking for Android
 
