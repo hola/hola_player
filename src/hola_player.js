@@ -428,6 +428,7 @@ Player.prototype.get_vjs_opt = function(){
                 play_button_color: opt.play_button_color,
                 seek_bar_color: opt.seek_bar_color,
                 title: opt.title,
+                hide_skip_buttons: opt.hide_skip_buttons,
             },
         },
         // hola-custom component configuration
