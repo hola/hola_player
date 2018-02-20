@@ -6,6 +6,9 @@ _(none)_
 
 ---------------------
 
+## 1.0.142 (2018-02-20)
+* Fix max height for the settings menu for mobile skin
+
 ## 1.0.141 (2018-02-09)
 * Add option to hide skip buttons for mobile skin
 
