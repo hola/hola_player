@@ -6,6 +6,9 @@ _(none)_
 
 ---------------------
 
+## 1.0.143 (2018-02-20)
+* Fix max height for the settings menu
+
 ## 1.0.142 (2018-02-20)
 * Fix max height for the settings menu for mobile skin
 
