@@ -7,9 +7,15 @@ var id3 = require('./id3.js');
 var hlsjs_source_handler = require('@hola.org/hap.js/lib/hola_videojs_hls.js');
 var flashls_source_handler = require('./flashls_source_handler.js');
 var url = require('url');
-var map = require('lodash/map');
-var pick = require('lodash/pick');
-var omit = require('lodash/omit');
+var _ = {
+    map: require('lodash/map'),
+    pick: require('lodash/pick'),
+    omit: require('lodash/omit'),
+    values: require('lodash/values'),
+    find: require('lodash/find'),
+    merge: require('lodash/merge'),
+    includes: require('lodash/includes'),
+};
 
 var E = window.hola_player = module.exports = hola_player;
 E.VERSION = '__VERSION__';
@@ -38,6 +44,55 @@ E.log = {
     } catch(err){ E.log.error(err.stack||err); }
 })();
 
+function get_geoip(){
+    var res = {};
+    try {
+        var json;
+        if (json = localStorage.getItem('hola_geoip'))
+            res = JSON.parse(json);
+    } catch(e){}
+    return res;
+}
+
+function parse_re(v){
+    if (v.__RegExp__)
+    {
+        var parsed = /^\/(.*)\/(\w*)$/.exec(v.__RegExp__);
+        if (!parsed)
+            throw v;
+        return new RegExp(parsed[1], parsed[2]);
+    }
+    return v;
+}
+
+function get_spark_conf(){
+    var conf = hola_conf&&hola_conf.spark||{};
+    if (!conf.zones)
+        return conf;
+    var zones = _.values(conf.zones);
+    zones.sort(function(a, b){ return a.order-b.order; });
+    var c = _.find(zones, function(r){
+        function url_match(){
+            return (r.by_frame_url ? location.href : get_top_url())
+                .match(parse_re(r.match));
+        }
+        function country_match(){
+            var code =  get_geoip().country;
+            var include = r.country ? r.country.include : [];
+            var exclude = r.country ? r.country.exclude : [];
+            return (!include.length || _.includes(include, code)) &&
+                (!exclude.length || !_.includes(exclude, code));
+        }
+        return url_match() && country_match();
+    });
+    c = c||conf;
+    ['player', 'playlist'].forEach(function(feature){
+        if ((c[feature]||{use_default_conf: true}).use_default_conf)
+            c[feature] = conf[feature];
+    });
+    return _.merge({general: conf.general}, c);
+}
+
 function hola_player(opt, ready_cb){
     if (typeof opt=='function')
     {
@@ -58,14 +113,14 @@ function hola_player(opt, ready_cb){
 }
 
 function set_defaults(element, opt){
-    var next_conf, player_conf, spark_conf = hola_conf&&hola_conf.spark;
+    var next_conf, player_conf, spark_conf = get_spark_conf();
     var url = get_top_url();
-    if (player_conf = spark_conf&&spark_conf.player)
+    if (player_conf = spark_conf.player)
     {
-        player_conf = omit(player_conf, 'strings');
+        player_conf = _.omit(player_conf, 'strings');
         opt = videojs.mergeOptions(player_conf, opt);
     }
-    E.debug = hola_conf.spark&&hola_conf.spark.debug || opt.debug ||
+    E.debug = spark_conf.debug || opt.debug ||
         url.indexOf('hola_debug_spark')!=-1;
     opt.autoplay = opt.auto_play || opt.autoplay; // allow both
     opt.base_url = opt.base_url||'//player2.h-cdn.com';
@@ -104,7 +159,7 @@ function set_defaults(element, opt){
         opt.share = undefined;
     else
         opt.share = videojs.mergeOptions(opt.share, {title: opt.title});
-    if ((next_conf = spark_conf&&spark_conf.playlist) && next_conf.next_btn &&
+    if ((next_conf = spark_conf.playlist) && next_conf.next_btn &&
         ((next_conf.enable || window.hola_ve_playlist || (url &&
         url.match(/hola_ve_playlist=(1|on)/)))))
     {
@@ -252,8 +307,8 @@ Player.prototype.init_element = function(element){
 };
 
 Player.prototype.add_languages = function(){
-    var spark_conf = hola_conf&&hola_conf.spark&&hola_conf.spark.player;
-    var strings = spark_conf&&spark_conf.strings, langs;
+    var player_conf = get_spark_conf().player;
+    var strings = player_conf&&player_conf.strings, langs;
     try {
         langs = strings&&JSON.parse(strings);
     } catch(e){}
@@ -375,7 +430,7 @@ Player.prototype.get_vjs_opt = function(){
         } catch(e){}
     }
     // XXX: maybe we should merge all data-setup conf with vjs_opt
-    origin_opts = pick(origin_opts, ['playbackRates']);
+    origin_opts = _.pick(origin_opts, ['playbackRates']);
     var is_mobile = videojs.browser.IS_ANDROID || videojs.browser.IS_IOS;
     var class_name = is_mobile&&!opt.use_desktop_skin ? 'vjs-ios-skin' :
         undefined;
@@ -637,7 +692,7 @@ function init_ads_id3(player){
         if (ad && cues.indexOf(sample.dts)<0)
         {
             cues.push({ad: ad, time: sample.dts});
-            player.trigger('ads-cuepoints', map(cues, 'time'));
+            player.trigger('ads-cuepoints', _.map(cues, 'time'));
         }
     });
 }
