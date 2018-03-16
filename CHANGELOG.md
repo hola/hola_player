@@ -6,6 +6,9 @@ _(none)_
 
 ---------------------
 
+## 1.0.144 (2018-03-16)
+* Fix handling Spark zones configuration
+
 ## 1.0.143 (2018-02-20)
 * Fix max height for the settings menu
 
