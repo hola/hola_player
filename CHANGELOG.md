@@ -6,6 +6,9 @@ _(none)_
 
 ---------------------
 
+## 1.0.145 (2018-03-29)
+* Fix ui zoom for ios skin
+
 ## 1.0.144 (2018-03-16)
 * Fix handling Spark zones configuration
 
