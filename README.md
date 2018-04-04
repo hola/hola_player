@@ -1,3 +1,5 @@
+This repository is moved to: https://github.com/spark-mv/spark_player
+
 # Hola Player - Enhanced HTML5 Video Player
 Hola Player is a web video player based on the popular video.js open source project world. It supports HTML5 and Flash video. It supports video playback on desktops and mobile devices. Hola Player integrates advanced features from [holaspark.com](http://www.holaspark.com)
 
